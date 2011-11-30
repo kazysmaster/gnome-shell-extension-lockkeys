@@ -1,0 +1,12 @@
+
+.indicator-state-enabled {	
+	padding-left: 4px;
+	padding-right: 4px;
+	background-image: url("active-bg.svg");
+}
+
+.indicator-state-disabled {
+	padding-left: 4px;
+	padding-right: 4px;
+	background-image: url("inactive-bg.svg");
+}
