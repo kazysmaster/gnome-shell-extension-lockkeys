@@ -81,7 +81,8 @@ LockKeysIndicator.prototype = {
 		                             icon_type: St.IconType.SYMBOLIC,
 		                             style_class: 'system-status-icon'});
 
-		this.layoutManager = new St.BoxLayout({vertical: false});
+		this.layoutManager = new St.BoxLayout({vertical: false,
+		                                       style_class: 'lockkeys-container'});
 		this.layoutManager.add(this.numIcon);
 		this.layoutManager.add(this.capsIcon);
 		
