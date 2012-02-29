@@ -2,10 +2,11 @@ const St = imports.gi.St;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Gdk = imports.gi.Gdk;
 const Gettext = imports.gettext;
 const _ = Gettext.gettext;
 
-const Keymap = imports.gi.Gdk.Keymap;
+const Keymap = Gdk.Keymap.get_default();
 const Caribou = imports.gi.Caribou;
 
 const Panel = imports.ui.panel;
@@ -95,18 +96,20 @@ LockKeysIndicator.prototype = {
 		this.menu.addMenuItem(this.capsMenuItem);
 		
 		this._updateState();
-		Keymap.get_default().connect('state-changed', Lang.bind(this, this._handleStateChange));
+		Keymap.connect('state-changed', Lang.bind(this, this._handleStateChange));
 	},
 
 	_handleNumlockMenuItem: function(actor, event) {
-		Caribou.XAdapter.get_default().keyval_press(0xff7f);
-		Caribou.XAdapter.get_default().keyval_release(0xff7f);
+		keyval = Gdk.keyval_from_name("Num_Lock");
+		Caribou.XAdapter.get_default().keyval_press(keyval);
+		Caribou.XAdapter.get_default().keyval_release(keyval);
 		//global.log("handled by numlock");
 	}, 
 	
 	_handleCapslockMenuItem: function(actor, event) {
-		Caribou.XAdapter.get_default().keyval_press(0xffe5);
-		Caribou.XAdapter.get_default().keyval_release(0xffe5);
+		keyval = Gdk.keyval_from_name("Caps_Lock");
+		Caribou.XAdapter.get_default().keyval_press(keyval);
+		Caribou.XAdapter.get_default().keyval_release(keyval);
 		//global.log("handled by capslock");
 	}, 
 	
@@ -177,10 +180,10 @@ LockKeysIndicator.prototype = {
 	},
 
 	 _getNumlockState: function() {
-		return Keymap.get_default().get_num_lock_state();
+		return Keymap.get_num_lock_state();
 	},
 	
 	_getCapslockState: function() {
-		return Keymap.get_default().get_caps_lock_state();
+		return Keymap.get_caps_lock_state();
 	},
 }
