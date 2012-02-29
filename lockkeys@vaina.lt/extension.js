@@ -1,5 +1,7 @@
 const St = imports.gi.St;
 const Lang = imports.lang;
+const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext;
 const _ = Gettext.gettext;
 
@@ -11,6 +13,8 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
+
+const Meta = imports.ui.extensionSystem.extensionMeta["lockkeys@vaina.lt"];
 
 let indicator;
 
@@ -64,12 +68,21 @@ LockKeysIndicator.prototype = {
 	_init: function() {
 		PanelMenu.Button.prototype._init.call(this, St.Align.START);
 
-		this.capsLabel = new St.Label({text: 'A'});
-		this.numLabel = new St.Label({ text: '1'});
-		
+		// For highlight to work properly you have to used themed
+		// icons. Fortunately we can add our directory to the search
+		// path.
+		Gtk.IconTheme.get_default().append_search_path(Meta.path);
+
+		this.numIcon = new St.Icon({icon_name: "numlock-enabled",
+		                            icon_type: St.IconType.SYMBOLIC,
+		                            style_class: 'system-status-icon'});
+		this.capsIcon = new St.Icon({icon_name: "capslock-enabled",
+		                             icon_type: St.IconType.SYMBOLIC,
+		                             style_class: 'system-status-icon'});
+
 		this.layoutManager = new St.BoxLayout({vertical: false});
-		this.layoutManager.add(this.capsLabel);
-		this.layoutManager.add(this.numLabel);
+		this.layoutManager.add(this.numIcon);
+		this.layoutManager.add(this.capsIcon);
 		
 		this.actor.add_actor(this.layoutManager);
 		
@@ -84,7 +97,7 @@ LockKeysIndicator.prototype = {
 		this._updateState();
 		Keymap.get_default().connect('state-changed', Lang.bind(this, this._handleStateChange));
 	},
-	
+
 	_handleNumlockMenuItem: function(actor, event) {
 		Caribou.XAdapter.get_default().keyval_press(0xff7f);
 		Caribou.XAdapter.get_default().keyval_release(0xff7f);
@@ -112,8 +125,17 @@ LockKeysIndicator.prototype = {
 	_updateState: function() {
 		this.numlock_state = this._getNumlockState();
 		this.capslock_state = this._getCapslockState();
-		this.numLabel.set_style_class_name( this._getStateClassName(this.numlock_state) );
-		this.capsLabel.set_style_class_name( this._getStateClassName(this.capslock_state) );
+
+		if (this.numlock_state)
+			this.numIcon.set_icon_name("numlock-enabled");
+		else
+			this.numIcon.set_icon_name("numlock-disabled");
+
+		if (this.capslock_state)
+			this.capsIcon.set_icon_name("capslock-enabled");
+		else
+			this.capsIcon.set_icon_name("capslock-disabled");
+
 		this.numMenuItem.setToggleState( this.numlock_state );
 		this.capsMenuItem.setToggleState( this.capslock_state );
 	},
@@ -150,10 +172,6 @@ LockKeysIndicator.prototype = {
 		}
 	},
 	
-	_getStateClassName: function(state) {
-		return state ? 'indicator-state-enabled' : 'indicator-state-disabled';
-	},
-
 	 _getStateText: function(state) {
 		return state ? _('On') : _('Off');
 	},
