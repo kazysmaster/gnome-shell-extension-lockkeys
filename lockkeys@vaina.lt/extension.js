@@ -116,11 +116,11 @@ LockKeysIndicator.prototype = {
 	_handleStateChange: function(actor, event) {
 		if (this.numlock_state != this._getNumlockState()) {
 			let notification_text = _('Num Lock') + ' ' + this._getStateText(this._getNumlockState());
-			this._showNotification(notification_text);
+			this._showNotification(notification_text, "numlock-enabled");
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _('Caps Lock') + ' ' + this._getStateText(this._getCapslockState());
-			this._showNotification(notification_text);
+			this._showNotification(notification_text, "capslock-enabled");
 		}
 		this._updateState();
 	}, 
@@ -143,8 +143,8 @@ LockKeysIndicator.prototype = {
 		this.capsMenuItem.setToggleState( this.capslock_state );
 	},
 	
-	_showNotification: function(notification_text) {
-		this._prepareSource();
+	_showNotification: function(notification_text, icon_name) {
+		this._prepareSource(icon_name);
 		
 		let notification = null;
 		if (this._source.notifications.length == 0) {
@@ -159,11 +159,11 @@ LockKeysIndicator.prototype = {
 		this._source.notify(notification);
 	},
 	
-	_prepareSource: function() {
+	_prepareSource: function(icon_name) {
 		if (this._source == null) {
 			this._source = new MessageTray.SystemNotificationSource();
 			this._source.createNotificationIcon = function() {
-				return new St.Icon({ icon_name: 'input-keyboard',
+				return new St.Icon({ icon_name: icon_name,
 									 icon_type: St.IconType.SYMBOLIC,
 									 icon_size: this.ICON_SIZE });
 			};
