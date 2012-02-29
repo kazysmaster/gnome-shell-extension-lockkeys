@@ -87,11 +87,11 @@ LockKeysIndicator.prototype = {
 		
 		this.actor.add_actor(this.layoutManager);
 		
-		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Numlock'), false, { reactive: true });
+		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Num Lock'), false, { reactive: true });
 		this.numMenuItem.connect('activate', Lang.bind(this, this._handleNumlockMenuItem));
 		this.menu.addMenuItem(this.numMenuItem);
 
-		this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Capslock'), false, { reactive: true });
+		this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Caps Lock'), false, { reactive: true });
 		this.capsMenuItem.connect('activate', Lang.bind(this, this._handleCapslockMenuItem));
 		this.menu.addMenuItem(this.capsMenuItem);
 		
@@ -115,11 +115,11 @@ LockKeysIndicator.prototype = {
 	
 	_handleStateChange: function(actor, event) {
 		if (this.numlock_state != this._getNumlockState()) {
-			let notification_text = _('Numlock') + ' ' + this._getStateText(this._getNumlockState());
+			let notification_text = _('Num Lock') + ' ' + this._getStateText(this._getNumlockState());
 			this._showNotification(notification_text);
 		}
 		if (this.capslock_state != this._getCapslockState()) {
-			let notification_text = _('Capslock') + ' ' + this._getStateText(this._getCapslockState());
+			let notification_text = _('Caps Lock') + ' ' + this._getStateText(this._getCapslockState());
 			this._showNotification(notification_text);
 		}
 		this._updateState();
