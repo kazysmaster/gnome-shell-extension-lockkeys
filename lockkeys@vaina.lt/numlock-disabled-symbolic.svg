@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg7384"
-   sodipodi:docname="numlock-disabled.svg"
+   sodipodi:docname="numlock-enabled-symbolic.svg"
    version="1.1"
    inkscape:version="0.48.1 r9760"
    height="16"
@@ -28,7 +28,7 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:cy="14.16421"
+     inkscape:cy="10.308178"
      pagecolor="#555753"
      borderopacity="1"
      showborder="false"
@@ -45,15 +45,15 @@
      id="namedview88"
      showgrid="false"
      inkscape:window-maximized="0"
-     inkscape:window-x="368"
+     inkscape:window-x="168"
      inkscape:snap-global="true"
-     inkscape:window-y="146"
+     inkscape:window-y="120"
      gridtolerance="10"
      inkscape:window-height="859"
      inkscape:snap-to-guides="true"
      inkscape:current-layer="layer11"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="33.29907"
+     inkscape:zoom="32"
+     inkscape:cx="8.6099291"
      inkscape:snap-grids="true"
      inkscape:pageopacity="1">
     <inkscape:grid
@@ -87,24 +87,26 @@
      inkscape:groupmode="layer"
      id="layer11">
     <g
-       transform="matrix(1.0011372,0,0,1,99.861257,-18.000003)"
-       id="g4934"
-       style="opacity:0.35">
-      <path
-         transform="matrix(0.99886409,0,0,1,-99.747824,17)"
-         inkscape:connector-curvature="0"
-         d="m 225.70228,383 c -1.53288,0 -2.71875,1.31948 -2.71875,2.84375 l 0,8.34375 c 0,1.52427 1.18587,2.84375 2.71875,2.84375 l 8.57897,0 c 1.53288,0 2.75,-1.31948 2.75,-2.84375 l 0,-8.34375 c 0,-1.52427 -1.21712,-2.84375 -2.75,-2.84375 z m 0.78125,1.03125 c 3.52668,0.25598 5.31717,0.13378 7.04772,0 0.75419,-0.0583 1.53125,0.61584 1.53125,1.4375 l 0,7.375 c 0,0.66541 -0.53119,1.09567 -1.1875,1.1875 -2.83642,0.39685 -4.75306,0.44007 -7.67272,0 -0.65529,-0.0988 -1.1875,-0.52209 -1.1875,-1.1875 l 0,-7.34375 c 0,-0.82166 0.71429,-1.52351 1.46875,-1.46875 z"
-         id="rect11749-5-9-2-7"
-         sodipodi:nodetypes="ssssssssssssssssss"
-         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#bebebe;fill:#bebebe;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans" />
-    </g>
-    <g
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;opacity:0.35;fill:#bebebe;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
-       id="text2996">
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#bebebe;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;opacity:0.35"
+       id="text2996"
+       transform="matrix(1.0978455,0,0,1.0978455,-22.504459,-37.773503)">
       <path
          d="m 229.32799,384.18294 -1.89,0.672 0.4935,1.0605 1.386,-0.462 0,4.83 -1.8375,0 0,1.1865 5.082,0 0,-1.1865 -1.764,0 0,-6.1005 -1.47,0"
-         style="font-size:10.5px;font-weight:bold;fill:#bebebe;-inkscape-font-specification:Cantarell Bold"
-         id="path4867" />
+         style="font-size:10.50000000000000000px;font-weight:bold;fill:#bebebe;-inkscape-font-specification:Cantarell Bold"
+         id="path4867"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       transform="matrix(1.1402701,0,0,1.1389577,81.766824,-74.564061)"
+       id="g4934-7"
+       style="opacity:0.35">
+      <path
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#bebebe;fill:#bebebe;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+         d="M 3.09375,-0.9375 C 1.3478382,-0.9375 0,0.54517095 0,2.28125 l 0,9.5 c 0,1.736079 1.3478382,3.25 3.09375,3.25 l 9.78125,0 c 1.745912,0 3.125,-1.513921 3.125,-3.25 l 0,-9.5 C 16,0.54517095 14.620912,-0.9375 12.875,-0.9375 z M 3.9999966,1.732278e-6 c 4.0167998,0.291550387722 6.0289474,0.152369757722 8.0000004,0 0.859003,-0.066401232278 2,1.064164067722 2,1.999999967722 l 0,8.0000003 c 0,0.757874 -0.846226,1.520408 -1.593747,1.624998 -3.2306111,0.451995 -5.4245849,0.501249 -8.75,0 C 2.909887,11.512499 1.9999966,10.757876 1.9999966,10.000002 l 0,-8.0000003 c 0,-0.9358359 1.140689,-2.06236929 2,-1.999999967722 z"
+         transform="matrix(0.8769852,0,0,0.87799573,122.98242,400.83386)"
+         id="rect11749-5-9-2-7-8"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ssssssssssssssssss" />
     </g>
   </g>
   <g
