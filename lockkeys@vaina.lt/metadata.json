@@ -5,4 +5,5 @@
    "description": "Numlock & Capslock status on the panel", 
    "url": "https://github.com/kazysmaster/gnome-shell-extension-lockkeys",
    "original-authors": "Kazimieras Vaina, Pierre Ossman"
+   "version" : 3
 }
