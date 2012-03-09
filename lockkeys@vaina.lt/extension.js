@@ -25,19 +25,20 @@ function main() {
 }
 
 function init() {
-	indicator = new LockKeysIndicator();
 }
 
 function enable() {
-	//Main.panel.addToStatusArea('numlock', indicator, getPreferredIndex());
+	indicator = new LockKeysIndicator();
+	indicator.setActive(true);
 	Main.panel._rightBox.insert_actor(indicator.actor,  getPreferredIndex());
 	Main.panel._menus.addMenu(indicator.menu);
 }
 
 function disable() {
-	//indicator.destroy();
 	Main.panel._rightBox.remove_actor(indicator.actor);
 	Main.panel._menus.removeMenu(indicator.menu);
+	indicator.setActive(false);
+	//indicator.destroy();
 }
 
 function getPreferredIndex() {
@@ -48,9 +49,7 @@ function getPreferredIndex() {
 		
 		let i;
 		for (i = children.length - 1; i >= 0; i--) {
-			//global.log("i:" + i + " role pos " +  children[i]._rolePosition);
 			if(xkb == children[i]._delegate){
-				//return children[i]._rolePosition;
 				return i;
 			}
 		}
@@ -96,22 +95,27 @@ LockKeysIndicator.prototype = {
 		this.capsMenuItem.connect('activate', Lang.bind(this, this._handleCapslockMenuItem));
 		this.menu.addMenuItem(this.capsMenuItem);
 		
-		this._updateState();
-		Keymap.connect('state-changed', Lang.bind(this, this._handleStateChange));
 	},
+	
+	setActive: function(enabled) {
+		if (enabled) {
+			this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._handleStateChange));
+			this._updateState();
+		} else {
+			Keymap.disconnect(this._keyboardStateChangedId);
+		}
+	}, 
 
 	_handleNumlockMenuItem: function(actor, event) {
 		keyval = Gdk.keyval_from_name("Num_Lock");
 		Caribou.XAdapter.get_default().keyval_press(keyval);
 		Caribou.XAdapter.get_default().keyval_release(keyval);
-		//global.log("handled by numlock");
 	}, 
 	
 	_handleCapslockMenuItem: function(actor, event) {
 		keyval = Gdk.keyval_from_name("Caps_Lock");
 		Caribou.XAdapter.get_default().keyval_press(keyval);
 		Caribou.XAdapter.get_default().keyval_release(keyval);
-		//global.log("handled by capslock");
 	}, 
 	
 	_handleStateChange: function(actor, event) {
