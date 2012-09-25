@@ -1,5 +1,7 @@
-Gnome shell numlock&capslock state indicator extension.
+## Gnome shell numlock&capslock state indicator extension.
 
-It shows notications about numlock or capslock state change.
+It shows notifications about numlock or capslock state change.
 
-![Screenshot] (https://github.com/kazysmaster/gnome-shell-extension-lockkeys/raw/master/screenshot.png)
+![Screenshot](https://github.com/kazysmaster/gnome-shell-extension-lockkeys/raw/master/screenshot.png)
+
+The master branch supports gnome-shell 3.4
