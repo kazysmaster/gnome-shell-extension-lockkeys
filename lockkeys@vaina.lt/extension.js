@@ -19,9 +19,9 @@ const MessageTray = imports.ui.messageTray;
 const Meta = imports.misc.extensionUtils.getCurrentExtension();
 
 //Preferences support
-const EXTENSION_PREFS = '{ "notifications": true }';
+const EXTENSION_PREFS = '{ "notifications": true, "capslock": true, "numlock": true }';
 
-const CONFIG_DIR = "/gnome-shell-lockkeys";
+const CONFIG_DIR  = "/gnome-shell-lockkeys";
 const CONFIG_FILE = "/gnome-shell-lockkeys/prefs.json";
 
 
@@ -108,6 +108,7 @@ LockKeysIndicator.prototype = {
 		this.menu.addMenuItem(this.notificationsMenuItem);
 
 		this._readprefs();
+		this._updateState();
 	},
 
 	setActive: function(enabled) {
@@ -120,15 +121,21 @@ LockKeysIndicator.prototype = {
 	}, 
 
 	_handleNumlockMenuItem: function(actor, event) {
-		keyval = Gdk.keyval_from_name("Num_Lock");
-		Caribou.XAdapter.get_default().keyval_press(keyval);
-		Caribou.XAdapter.get_default().keyval_release(keyval);
+		if (!this.numMenuItem.state && !this.capsMenuItem.state) {
+			this.capsMenuItem.setToggleState(true);
+		}
+		
+		this._updateState();
+		this._writeprefs();
 	}, 
 
 	_handleCapslockMenuItem: function(actor, event) {
-		keyval = Gdk.keyval_from_name("Caps_Lock");
-		Caribou.XAdapter.get_default().keyval_press(keyval);
-		Caribou.XAdapter.get_default().keyval_release(keyval);
+		if (!this.numMenuItem.state && !this.capsMenuItem.state) {
+			this.numMenuItem.setToggleState(true);
+		}
+		
+		this._updateState();
+		this._writeprefs();
 	},
 
 	_handleNotificationsMenuItem: function(actor, event) {
@@ -138,18 +145,18 @@ LockKeysIndicator.prototype = {
 	_handleStateChange: function(actor, event) {
 		if (this.numlock_state != this._getNumlockState()) {
 			let notification_text = _('Num Lock') + ' ' + this._getStateText(this._getNumlockState());
-			if (this.notificationsMenuItem.state) {
+			if (this.notificationsMenuItem.state && this.numMenuItem.state) {
 				this._showNotification(notification_text, "numlock-enabled");
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _('Caps Lock') + ' ' + this._getStateText(this._getCapslockState());
-			if (this.notificationsMenuItem.state) {
+			if (this.notificationsMenuItem.state && this.capsMenuItem.state) {
 				this._showNotification(notification_text, "capslock-enabled");
 			}
 		}
 		this._updateState();
-	}, 
+	},
 
 	_updateState: function() {
 		this.numlock_state = this._getNumlockState();
@@ -164,9 +171,16 @@ LockKeysIndicator.prototype = {
 			this.capsIcon.set_icon_name("capslock-enabled");
 		else
 			this.capsIcon.set_icon_name("capslock-disabled");
-
-		this.numMenuItem.setToggleState( this.numlock_state );
-		this.capsMenuItem.setToggleState( this.capslock_state );
+		
+		if (this.numMenuItem.state)
+			this.numIcon.show();
+		else
+			this.numIcon.hide();
+		
+		if (this.capsMenuItem.state)
+			this.capsIcon.show();
+		else
+			this.capsIcon.hide();
 	},
 
 	_showNotification: function(notification_text, icon_name) {
@@ -229,17 +243,21 @@ LockKeysIndicator.prototype = {
 		}
 
 		this.notificationsMenuItem.setToggleState(prefs.notifications);
+		this.numMenuItem.setToggleState( prefs.numlock );
+		this.capsMenuItem.setToggleState( prefs.capslock );
 	},
 
 	_writeprefs: function() {
 		let prefs = JSON.parse(EXTENSION_PREFS);
 		prefs.notifications = this.notificationsMenuItem.state;
+		prefs.numlock = this.numMenuItem.state;
+		prefs.capslock = this.capsMenuItem.state;
 		
-		let _configDir = GLib.get_user_config_dir() + CONFIG_DIR;
-		if (!GLib.file_test(_configDir, GLib.FileTest.EXISTS | GLib.FileTest.IS_DIR)) {
-			GLib.mkdir_with_parents(_configDir, 0755);
-		}
-		try {		
+		try {
+			let _configDir = GLib.get_user_config_dir() + CONFIG_DIR;
+			if (!GLib.file_test(_configDir, GLib.FileTest.EXISTS)) {
+				GLib.mkdir_with_parents(_configDir, 0755);
+			}
 			let _configFile = GLib.get_user_config_dir() + CONFIG_FILE;
 			let filedata = JSON.stringify(prefs, null, "  ");
 	        GLib.file_set_contents(_configFile, filedata, filedata.length);
