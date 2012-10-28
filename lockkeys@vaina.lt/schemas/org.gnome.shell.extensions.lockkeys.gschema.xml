@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extension-lockkeys">
+	<schema path="/org/gnome/shell/extensions/lockkeys/" id="org.gnome.shell.extensions.lockkeys">
+		<key name="notifications" type="b">
+			<default>true</default>
+			<summary>Show notifications when key state changes</summary>
+			<description>Set false to suppress num-lock or caps-lock state change
+				notifications</description>
+		</key>
+		<key name="style" type="s">
+			<default>'both'</default>
+			<summary>Indicator style</summary>
+			<description>Set numlock value to display only num-lock indicator,
+				set capslock value to display only caps-lock indicator, or both for
+				both</description>
+		</key>
+	</schema>
+</schemalist>
