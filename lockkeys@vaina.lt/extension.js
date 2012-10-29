@@ -20,11 +20,6 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Meta = ExtensionUtils.getCurrentExtension();
 const Utils = Meta.imports.utils;
 
-//GS 3.4 and 3.6 compatibility
-const StatusArea = Main.panel.statusArea ? Main.panel.statusArea : Main.panel._statusArea;
-const MenuManager = Main.panel.menuManager ? Main.panel.menuManager : Main.panel._menus;
-const RightBox = Main.panel._rightBox;
-
 
 const STYLE = 'style';
 const STYLE_NUMLOCK = 'numlock';
@@ -43,39 +38,15 @@ function init() {
 }
 
 function enable() {
-	indicator = new LockKeysIndicator();
-	
-	//this approach does not work on GS 3.6
-	indicator.actor.reparent(RightBox);
-	RightBox.remove_actor(indicator.actor);
-	RightBox.insert_child_at_index(indicator.actor,  _getPreferredIndex());
-
-	MenuManager.addMenu(indicator.menu);
+	indicator = new LockKeysIndicator();	
+	Main.panel.addToStatusArea('lockkeys', indicator, 2);
 	indicator.setActive(true);
 }
 
 function disable() {
 	indicator.setActive(false);
-	MenuManager.removeMenu(indicator.menu);
-	RightBox.remove_actor(indicator.actor);
+	indicator.destroy();
 }
-
-function _getPreferredIndex() {
-	//just before xkb layout indicator
-	if (StatusArea['keyboard']) {
-		let xkb = StatusArea['keyboard'];
-		
-		let i;
-		let children = RightBox.get_children();
-		for (i = children.length - 1; i >= 0; i--) {
-			if(xkb == children[i]._delegate){
-				return i;
-			}
-		}
-	}
-	return 0;
-}
-
 
 function LockKeysIndicator() {
 	this._init();
