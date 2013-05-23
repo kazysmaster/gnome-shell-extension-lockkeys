@@ -4,7 +4,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
+const Gettext = imports.gettext.domain('lockkeys');
 const _ = Gettext.gettext;
 
 const Panel = imports.ui.panel;
@@ -35,6 +35,7 @@ function main() {
 }
 
 function init() {
+	Utils.initTranslations("lockkeys");
 }
 
 function enable() {
@@ -74,16 +75,16 @@ LockKeysIndicator.prototype = {
 
 		this.actor.add_actor(this.layoutManager);
 
-		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Num Lock'), false, { reactive: true });
+		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: true });
 		this.numMenuItem.connect('toggled', Lang.bind(this, this._handleNumlockMenuItem));
 		this.menu.addMenuItem(this.numMenuItem);
 
-		this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Caps Lock'), false, { reactive: true });
+		this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: true });
 		this.capsMenuItem.connect('toggled', Lang.bind(this, this._handleCapslockMenuItem));
 		this.menu.addMenuItem(this.capsMenuItem);
 
 		this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-		this.settingsMenuItem = new PopupMenu.PopupMenuItem(_('Settings'));
+		this.settingsMenuItem = new PopupMenu.PopupMenuItem(_("Settings"));
 		this.settingsMenuItem.connect('activate', Lang.bind(this, this._handleSettingsMenuItem));
 		this.menu.addMenuItem(this.settingsMenuItem);
 		
@@ -148,13 +149,13 @@ LockKeysIndicator.prototype = {
 
 	_handleStateChange: function(actor, event) {
 		if (this.numlock_state != this._getNumlockState()) {
-			let notification_text = _('Num Lock') + ' ' + this._getStateText(this._getNumlockState());
+			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
 			if (this._isShowNotifications() && this._isShowNumLock()) {
 				this._showNotification(notification_text, "numlock-enabled");
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
-			let notification_text = _('Caps Lock') + ' ' + this._getStateText(this._getCapslockState());
+			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
 			if (this._isShowNotifications() && this._isShowCapsLock()) {
 				this._showNotification(notification_text, "capslock-enabled");
 			}
@@ -213,7 +214,7 @@ LockKeysIndicator.prototype = {
 	},
 
 	_getStateText: function(state) {
-		return state ? _('On') : _('Off');
+		return state ? _("On") : _("Off");
 	},
 
 	_getNumlockState: function() {
