@@ -1,7 +1,7 @@
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 
-const Gettext = imports.gettext;
+const Gettext = imports.gettext.domain('lockkeys');
 const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -18,15 +18,16 @@ let settings;
 
 function init() {
 	settings = Utils.getSettings(Meta);
+	Utils.initTranslations("lockkeys");
 }
 
 function buildPrefsWidget() {
 	let frame = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
 		border_width: 10, margin: 20});
 	//can not use constants here like STYLE_NUMLOCK etc, don't know why
-	frame.add(_createComboBox(STYLE, _('Indicator Style'), _('Change indicator dysplay options'),
-			{'numlock': _('Num-Lock Only'), 'capslock' : _('Caps-Lock Only'), 'both' : _('Both')}));
-	frame.add(_createCheckBox(NOTIFICATIONS, _('Notifications'), _('Show notifications when state changes')));
+	frame.add(_createComboBox(STYLE, _("Indicator Style"), _("Change indicator dysplay options"),
+			{'numlock': _("Num-Lock Only"), 'capslock' : _("Caps-Lock Only"), 'both' : _("Both")}));
+	frame.add(_createCheckBox(NOTIFICATIONS, _("Notifications"), _("Show notifications when state changes")));
 	
 	frame.show_all();
 	return frame;
