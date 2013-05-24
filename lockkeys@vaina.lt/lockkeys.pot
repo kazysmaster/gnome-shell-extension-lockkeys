@@ -22,7 +22,7 @@ msgid "Indicator Style"
 msgstr ""
 
 #: prefs.js:28
-msgid "Change indicator dysplay options"
+msgid "Change indicator display options"
 msgstr ""
 
 #: prefs.js:29
