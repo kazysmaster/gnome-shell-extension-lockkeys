@@ -12,7 +12,7 @@
 			<summary>Indicator style</summary>
 			<description>Set numlock value to display only num-lock indicator,
 				set capslock value to display only caps-lock indicator, or both for
-				both</description>
+				both. Set show-hide, to display corresponding indicator icons only when on.</description>
 		</key>
 	</schema>
 </schemalist>
