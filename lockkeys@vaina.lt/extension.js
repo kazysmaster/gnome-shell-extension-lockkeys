@@ -90,7 +90,7 @@ LockKeysIndicator.prototype = {
 		this.menu.addMenuItem(this.settingsMenuItem);
 		
 		this.config = new Configuration();
-		this.indicatorStyle = new HighlightIndicator(this.config, this.numIcon, this.capsIcon);
+		this.indicatorStyle = new HighlightIndicator(this);
 	},
 
 	setActive: function(enabled) {
@@ -110,9 +110,9 @@ LockKeysIndicator.prototype = {
 	
 	_handleSettingsChange: function(actor, event) {
 		if (this.config.isShowHideStyle())
-			this.indicatorStyle = new ShowhideIndicator(this.config, this.numIcon, this.capsIcon);
+			this.indicatorStyle = new ShowhideIndicator(this);
 		else
-			this.indicatorStyle = new HighlightIndicator(this.config, this.numIcon, this.capsIcon);
+			this.indicatorStyle = new HighlightIndicator(this);
 		this._updateState();
 	},
 	
@@ -198,15 +198,16 @@ LockKeysIndicator.prototype = {
 	}
 }
 
-function HighlightIndicator(config, numIcon, capsIcon) {
-	this._init(config, numIcon, capsIcon);
+function HighlightIndicator(panelButton) {
+	this._init(panelButton);
 }
 
 HighlightIndicator.prototype = {
-	_init: function(config, numIcon, capsIcon) {
-		this.config = config;
-		this.numIcon = numIcon; 
-		this.capsIcon = capsIcon;
+	_init: function(panelButton) {
+		this.panelButton = panelButton;
+		this.config = panelButton.config;
+		this.numIcon = panelButton.numIcon; 
+		this.capsIcon = panelButton.capsIcon;
 		
 		if (this.config.isShowNumLock())
 			this.numIcon.show();
@@ -220,6 +221,8 @@ HighlightIndicator.prototype = {
 	},
 	
 	displayState: function(numlock_state, capslock_state) {
+		this.panelButton.actor.visible = true;
+		
 		if (numlock_state)
 			this.numIcon.set_icon_name('numlock-enabled-symbolic');
 		else
@@ -233,21 +236,24 @@ HighlightIndicator.prototype = {
 	}
 }
 
-function ShowhideIndicator(config, numIcon, capsIcon) {
-	this._init(config, numIcon, capsIcon);
+function ShowhideIndicator(panelButton) {
+	this._init(panelButton);
 }
 
 ShowhideIndicator.prototype = {
-	_init: function(config, numIcon, capsIcon) {
-		this.config = config;
-		this.numIcon = numIcon; 
-		this.capsIcon = capsIcon;
+	_init: function(panelButton) {
+		this.panelButton = panelButton;
+		this.config = panelButton.config;
+		this.numIcon = panelButton.numIcon; 
+		this.capsIcon = panelButton.capsIcon;
 		
 		this.numIcon.set_icon_name('numlock-enabled-symbolic');
 		this.capsIcon.set_icon_name('capslock-enabled-symbolic');
 	},
 	
 	displayState: function(numlock_state, capslock_state) {
+		this.panelButton.actor.visible = numlock_state || capslock_state;
+	
 		if (numlock_state)
 			this.numIcon.show();
 		else
@@ -257,7 +263,6 @@ ShowhideIndicator.prototype = {
 			this.capsIcon.show();
 		else
 			this.capsIcon.hide();
-
 	}
 }
 
