@@ -1,0 +1,71 @@
+# Polish translations for PACKAGE package.
+# 
+# This file is distributed under the same license as the PACKAGE package.
+# Kazimieras Vaina <kazimieras.vaina@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-13 00:01+0200\n"
+"PO-Revision-Date: 2013-10-14 23:36+0300\n"
+"Last-Translator: Mariusz Lisowski <lisu.tei@gmail.com>\n"
+"Language-Team: Polish\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: prefs.js:28
+msgid "Indicator Style"
+msgstr "Styl wskaźnika"
+
+#: prefs.js:28
+msgid "Change indicator display options"
+msgstr "Zmień opcje wyświetlania wskaźnika"
+
+#: prefs.js:29
+msgid "Num-Lock Only"
+msgstr "Tylko Num-Lock"
+
+#: prefs.js:29
+msgid "Caps-Lock Only"
+msgstr "Tylko Caps-Lock"
+
+#: prefs.js:29
+msgid "Both"
+msgstr "Obydwa"
+
+#: prefs.js:29
+msgid "Show/Hide"
+msgstr "Pokaż/Ukryj"
+
+#: prefs.js:30
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+#: prefs.js:30
+msgid "Show notifications when state changes"
+msgstr "Wyświetl powiadomienie gdy zmieni się stan"
+
+#: extension.js:78 extension.js:152
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: extension.js:82 extension.js:158
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: extension.js:87
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: extension.js:217
+msgid "On"
+msgstr "Włącz"
+
+#: extension.js:217
+msgid "Off"
+msgstr "Wyłącz"
