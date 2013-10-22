@@ -1,0 +1,67 @@
+# Spanish
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-lockkeys\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-23 00:01+0200\n"
+"PO-Revision-Date: 2013-10-22 15:32-0400\n"
+"Last-Translator: Cristian Beroiza <cberoiza@gmail.com>\n"
+"Language-Team: spanish <cberoiza@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"Language: es\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: prefs.js:28
+msgid "Indicator Style"
+msgstr "Estilo del indicador"
+
+#: prefs.js:28
+msgid "Change indicator display options"
+msgstr "Cambiar opciones de visualización del indicador"
+
+#: prefs.js:29
+msgid "Num-Lock Only"
+msgstr "Bloq-Num solamente"
+
+#: prefs.js:29
+msgid "Caps-Lock Only"
+msgstr "Bloq-Mayús solamente"
+
+#: prefs.js:29
+msgid "Both"
+msgstr "Ambos"
+
+#: prefs.js:29
+msgid "Show/Hide"
+msgstr "Mostrar/Ocultar"
+
+#: prefs.js:30
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: prefs.js:30
+msgid "Show notifications when state changes"
+msgstr "Mostrar notificaciones cuando el estado cambie"
+
+#: extension.js:78 extension.js:152
+msgid "Num Lock"
+msgstr "Bloq-Num"
+
+#: extension.js:82 extension.js:158
+msgid "Caps Lock"
+msgstr "Bloq-Mayús"
+
+#: extension.js:87
+msgid "Settings"
+msgstr "Preferencias"
+
+#: extension.js:217
+msgid "On"
+msgstr "Encendido"
+
+#: extension.js:217
+msgid "Off"
+msgstr "Apagado"
