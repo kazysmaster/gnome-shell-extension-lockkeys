@@ -118,14 +118,28 @@ LockKeysIndicator.prototype = {
 	
 	_handleNumlockMenuItem: function(actor, event) {
 		keyval = Gdk.keyval_from_name('Num_Lock');
-		Caribou.XAdapter.get_default().keyval_press(keyval);
-		Caribou.XAdapter.get_default().keyval_release(keyval);
+		//https://bugzilla.gnome.org/show_bug.cgi?id=705720
+		if (Caribou.XAdapter.get_default !== undefined) {
+			//caribou <= 0.4.11
+			Caribou.XAdapter.get_default().keyval_press(keyval);
+			Caribou.XAdapter.get_default().keyval_release(keyval);
+		} else { 
+			Caribou.DisplayAdapter.get_default().keyval_press(keyval);
+			Caribou.DisplayAdapter.get_default().keyval_release(keyval);
+		}
 	}, 
 
 	_handleCapslockMenuItem: function(actor, event) {
 		keyval = Gdk.keyval_from_name('Caps_Lock');
-		Caribou.XAdapter.get_default().keyval_press(keyval);
-		Caribou.XAdapter.get_default().keyval_release(keyval);
+		//https://bugzilla.gnome.org/show_bug.cgi?id=705720
+		if (Caribou.XAdapter.get_default !== undefined) {
+			//caribou <= 0.4.11
+			Caribou.XAdapter.get_default().keyval_press(keyval);
+			Caribou.XAdapter.get_default().keyval_release(keyval);
+		} else { 
+			Caribou.DisplayAdapter.get_default().keyval_press(keyval);
+			Caribou.DisplayAdapter.get_default().keyval_release(keyval);
+		}
 	},
 
 	_handleStateChange: function(actor, event) {
