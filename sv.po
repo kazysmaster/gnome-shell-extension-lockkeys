@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lock Keys Gnome-Shell extension\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-03 13:55+0100\n"
+"PO-Revision-Date: 2014-01-03 15:30+0100\n"
+"Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
+"Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "Both"
+msgstr "Båda"
+
+msgid "Caps Lock"
+msgstr "Skiftlås"
+
+msgid "Caps-Lock Only"
+msgstr "Endast skiftlås"
+
+msgid "Change indicator display options"
+msgstr "Ändra indikatorinställningar"
+
+msgid "Indicator Style"
+msgstr "Indikatorstil"
+
+msgid "Show/Hide"
+msgstr "Visa/dölj"
+
+msgid "Notifications"
+msgstr "Notifieringar"
+
+msgid "Num Lock"
+msgstr "Numeriskt lås"
+
+msgid "Num-Lock Only"
+msgstr "Endast numeriskt lås"
+
+msgid "Off"
+msgstr "av"
+
+msgid "On"
+msgstr "på"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Show notifications when state changes"
+msgstr "Visa notifieringar när låsstatus ändras"
