@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-23 00:01+0200\n"
-"PO-Revision-Date: 2013-05-23 00:07+0100\n"
-"Last-Translator: Jonatan Zeidler <jonatan_zeidler@hotmail.de>\n"
+"PO-Revision-Date: 2014-10-20 17:31+0100\n"
+"Last-Translator: Jonatan Zeidler <jonatan_zeidler@gmx.de>\n"
 "Language-Team: German <jonatan_zeidler@gmx.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -13,38 +13,54 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "Both"
-msgstr "Beide"
-
-msgid "Caps Lock"
-msgstr "Feststelltaste"
-
-msgid "Caps-Lock Only"
-msgstr "Nur Feststelltaste"
-
-msgid "Change indicator display options"
-msgstr "Anzeigeoption des Indikators wählen"
-
+#: prefs.js:28
 msgid "Indicator Style"
 msgstr "Indikatorstil"
 
-msgid "Notifications"
-msgstr "Benachrichtigungen"
+#: prefs.js:28
+msgid "Change indicator display options"
+msgstr "Anzeigeoption des Indikators wählen"
 
-msgid "Num Lock"
-msgstr "Num-Taste"
-
+#: prefs.js:29
 msgid "Num-Lock Only"
 msgstr "Nur Num-Taste"
 
-msgid "Off"
-msgstr "Aus"
+#: prefs.js:29
+msgid "Caps-Lock Only"
+msgstr "Nur Feststelltaste"
 
-msgid "On"
-msgstr "An"
+#: prefs.js:29
+msgid "Both"
+msgstr "Beide"
 
+#: prefs.js:29
+msgid "Show/Hide"
+msgstr "Anzeigen/Verstecken"
+
+#: prefs.js:30
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#: prefs.js:30
+msgid "Show notifications when state changes"
+msgstr "Benachrichtigung anzeigen, wenn sich der Status ändert"
+
+#: extension.js:78 extension.js:152
+msgid "Num Lock"
+msgstr "Num-Taste"
+
+#: extension.js:82 extension.js:158
+msgid "Caps Lock"
+msgstr "Feststelltaste"
+
+#: extension.js:87
 msgid "Settings"
 msgstr "Einstellungen"
 
-msgid "Show notifications when state changes"
-msgstr "Benachrichtigung anzeigen, wenn sich der Status ändert"
+#: extension.js:217
+msgid "On"
+msgstr "An"
+
+#: extension.js:217
+msgid "Off"
+msgstr "Aus"
