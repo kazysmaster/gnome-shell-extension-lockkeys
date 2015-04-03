@@ -1,9 +1,9 @@
 {
-   "shell-version": ["3.4", "3.6", "3.8", "3.10", "3.12", "3.14"], 
+   "shell-version": ["3.4", "3.6", "3.8", "3.10", "3.12", "3.14", "3.16"], 
    "uuid": "lockkeys@vaina.lt", 
    "name": "Lock Keys", 
    "description": "Numlock & Capslock status on the panel", 
    "url": "https://github.com/kazysmaster/gnome-shell-extension-lockkeys",
    "original-authors": "Kazimieras Vaina, Pierre Ossman, erguille, jonnius, Philipp Wolfer, Mariusz Lisowski, Cristian Beroiza, warmsun0220, Rasmus Kaj, Pablo Martin-Gomez Bouska",
-   "version" : 21
+   "version" : 22
 }
