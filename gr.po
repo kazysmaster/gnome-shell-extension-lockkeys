@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-04 17:48+0300\n"
+"PO-Revision-Date: 2017-05-13 14:02+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: el\n"
+
+#: prefs.js:28
+msgid "Indicator Style"
+msgstr "Στυλ δείκτη"
+
+#: prefs.js:28
+msgid "Change indicator display options"
+msgstr "Αλλαγή επιλογών εμφάνισης δείκτη"
+
+#: prefs.js:29
+msgid "Num-Lock Only"
+msgstr "Μόνο κλείδωμα αριθμητικών"
+
+#: prefs.js:29
+msgid "Caps-Lock Only"
+msgstr "Μόνο κλείδωμα κεφαλαίων"
+
+#: prefs.js:29
+msgid "Both"
+msgstr "Αμφότερα"
+
+#: prefs.js:29
+msgid "Show/Hide"
+msgstr "Εμφάνιση/Απόκρυψη"
+
+#: prefs.js:30
+msgid "Notifications"
+msgstr "Ειδοποιήσεις"
+
+#: prefs.js:30
+msgid "Show notifications when state changes"
+msgstr "Εμφάνιση ειδοποιήσεων όταν αλλάζει η κατάσταση"
+
+#: extension.js:78 extension.js:152
+msgid "Num Lock"
+msgstr "Κλείδωμα αριθμητικών"
+
+#: extension.js:82 extension.js:158
+msgid "Caps Lock"
+msgstr "Κλείδωμα κεφαλαίων"
+
+#: extension.js:87
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: extension.js:217
+msgid "On"
+msgstr "Άνοιγμα"
+
+#: extension.js:217
+msgid "Off"
+msgstr "Κλείσιμο"
