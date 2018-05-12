@@ -14,7 +14,7 @@ const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
 
 const Keymap = Gdk.Keymap.get_default();
-const Caribou = imports.gi.Caribou;
+
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Meta = ExtensionUtils.getCurrentExtension();
@@ -76,12 +76,10 @@ LockKeysIndicator.prototype = {
 
 		this.actor.add_actor(this.layoutManager);
 
-		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: true });
-		this.numMenuItem.connect('toggled', Lang.bind(this, this._handleNumlockMenuItem));
+		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
 		this.menu.addMenuItem(this.numMenuItem);
 
-		this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: true });
-		this.capsMenuItem.connect('toggled', Lang.bind(this, this._handleCapslockMenuItem));
+		this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: false });
 		this.menu.addMenuItem(this.capsMenuItem);
 
 		this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -114,32 +112,6 @@ LockKeysIndicator.prototype = {
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
 		this._updateState();
-	},
-	
-	_handleNumlockMenuItem: function(actor, event) {
-		keyval = Gdk.keyval_from_name('Num_Lock');
-		//https://bugzilla.gnome.org/show_bug.cgi?id=705720
-		if (Caribou.XAdapter.get_default !== undefined) {
-			//caribou <= 0.4.11
-			Caribou.XAdapter.get_default().keyval_press(keyval);
-			Caribou.XAdapter.get_default().keyval_release(keyval);
-		} else { 
-			Caribou.DisplayAdapter.get_default().keyval_press(keyval);
-			Caribou.DisplayAdapter.get_default().keyval_release(keyval);
-		}
-	}, 
-
-	_handleCapslockMenuItem: function(actor, event) {
-		keyval = Gdk.keyval_from_name('Caps_Lock');
-		//https://bugzilla.gnome.org/show_bug.cgi?id=705720
-		if (Caribou.XAdapter.get_default !== undefined) {
-			//caribou <= 0.4.11
-			Caribou.XAdapter.get_default().keyval_press(keyval);
-			Caribou.XAdapter.get_default().keyval_release(keyval);
-		} else { 
-			Caribou.DisplayAdapter.get_default().keyval_press(keyval);
-			Caribou.DisplayAdapter.get_default().keyval_release(keyval);
-		}
 	},
 
 	_handleStateChange: function(actor, event) {
