@@ -1,4 +1,4 @@
-# French translation of Lock Keys Gnome-Shell extension
+# Turkish translation of Lock Keys Gnome-Shell extension
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Muha Aliss <muhaaliss@pm.me>, 2019
