@@ -113,7 +113,7 @@ const LockKeysIndicator = new Lang.Class({
 			this.indicatorStyle = new ShowhideIndicator(this);
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
-		this._updateState();
+		this._updateState(actor);
 	},
 
 	_handleStateChange: function(actor, event) {
@@ -129,14 +129,14 @@ const LockKeysIndicator = new Lang.Class({
 				this._showNotification(notification_text, "capslock-enabled");
 			}
 		}
-		this._updateState();
+		this._updateState(actor);
 	},
 
-	_updateState: function() {
+	_updateState: function(actor) {
 		this.numlock_state = this._getNumlockState();
 		this.capslock_state = this._getCapslockState();
 
-		this.indicatorStyle.displayState(this.numlock_state, this.capslock_state);
+		this.indicatorStyle.displayState(actor, this.numlock_state, this.capslock_state);
 		this.numMenuItem.setToggleState(this.numlock_state);
 		this.capsMenuItem.setToggleState(this.capslock_state);
 	},
@@ -208,8 +208,8 @@ HighlightIndicator.prototype = {
 			this.capsIcon.hide();
 	},
 	
-	displayState: function(numlock_state, capslock_state) {
-		this.panelButton.actor.visible = true;
+	displayState: function(actor, numlock_state, capslock_state) {
+		actor.visible = true;
 		
 		if (numlock_state)
 			this.numIcon.set_gicon( this.panelButton._getCustIcon('numlock-enabled-symbolic') );
@@ -239,8 +239,8 @@ ShowhideIndicator.prototype = {
 		this.capsIcon.set_gicon( this.panelButton._getCustIcon('capslock-enabled-symbolic') );
 	},
 	
-	displayState: function(numlock_state, capslock_state) {
-		this.panelButton.actor.visible = numlock_state || capslock_state;
+	displayState: function(actor, numlock_state, capslock_state) {
+		actor.visible = numlock_state || capslock_state;
 	
 		if (numlock_state)
 			this.numIcon.show();
