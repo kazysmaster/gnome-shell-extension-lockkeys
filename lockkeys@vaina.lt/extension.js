@@ -209,7 +209,8 @@ HighlightIndicator.prototype = {
 	},
 	
 	displayState: function(actor, numlock_state, capslock_state) {
-		actor.visible = true;
+		if (actor)
+			actor.visible = true;
 		
 		if (numlock_state)
 			this.numIcon.set_gicon( this.panelButton._getCustIcon('numlock-enabled-symbolic') );
@@ -240,7 +241,8 @@ ShowhideIndicator.prototype = {
 	},
 	
 	displayState: function(actor, numlock_state, capslock_state) {
-		actor.visible = numlock_state || capslock_state;
+		if (actor)
+			actor.visible = numlock_state || capslock_state;
 	
 		if (numlock_state)
 			this.numIcon.show();
