@@ -76,7 +76,7 @@ const LockKeysIndicator = new Lang.Class({
 		layoutManager.add_child(this.numIcon);
 		layoutManager.add_child(this.capsIcon);
 
-		this.actor.add_child(layoutManager);
+		this.add_child(layoutManager);
 
 		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
 		this.menu.addMenuItem(this.numMenuItem);
