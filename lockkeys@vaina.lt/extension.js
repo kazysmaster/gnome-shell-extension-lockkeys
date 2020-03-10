@@ -2,8 +2,6 @@ const St = imports.gi.St;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const GLib = imports.gi.GLib;
 const Gettext = imports.gettext.domain('lockkeys');
 const _ = Gettext.gettext;
 
@@ -13,7 +11,9 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
 
-const Keymap = Gdk.Keymap.get_default();
+const Keymap = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34 ?
+               imports.gi.Clutter.get_default_backend().get_keymap() :
+               imports.gi.Gtk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -121,12 +121,14 @@ const LockKeysIndicator = new Lang.Class({
 			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
 			if (this.config.isShowNotifications() && this.config.isShowNumLock()) {
 				this._showNotification(notification_text, "numlock-enabled");
+				//Main.osdWindowManager.show(-1, this._getCustIcon("numlock-enabled-symbolic"), notification_text, 1, 1);
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
 			if (this.config.isShowNotifications() && this.config.isShowCapsLock()) {
 				this._showNotification(notification_text, "capslock-enabled");
+				//Main.osdWindowManager.show(-1, this._getCustIcon("capslock-enabled-symbolic"), notification_text, 1, 1);
 			}
 		}
 		this._updateState();
@@ -161,9 +163,7 @@ const LockKeysIndicator = new Lang.Class({
 		if (this._source == null) {
 			this._source = new MessageTray.SystemNotificationSource();
 			this._source.createNotificationIcon = function() {
-				return new St.Icon({ icon_name: icon_name,
-					icon_type: St.IconType.SYMBOLIC,
-					icon_size: this.ICON_SIZE });
+				return new St.Icon({ icon_name: icon_name});
 			};
 			this._source.connect('destroy', Lang.bind(this,
 					function() {
