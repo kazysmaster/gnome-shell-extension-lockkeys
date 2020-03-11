@@ -253,21 +253,19 @@ ShowhideIndicator.prototype = {
 		this.config = panelButton.config;
 		this.numIcon = panelButton.numIcon; 
 		this.capsIcon = panelButton.capsIcon;
-		
-		this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
-		this.capsIcon.set_gicon(this.panelButton._getCustIcon('capslock-enabled-symbolic'));
 	},
 	
 	displayState: function(numlock_state, capslock_state) {
-
-		if (numlock_state)
+		if (numlock_state) {
+			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
 			this.numIcon.show();
-		else
+		} else
 			this.numIcon.hide();
 
-		if (capslock_state)
+		if (capslock_state) {
+			this.capsIcon.set_gicon(this.panelButton._getCustIcon('capslock-enabled-symbolic'));
 			this.capsIcon.show();
-		else
+		} else
 			this.capsIcon.hide();
 	}
 }
