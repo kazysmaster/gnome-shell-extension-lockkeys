@@ -26,7 +26,10 @@ const STYLE_NUMLOCK = 'numlock';
 const STYLE_CAPSLOCK = 'capslock';
 const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
-const NOTIFICATIONS = 'notifications';
+const NOTIFICATIONS = 'notification-preferences';
+const NOTIFICATIONS_OFF = 'off';
+const NOTIFICATIONS_ON = 'on';
+const NOTIFICATIONS_OSD = 'osd';
 
 let indicator;
 
@@ -55,8 +58,12 @@ const LockKeysIndicator = new Lang.Class({
 	Extends: PanelMenu.Button,
 
 	_getCustIcon: function(icon_name) {
-		let gicon = Gio.icon_new_for_string( Meta.dir.get_child('icons').get_path() + "/" + icon_name + ".svg" );
-		return gicon;
+		//workaround for themed icon
+		//new Gio.ThemedIcon({ name: icon_name });
+		//return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
+		return new Gio.FileIcon({file: Gio.File.new_for_path(Gtk.IconTheme.get_default().lookup_icon(icon_name, -1, 2).get_filename())});
+		//return imports.gi.GdkPixbuf.Pixbuf.new_from_file(imports.gi.Gtk.IconTheme.get_default().lookup_icon("numlock-enabled-symbolic", 256, 2).get_filename());
+		//return Gio.BytesIcon.new(Gio.File.new_for_path(imports.gi.Gtk.IconTheme.get_default().lookup_icon("numlock-enabled-symbolic", -1, 2).get_filename()).load_bytes(null)[0]);
 	},
 
 	_init: function() {
@@ -65,14 +72,18 @@ const LockKeysIndicator = new Lang.Class({
 		// For highlight to work properly you have to use themed
 		// icons. Fortunately we can add our directory to the search path.
 		Gtk.IconTheme.get_default().append_search_path(Meta.dir.get_child('icons').get_path());
+		
+		this.numIcon = new St.Icon({
+			style_class: 'system-status-icon'
+		});
+		this.capsIcon = new St.Icon({
+			style_class: 'system-status-icon'
+		});
 
-		this.numIcon = new St.Icon({gicon: this._getCustIcon("numlock-enabled-symbolic"),
-			style_class: 'system-status-icon'});
-		this.capsIcon = new St.Icon({gicon: this._getCustIcon("capslock-enabled-symbolic"),
-			style_class: 'system-status-icon'});
-
-		let layoutManager = new St.BoxLayout({vertical: false,
-			style_class: 'lockkeys-container'});
+		let layoutManager = new St.BoxLayout({
+			vertical: false,
+			style_class: 'lockkeys-container'
+		});
 		layoutManager.add_child(this.numIcon);
 		layoutManager.add_child(this.capsIcon);
 
@@ -120,15 +131,15 @@ const LockKeysIndicator = new Lang.Class({
 		if (this.numlock_state != this._getNumlockState()) {
 			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
 			if (this.config.isShowNotifications() && this.config.isShowNumLock()) {
-				this._showNotification(notification_text, "numlock-enabled");
-				//Main.osdWindowManager.show(-1, this._getCustIcon("numlock-enabled-symbolic"), notification_text, 1, 1);
+				icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
+				this._showNotification(notification_text, icon_name);				
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
 			if (this.config.isShowNotifications() && this.config.isShowCapsLock()) {
-				this._showNotification(notification_text, "capslock-enabled");
-				//Main.osdWindowManager.show(-1, this._getCustIcon("capslock-enabled-symbolic"), notification_text, 1, 1);
+				icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
+				this._showNotification(notification_text, icon_name);
 			}
 		}
 		this._updateState();
@@ -144,33 +155,43 @@ const LockKeysIndicator = new Lang.Class({
 	},
 
 	_showNotification: function(notification_text, icon_name) {
-		this._prepareSource(icon_name);
-
-		let notification = null;
-		if (this._source.notifications.length == 0) {
-			notification = new MessageTray.Notification(this._source, notification_text);
-			notification.setTransient(true);
-			notification.setResident(false);
+		if (this.config.isShowOsd()) {
+			Main.osdWindowManager.show(-1, this._getCustIcon(icon_name), notification_text, 1, 1);
 		} else {
-			notification = this._source.notifications[0];
-			notification.update(notification_text, null, { clear: true });
-		}
+			this._prepareSource(icon_name);
 
-		this._source.notify(notification);
+			let notification = null;
+			if (this._source.notifications.length == 0) {
+				notification = new MessageTray.Notification(this._source, notification_text);
+				notification.setTransient(true);
+				notification.setResident(false);
+			} else {
+				notification = this._source.notifications[0];
+				notification.update(notification_text, null, { clear: true });
+			}
+
+			this._source.notify(notification);
+		}
 	},
 
 	_prepareSource: function(icon_name) {
 		if (this._source == null) {
-			this._source = new MessageTray.SystemNotificationSource();
-			this._source.createNotificationIcon = function() {
-				return new St.Icon({ icon_name: icon_name});
-			};
-			this._source.connect('destroy', Lang.bind(this,
-					function() {
+			this._source = new MessageTray.Source("LockKeysIndicator", icon_name);
+			
+			let parent = this;
+			this._source.createIcon = function(size) {
+				 return new St.Icon({ 
+					 gicon: parent._getCustIcon(parent._source.iconName),
+                     icon_size: size 
+                 });
+			}
+			
+			this._source.connect('destroy', Lang.bind(this, function() {
 				this._source = null;
 			}));
 			Main.messageTray.add(this._source);
 		}
+		this._source.iconName = icon_name;
 	},
 
 	_getStateText: function(state) {
@@ -211,15 +232,14 @@ HighlightIndicator.prototype = {
 	displayState: function(numlock_state, capslock_state) {
 		
 		if (numlock_state)
-			this.numIcon.set_gicon( this.panelButton._getCustIcon('numlock-enabled-symbolic') );
+			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
 		else
-			this.numIcon.set_gicon( this.panelButton._getCustIcon('numlock-disabled-symbolic') );
-
+			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-disabled-symbolic'));
+		
 		if (capslock_state)
-			this.capsIcon.set_gicon( this.panelButton._getCustIcon('capslock-enabled-symbolic') );
+			this.capsIcon.set_gicon(this.panelButton._getCustIcon('capslock-enabled-symbolic'));
 		else
-			this.capsIcon.set_gicon( this.panelButton._getCustIcon('capslock-disabled-symbolic') );
-
+			this.capsIcon.set_gicon(this.panelButton._getCustIcon('capslock-disabled-symbolic'));
 	}
 }
 
@@ -234,8 +254,8 @@ ShowhideIndicator.prototype = {
 		this.numIcon = panelButton.numIcon; 
 		this.capsIcon = panelButton.capsIcon;
 		
-		this.numIcon.set_gicon( this.panelButton._getCustIcon('numlock-enabled-symbolic') );
-		this.capsIcon.set_gicon( this.panelButton._getCustIcon('capslock-enabled-symbolic') );
+		this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
+		this.capsIcon.set_gicon(this.panelButton._getCustIcon('capslock-enabled-symbolic'));
 	},
 	
 	displayState: function(numlock_state, capslock_state) {
@@ -262,7 +282,13 @@ Configuration.prototype = {
 	},
 	
 	isShowNotifications: function() {
-		return this.settings.get_boolean(NOTIFICATIONS);
+		let notification_prefs = this.settings.get_string(NOTIFICATIONS);
+		return notification_prefs == NOTIFICATIONS_ON || notification_prefs == NOTIFICATIONS_OSD;
+	},
+	
+	isShowOsd: function() {
+		let notification_prefs = this.settings.get_string(NOTIFICATIONS);
+		return notification_prefs == NOTIFICATIONS_OSD;
 	},
 	
 	isShowNumLock: function() {

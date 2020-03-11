@@ -13,7 +13,10 @@ const STYLE_NUMLOCK = 'numlock';
 const STYLE_CAPSLOCK = 'capslock';
 const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
-const NOTIFICATIONS = 'notifications';
+const NOTIFICATIONS = 'notification-preferences';
+const NOTIFICATIONS_OFF = 'off';
+const NOTIFICATIONS_ON = 'on';
+const NOTIFICATIONS_OSD = 'osd';
 
 let settings;
 
@@ -26,10 +29,19 @@ function buildPrefsWidget() {
 	let frame = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
 		border_width: 10, margin: 20});
 	frame.set_spacing(10);
-	//can not use constants here like STYLE_NUMLOCK etc, don't know why
-	frame.add(_createComboBox(STYLE, _("Indicator Style"), _("Change indicator display options"),
-			{'numlock': _("Num-Lock Only"), 'capslock' : _("Caps-Lock Only"), 'both' : _("Both"), 'show-hide' : _("Show/Hide")}));
-	frame.add(_createCheckBox(NOTIFICATIONS, _("Notifications"), _("Show notifications when state changes")));
+
+	frame.add(_createComboBox(STYLE, _("Indicator Style"), _("Change indicator display options"), {
+		[STYLE_NUMLOCK]: _("Num-Lock Only"), 
+		[STYLE_CAPSLOCK]: _("Caps-Lock Only"), 
+		[STYLE_BOTH]: _("Both"), 
+		[STYLE_SHOWHIDE]: _("Show/Hide")
+	}));
+	
+	frame.add(_createComboBox(NOTIFICATIONS, _("Notifications"), _("Show notifications when state changes"), {
+		[NOTIFICATIONS_OFF]: _("Off"), 
+		[NOTIFICATIONS_ON]: _("Compact"), 
+		[NOTIFICATIONS_OSD]: _("Osd")
+	}));
 	
 	frame.show_all();
 	return frame;

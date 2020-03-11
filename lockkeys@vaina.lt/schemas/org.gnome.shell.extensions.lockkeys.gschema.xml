@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extension-lockkeys">
 	<schema path="/org/gnome/shell/extensions/lockkeys/" id="org.gnome.shell.extensions.lockkeys">
-		<key name="notifications" type="b">
-			<default>true</default>
+		<key name="notification-preferences" type="s">
+			<default>'osd'</default>
 			<summary>Show notifications when key state changes</summary>
 			<description>Set false to suppress num-lock or caps-lock state change
 				notifications</description>
