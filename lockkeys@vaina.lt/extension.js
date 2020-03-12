@@ -13,7 +13,7 @@ const MessageTray = imports.ui.messageTray;
 
 const Keymap = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34 ?
                imports.gi.Clutter.get_default_backend().get_keymap() :
-               imports.gi.Gtk.Keymap.get_default();
+               imports.gi.Gdk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -131,14 +131,14 @@ const LockKeysIndicator = new Lang.Class({
 		if (this.numlock_state != this._getNumlockState()) {
 			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
 			if (this.config.isShowNotifications() && this.config.isShowNumLock()) {
-				icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
+				let icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
 				this._showNotification(notification_text, icon_name);				
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
 			if (this.config.isShowNotifications() && this.config.isShowCapsLock()) {
-				icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
+				let icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
 				this._showNotification(notification_text, icon_name);
 			}
 		}
