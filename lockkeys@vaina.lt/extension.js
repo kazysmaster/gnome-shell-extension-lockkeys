@@ -11,9 +11,8 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
 
-const Keymap = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34 ?
-               imports.gi.Clutter.get_default_backend().get_keymap() :
-               imports.gi.Gdk.Keymap.get_default();
+const POST_3_34 = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34;
+const Keymap = POST_3_34 ? imports.gi.Clutter.get_default_backend().get_keymap() : imports.gi.Gdk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -86,9 +85,8 @@ const LockKeysIndicator = new Lang.Class({
 		});
 		layoutManager.add_child(this.numIcon);
 		layoutManager.add_child(this.capsIcon);
-
-		this.add_child(layoutManager);
-
+		this.add_child_compat(layoutManager);
+		
 		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
 		this.menu.addMenuItem(this.numMenuItem);
 
@@ -102,6 +100,13 @@ const LockKeysIndicator = new Lang.Class({
 		
 		this.config = new Configuration();
 		this.indicatorStyle = new HighlightIndicator(this);
+	},
+
+	add_child_compat: function(child) {
+		if (POST_3_34)
+			this.add_child(child);
+		else
+			this.actor.add_child(child);
 	},
 
 	setActive: function(enabled) {
@@ -156,7 +161,7 @@ const LockKeysIndicator = new Lang.Class({
 
 	_showNotification: function(notification_text, icon_name) {
 		if (this.config.isShowOsd()) {
-			Main.osdWindowManager.show(-1, this._getCustIcon(icon_name), notification_text, 1, 1);
+			Main.osdWindowManager.show(-1, this._getCustIcon(icon_name), notification_text);
 		} else {
 			this._prepareSource(icon_name);
 
@@ -180,10 +185,10 @@ const LockKeysIndicator = new Lang.Class({
 			
 			let parent = this;
 			this._source.createIcon = function(size) {
-				 return new St.Icon({ 
-					 gicon: parent._getCustIcon(parent._source.iconName),
-                     icon_size: size 
-                 });
+				return new St.Icon({ 
+					gicon: parent._getCustIcon(parent._source.iconName),
+                     			icon_size: size 
+                 		});
 			}
 			
 			this._source.connect('destroy', Lang.bind(this, function() {
