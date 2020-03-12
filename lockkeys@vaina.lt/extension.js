@@ -13,7 +13,7 @@ const MessageTray = imports.ui.messageTray;
 
 const Keymap = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34 ?
                imports.gi.Clutter.get_default_backend().get_keymap() :
-               imports.gi.Gtk.Keymap.get_default();
+               imports.gi.Gdk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
