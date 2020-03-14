@@ -65,16 +65,17 @@ const LockKeysIndicator = new Lang.Class({
 		//workaround for themed icon
 		//new Gio.ThemedIcon({ name: icon_name });
 		//return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
-		return new Gio.FileIcon({file: Gio.File.new_for_path(Gtk.IconTheme.get_default().lookup_icon(icon_name, -1, 2).get_filename())});
+		let icon_path = Meta.dir.get_child('icons').get_child(icon_name + ".svg").get_path();
+		let theme_icon = Gtk.IconTheme.get_default().lookup_icon(icon_name, -1, 2);
+		if (theme_icon) {
+			icon_path = theme_icon.get_filename();
+		}
+		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
 	},
 
 	_init: function() {
 		this.parent(0.0, "LockKeysIndicator");
 
-		// For highlight to work properly you have to use themed
-		// icons. Fortunately we can add our directory to the search path.
-		Gtk.IconTheme.get_default().append_search_path(Meta.dir.get_child('icons').get_path());
-		
 		this.numIcon = new St.Icon({
 			style_class: 'system-status-icon'
 		});
