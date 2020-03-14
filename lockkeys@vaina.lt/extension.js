@@ -2,6 +2,7 @@ const St = imports.gi.St;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext.domain('lockkeys');
 const _ = Gettext.gettext;
 
@@ -10,9 +11,13 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
+const Config = imports.misc.config;
 
-const POST_3_34 = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34;
-const Keymap = POST_3_34 ? imports.gi.Clutter.get_default_backend().get_keymap() : imports.gi.Gdk.Keymap.get_default();
+const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
+const POST_3_34 = parseFloat(Config.PACKAGE_VERSION) >= 3.34;
+const Keymap = POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
+			   POST_3_34 ? Clutter.get_default_backend().get_keymap():
+			   imports.gi.Gdk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -61,8 +66,6 @@ const LockKeysIndicator = new Lang.Class({
 		//new Gio.ThemedIcon({ name: icon_name });
 		//return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
 		return new Gio.FileIcon({file: Gio.File.new_for_path(Gtk.IconTheme.get_default().lookup_icon(icon_name, -1, 2).get_filename())});
-		//return imports.gi.GdkPixbuf.Pixbuf.new_from_file(imports.gi.Gtk.IconTheme.get_default().lookup_icon("numlock-enabled-symbolic", 256, 2).get_filename());
-		//return Gio.BytesIcon.new(Gio.File.new_for_path(imports.gi.Gtk.IconTheme.get_default().lookup_icon("numlock-enabled-symbolic", -1, 2).get_filename()).load_bytes(null)[0]);
 	},
 
 	_init: function() {
