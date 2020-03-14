@@ -66,9 +66,12 @@ const LockKeysIndicator = new Lang.Class({
 		//new Gio.ThemedIcon({ name: icon_name });
 		//return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
 		let icon_path = Meta.dir.get_child('icons').get_child(icon_name + ".svg").get_path();
-		let theme_icon = Gtk.IconTheme.get_default().lookup_icon(icon_name, -1, 2);
-		if (theme_icon) {
-			icon_path = theme_icon.get_filename();
+		let theme = Gtk.IconTheme.get_default();
+		if (theme) {
+			let theme_icon = theme.lookup_icon(icon_name, -1, 2);
+			if (theme_icon) {
+				icon_path = theme_icon.get_filename();
+			}
 		}
 		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
 	},
@@ -140,14 +143,14 @@ const LockKeysIndicator = new Lang.Class({
 		if (this.numlock_state != this._getNumlockState()) {
 			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
 			if (this.config.isShowNotifications() && this.config.isShowNumLock()) {
-				icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
+				let icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
 				this._showNotification(notification_text, icon_name);				
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
 			if (this.config.isShowNotifications() && this.config.isShowCapsLock()) {
-				icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
+				let icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
 				this._showNotification(notification_text, icon_name);
 			}
 		}
