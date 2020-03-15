@@ -2,6 +2,7 @@ const St = imports.gi.St;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext.domain('lockkeys');
 const _ = Gettext.gettext;
 
@@ -10,9 +11,13 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
+const Config = imports.misc.config;
 
-const POST_3_34 = parseFloat(imports.misc.config.PACKAGE_VERSION) >= 3.34;
-const Keymap = POST_3_34 ? imports.gi.Clutter.get_default_backend().get_keymap() : imports.gi.Gdk.Keymap.get_default();
+const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
+const POST_3_34 = parseFloat(Config.PACKAGE_VERSION) >= 3.34;
+const Keymap = POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
+			   POST_3_34 ? Clutter.get_default_backend().get_keymap():
+			   imports.gi.Gdk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -60,18 +65,20 @@ const LockKeysIndicator = new Lang.Class({
 		//workaround for themed icon
 		//new Gio.ThemedIcon({ name: icon_name });
 		//return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
-		return new Gio.FileIcon({file: Gio.File.new_for_path(Gtk.IconTheme.get_default().lookup_icon(icon_name, -1, 2).get_filename())});
-		//return imports.gi.GdkPixbuf.Pixbuf.new_from_file(imports.gi.Gtk.IconTheme.get_default().lookup_icon("numlock-enabled-symbolic", 256, 2).get_filename());
-		//return Gio.BytesIcon.new(Gio.File.new_for_path(imports.gi.Gtk.IconTheme.get_default().lookup_icon("numlock-enabled-symbolic", -1, 2).get_filename()).load_bytes(null)[0]);
+		let icon_path = Meta.dir.get_child('icons').get_child(icon_name + ".svg").get_path();
+		let theme = Gtk.IconTheme.get_default();
+		if (theme) {
+			let theme_icon = theme.lookup_icon(icon_name, -1, 2);
+			if (theme_icon) {
+				icon_path = theme_icon.get_filename();
+			}
+		}
+		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
 	},
 
 	_init: function() {
 		this.parent(0.0, "LockKeysIndicator");
 
-		// For highlight to work properly you have to use themed
-		// icons. Fortunately we can add our directory to the search path.
-		Gtk.IconTheme.get_default().append_search_path(Meta.dir.get_child('icons').get_path());
-		
 		this.numIcon = new St.Icon({
 			style_class: 'system-status-icon'
 		});
@@ -136,14 +143,14 @@ const LockKeysIndicator = new Lang.Class({
 		if (this.numlock_state != this._getNumlockState()) {
 			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
 			if (this.config.isShowNotifications() && this.config.isShowNumLock()) {
-				icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
+				let icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
 				this._showNotification(notification_text, icon_name);				
 			}
 		}
 		if (this.capslock_state != this._getCapslockState()) {
 			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
 			if (this.config.isShowNotifications() && this.config.isShowCapsLock()) {
-				icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
+				let icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
 				this._showNotification(notification_text, icon_name);
 			}
 		}

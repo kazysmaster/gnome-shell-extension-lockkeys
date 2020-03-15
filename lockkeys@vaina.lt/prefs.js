@@ -65,7 +65,7 @@ function _createComboBox(key, text, tooltip, values)
 	let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
 	let label = new Gtk.Label({ label: text, xalign: 0, tooltip_text:tooltip });
 	let widget = new Gtk.ComboBoxText();
-	for (id in values) {
+	for (let id in values) {
 		widget.append(id, values[id]);
 	}
 	widget.set_active_id(settings.get_string(key));
@@ -76,4 +76,3 @@ function _createComboBox(key, text, tooltip, values)
 	box.add(widget);
 	return box;
 }
-
