@@ -128,7 +128,10 @@ const LockKeysIndicator = new Lang.Class({
 	}, 
 
 	_handleSettingsMenuItem: function(actor, event) {
-		imports.misc.util.spawn(['gnome-shell-extension-prefs', 'lockkeys@vaina.lt']);
+		if (POST_3_36)
+			imports.misc.util.spawn(['gnome-extensions', 'prefs', 'lockkeys@vaina.lt']);
+		else
+			imports.misc.util.spawn(['gnome-shell-extension-prefs', 'lockkeys@vaina.lt']);
 	},
 	
 	_handleSettingsChange: function(actor, event) {
@@ -279,6 +282,8 @@ ShowhideIndicator.prototype = {
 			this.capsIcon.show();
 		} else
 			this.capsIcon.hide();
+			
+		this.panelButton.visible = numlock_state || capslock_state;
 	}
 }
 
