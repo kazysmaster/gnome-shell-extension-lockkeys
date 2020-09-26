@@ -66,8 +66,8 @@ msgstr "Nastavenia"
 
 #: extension.js:217
 msgid "On"
-msgstr "Zapnuté"
+msgstr "zapnutý"
 
 #: extension.js:217
 msgid "Off"
-msgstr "Vypnuté"
+msgstr "vypnutý"
