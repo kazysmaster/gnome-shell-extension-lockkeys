@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Dušan Kazik <prescott66@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-26 11:26+0200\n"
+"PO-Revision-Date: 2020-09-26 11:39+0200\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"Language-Team: \n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+
+#: extension.js:97 extension.js:147
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: extension.js:100 extension.js:154
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: extension.js:104
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: extension.js:213
+msgid "On"
+msgstr "zapnutý"
+
+#: extension.js:213 prefs.js:41
+msgid "Off"
+msgstr "vypnutý"
+
+#: prefs.js:33
+msgid "Indicator Style"
+msgstr "Štýl indikátoru"
+
+# tooltip
+#: prefs.js:33
+msgid "Change indicator display options"
+msgstr "Zmení voľby zobrazenia indikátora"
+
+#: prefs.js:34
+msgid "Num-Lock Only"
+msgstr "Iba funkcia Num-Lock"
+
+#: prefs.js:35
+msgid "Caps-Lock Only"
+msgstr "Iba funkcia Caps-Lock"
+
+#: prefs.js:36
+msgid "Both"
+msgstr "Oboje"
+
+#: prefs.js:37
+msgid "Show/Hide"
+msgstr "Zobraziť alebo skryť"
+
+#: prefs.js:40
+msgid "Notifications"
+msgstr "Oznámenia"
+
+# tooltip
+#: prefs.js:40
+msgid "Show notifications when state changes"
+msgstr "Zobrazí oznámenia pri zmene stavu"
+
+#: prefs.js:42
+msgid "Compact"
+msgstr "Kompaktné"
+
+#: prefs.js:43
+msgid "Osd"
+msgstr "Na obrazovke"
+
+# tooltip
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr "Zobrazí oznámenia pri zmene stavu klávesov"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr ""
+"Nastavením na hodnotu false potlačíte oznámenia o zmene stavov funkcií num-"
+"lock alebo caps-lock"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr "Štýl indikátoru"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+"Nastavením na hodnotu „numlock“ bude zobrazený iba indikátor funkcie Num-"
+"Lock. Nastavenim na hodnotu „capslock“ bude zobrazený iba indikátor funkcie "
+"Caps-Lock. Hodnota „both“ zobrazí oba indikátory. Nastavením hodnoty "
+"„show“ (zobraziť) alebo „hide“ (skryť) budú po zapnutí zobrazené iba ikony "
+"príslušného indikátoru."
