@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-26 11:26+0200\n"
-"PO-Revision-Date: 2020-09-26 11:39+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2020-10-05 11:01+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -34,7 +34,7 @@ msgstr "Nastavenia"
 msgid "On"
 msgstr "zapnutý"
 
-#: extension.js:213 prefs.js:41
+#: extension.js:213
 msgid "Off"
 msgstr "vypnutý"
 
@@ -71,6 +71,10 @@ msgstr "Oznámenia"
 #: prefs.js:40
 msgid "Show notifications when state changes"
 msgstr "Zobrazí oznámenia pri zmene stavu"
+
+#: prefs.js:41
+msgid "Disabled"
+msgstr "Zakázané"
 
 #: prefs.js:42
 msgid "Compact"

@@ -38,9 +38,9 @@ function buildPrefsWidget() {
 	}));
 	
 	frame.add(_createComboBox(NOTIFICATIONS, _("Notifications"), _("Show notifications when state changes"), {
-		[NOTIFICATIONS_OFF]: _("Off"), 
+		[NOTIFICATIONS_OFF]: _("Disabled"), 
 		[NOTIFICATIONS_ON]: _("Compact"), 
-		[NOTIFICATIONS_OSD]: _("Osd")
+		[NOTIFICATIONS_OSD]: _("OSD")
 	}));
 	
 	frame.show_all();

@@ -3,12 +3,10 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
-msgid ""
-msgstr ""
+
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-23 00:01+0200\n"
+"POT-Creation-Date: 2020-10-05 09:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +15,85 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: prefs.js:28
-msgid "Indicator Style"
-msgstr ""
-
-#: prefs.js:28
-msgid "Change indicator display options"
-msgstr ""
-
-#: prefs.js:29
-msgid "Num-Lock Only"
-msgstr ""
-
-#: prefs.js:29
-msgid "Caps-Lock Only"
-msgstr ""
-
-#: prefs.js:29
-msgid "Both"
-msgstr ""
-
-#: prefs.js:29
-msgid "Show/Hide"
-msgstr ""
-
-#: prefs.js:30
-msgid "Notifications"
-msgstr ""
-
-#: prefs.js:30
-msgid "Show notifications when state changes"
-msgstr ""
-
-#: extension.js:78 extension.js:152
+#: extension.js:97 extension.js:147
 msgid "Num Lock"
 msgstr ""
 
-#: extension.js:82 extension.js:158
+#: extension.js:100 extension.js:154
 msgid "Caps Lock"
 msgstr ""
 
-#: extension.js:87
+#: extension.js:104
 msgid "Settings"
 msgstr ""
 
-#: extension.js:217
+#: extension.js:213
 msgid "On"
 msgstr ""
 
-#: extension.js:217
+#: extension.js:213
 msgid "Off"
+msgstr ""
+
+#: prefs.js:33
+msgid "Indicator Style"
+msgstr ""
+
+#: prefs.js:33
+msgid "Change indicator display options"
+msgstr ""
+
+#: prefs.js:34
+msgid "Num-Lock Only"
+msgstr ""
+
+#: prefs.js:35
+msgid "Caps-Lock Only"
+msgstr ""
+
+#: prefs.js:36
+msgid "Both"
+msgstr ""
+
+#: prefs.js:37
+msgid "Show/Hide"
+msgstr ""
+
+#: prefs.js:40
+msgid "Notifications"
+msgstr ""
+
+#: prefs.js:40
+msgid "Show notifications when state changes"
+msgstr ""
+
+#: prefs.js:41
+msgid "Disabled"
+msgstr ""
+
+#: prefs.js:42
+msgid "Compact"
+msgstr ""
+
+#: prefs.js:43
+msgid "Osd"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
 msgstr ""
