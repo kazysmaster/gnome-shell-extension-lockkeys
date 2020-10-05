@@ -76,7 +76,7 @@ msgid "Compact"
 msgstr ""
 
 #: prefs.js:43
-msgid "Osd"
+msgid "OSD"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6

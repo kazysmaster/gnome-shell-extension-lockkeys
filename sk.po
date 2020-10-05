@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-10-05 11:01+0200\n"
+"PO-Revision-Date: 2020-10-05 11:09+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -81,7 +81,7 @@ msgid "Compact"
 msgstr "Kompaktné"
 
 #: prefs.js:43
-msgid "Osd"
+msgid "OSD"
 msgstr "Na obrazovke"
 
 # tooltip
@@ -110,3 +110,6 @@ msgstr ""
 "Caps-Lock. Hodnota „both“ zobrazí oba indikátory. Nastavením hodnoty "
 "„show“ (zobraziť) alebo „hide“ (skryť) budú po zapnutí zobrazené iba ikony "
 "príslušného indikátoru."
+
+#~ msgid "Osd"
+#~ msgstr "Na obrazovke"
