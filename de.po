@@ -2,65 +2,99 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-23 00:01+0200\n"
-"PO-Revision-Date: 2014-10-20 17:31+0100\n"
-"Last-Translator: Jonatan Zeidler <jonatan_zeidler@gmx.de>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2020-10-09 20:55+0200\n"
+"Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
 "Language-Team: German <jonatan_zeidler@gmx.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: prefs.js:28
-msgid "Indicator Style"
-msgstr "Indikatorstil"
-
-#: prefs.js:28
-msgid "Change indicator display options"
-msgstr "Anzeigeoption des Indikators wählen"
-
-#: prefs.js:29
-msgid "Num-Lock Only"
-msgstr "Nur Num-Taste"
-
-#: prefs.js:29
-msgid "Caps-Lock Only"
-msgstr "Nur Feststelltaste"
-
-#: prefs.js:29
-msgid "Both"
-msgstr "Beide"
-
-#: prefs.js:29
-msgid "Show/Hide"
-msgstr "Anzeigen/Verstecken"
-
-#: prefs.js:30
-msgid "Notifications"
-msgstr "Benachrichtigungen"
-
-#: prefs.js:30
-msgid "Show notifications when state changes"
-msgstr "Benachrichtigung anzeigen, wenn sich der Status ändert"
-
-#: extension.js:78 extension.js:152
+#: extension.js:97 extension.js:147
 msgid "Num Lock"
 msgstr "Num-Taste"
 
-#: extension.js:82 extension.js:158
+#: extension.js:100 extension.js:154
 msgid "Caps Lock"
 msgstr "Feststelltaste"
 
-#: extension.js:87
+#: extension.js:104
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: extension.js:217
+#: extension.js:213
 msgid "On"
 msgstr "An"
 
-#: extension.js:217
+#: extension.js:213 prefs.js:41
 msgid "Off"
 msgstr "Aus"
+
+#: prefs.js:33
+msgid "Indicator Style"
+msgstr "Indikatorstil"
+
+#: prefs.js:33
+msgid "Change indicator display options"
+msgstr "Anzeigeoption des Indikators wählen"
+
+#: prefs.js:34
+msgid "Num-Lock Only"
+msgstr "Nur Num-Taste"
+
+#: prefs.js:35
+msgid "Caps-Lock Only"
+msgstr "Nur Feststelltaste"
+
+#: prefs.js:36
+msgid "Both"
+msgstr "Beide"
+
+#: prefs.js:37
+msgid "Show/Hide"
+msgstr "Anzeigen/Verstecken"
+
+#: prefs.js:40
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#: prefs.js:40
+msgid "Show notifications when state changes"
+msgstr "Benachrichtigung anzeigen, wenn sich der Status ändert"
+
+#: prefs.js:42
+msgid "Compact"
+msgstr "Kompakt"
+
+#: prefs.js:43
+msgid "Osd"
+msgstr "OSD"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr "Benachrichtigung anzeigen, wenn sich der Tastatur-Status ändert"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr ""
+"Wählen Sie 'Aus', um keine Benachrichtigungen über Statusänderungen der "
+"Num- oder Feststelltaste zu erhalten"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr "Indikatorstil"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+"Wählen Sie 'Nur Num-Taste', wenn nur das Symbol für die Nummern-Taste in "
+"der Leiste angezeigt werden soll oder 'Nur Feststelltaste', damit nur das "
+"Symbol für die Feststelltaste angezeigt wird. Soll beides angezeigt werden, "
+"wählen Sie 'Beide'. Bei 'Anzeigen/Verstecken' wird das entsprechende Symbol "
+"nur angezeigt, wenn die jeweilige Taste aktiv ist."
