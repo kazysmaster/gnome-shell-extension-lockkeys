@@ -27,6 +27,9 @@ msgid "Change indicator display options"
 msgstr "Keisti indikatoriaus rodymo būdą"
 
 #: prefs.js:29
+msgid "Notifications Only"
+msgstr "Tik pranešimai"
+
 msgid "Num-Lock Only"
 msgstr "Tik Num-Lock"
 

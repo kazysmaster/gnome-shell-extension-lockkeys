@@ -9,8 +9,9 @@ const Meta = ExtensionUtils.getCurrentExtension();
 const Utils = Meta.imports.utils;
 
 const STYLE = 'style';
-const STYLE_NUMLOCK = 'numlock';
-const STYLE_CAPSLOCK = 'capslock';
+const STYLE_NONE = 'none';
+const STYLE_NUMLOCK_ONLY = 'numlock';
+const STYLE_CAPSLOCK_ONLY = 'capslock';
 const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
 const NOTIFICATIONS = 'notification-preferences';
@@ -31,8 +32,9 @@ function buildPrefsWidget() {
 	frame.set_spacing(10);
 
 	frame.add(_createComboBox(STYLE, _("Indicator Style"), _("Change indicator display options"), {
-		[STYLE_NUMLOCK]: _("Num-Lock Only"), 
-		[STYLE_CAPSLOCK]: _("Caps-Lock Only"), 
+		[STYLE_NONE]: _("Notifications Only"),
+		[STYLE_NUMLOCK_ONLY]: _("Num-Lock Only"),
+		[STYLE_CAPSLOCK_ONLY]: _("Caps-Lock Only"),
 		[STYLE_BOTH]: _("Both"), 
 		[STYLE_SHOWHIDE]: _("Show/Hide")
 	}));

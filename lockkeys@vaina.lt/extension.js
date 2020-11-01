@@ -26,8 +26,9 @@ const Utils = Meta.imports.utils;
 
 
 const STYLE = 'style';
-const STYLE_NUMLOCK = 'numlock';
-const STYLE_CAPSLOCK = 'capslock';
+const STYLE_NONE = 'none';
+const STYLE_NUMLOCK_ONLY = 'numlock';
+const STYLE_CAPSLOCK_ONLY = 'capslock';
 const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
 const NOTIFICATIONS = 'notification-preferences';
@@ -135,28 +136,26 @@ const LockKeysIndicator = new Lang.Class({
 	},
 	
 	_handleSettingsChange: function(actor, event) {
-		if (this.config.isShowHideStyle())
-			this.indicatorStyle = new ShowhideIndicator(this);
+		if (this.config.isVisibilityStyle())
+			this.indicatorStyle = new VisibilityIndicator(this);
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
 		this._updateState(actor);
 	},
 
 	_handleStateChange: function(actor, event) {
-		if (this.numlock_state != this._getNumlockState()) {
-			let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
-			if (this.config.isShowNotifications() && this.config.isShowNumLock()) {
-				let icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
-				this._showNotification(notification_text, icon_name);				
-			}
+		if (this.numlock_state != this._getNumlockState() && this.config.isNotifyNumLock()) {
+		    let notification_text = _("Num Lock") + ' ' + this._getStateText(this._getNumlockState());
+            let icon_name = this._getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
+            this._showNotification(notification_text, icon_name);
 		}
-		if (this.capslock_state != this._getCapslockState()) {
+
+		if (this.capslock_state != this._getCapslockState() && this.config.isNotifyCapsLock()) {
 			let notification_text = _("Caps Lock") + ' ' + this._getStateText(this._getCapslockState());
-			if (this.config.isShowNotifications() && this.config.isShowCapsLock()) {
-				let icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
-				this._showNotification(notification_text, icon_name);
-			}
+			let icon_name = this._getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
+            this._showNotification(notification_text, icon_name);
 		}
+
 		this._updateState();
 	},
 
@@ -233,19 +232,20 @@ HighlightIndicator.prototype = {
 		this.numIcon = panelButton.numIcon; 
 		this.capsIcon = panelButton.capsIcon;
 		
-		if (this.config.isShowNumLock())
+		if (this.config.isHighlightNumLock())
 			this.numIcon.show();
 		else
 			this.numIcon.hide();
 		
-		if (this.config.isShowCapsLock())
+		if (this.config.isHighlightCapsLock())
 			this.capsIcon.show();
 		else
 			this.capsIcon.hide();
+
+		this.panelButton.visible = this.config.isHighlightNumLock() || this.config.isHighlightCapsLock();
 	},
 	
 	displayState: function(numlock_state, capslock_state) {
-		
 		if (numlock_state)
 			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
 		else
@@ -258,11 +258,11 @@ HighlightIndicator.prototype = {
 	}
 }
 
-function ShowhideIndicator(panelButton) {
+function VisibilityIndicator(panelButton) {
 	this._init(panelButton);
 }
 
-ShowhideIndicator.prototype = {
+VisibilityIndicator.prototype = {
 	_init: function(panelButton) {
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
@@ -287,6 +287,7 @@ ShowhideIndicator.prototype = {
 	}
 }
 
+
 function Configuration() {
 	this._init();
 }
@@ -306,17 +307,27 @@ Configuration.prototype = {
 		return notification_prefs == NOTIFICATIONS_OSD;
 	},
 	
-	isShowNumLock: function() {
+	isNotifyNumLock: function() {
 		let widget_style = this.settings.get_string(STYLE);
-		return widget_style == STYLE_NUMLOCK || widget_style == STYLE_BOTH || widget_style == STYLE_SHOWHIDE; 
+		return this.isShowNotifications() && widget_style != STYLE_CAPSLOCK_ONLY;
 	},
 	
-	isShowCapsLock: function() {
+	isNotifyCapsLock: function() {
 		let widget_style = this.settings.get_string(STYLE);
-		return widget_style == STYLE_CAPSLOCK || widget_style == STYLE_BOTH || widget_style == STYLE_SHOWHIDE; 
+		return this.isShowNotifications() && widget_style != STYLE_NUMLOCK_ONLY;
 	},
+
+	isHighlightNumLock: function() {
+        let widget_style = this.settings.get_string(STYLE);
+        return widget_style == STYLE_BOTH || widget_style == STYLE_NUMLOCK_ONLY;
+    },
+
+    isHighlightCapsLock: function() {
+        let widget_style = this.settings.get_string(STYLE);
+        return widget_style == STYLE_BOTH || widget_style == STYLE_CAPSLOCK_ONLY;
+    },
 	
-	isShowHideStyle: function() {
+	isVisibilityStyle: function() {
 		let widget_style = this.settings.get_string(STYLE);
 		return widget_style == STYLE_SHOWHIDE;
 	}
