@@ -13,11 +13,13 @@ const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
 const Config = imports.misc.config;
 
+const X11 = imports.gi.GLib.getenv('XDG_SESSION_TYPE') == 'x11';
 const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
 const POST_3_34 = parseFloat(Config.PACKAGE_VERSION) >= 3.34;
-const Keymap = POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
+const Keymap = X11       ? imports.gi.Gdk.Keymap.get_default():
+               POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
 			   POST_3_34 ? Clutter.get_default_backend().get_keymap():
-			   imports.gi.Gdk.Keymap.get_default();
+			               imports.gi.Gdk.Keymap.get_default();
 
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -48,7 +50,7 @@ function init() {
 }
 
 function enable() {
-	indicator = new LockKeysIndicator();	
+	indicator = new LockKeysIndicator();
 	Main.panel.addToStatusArea('lockkeys', indicator, 2);
 	indicator.setActive(true);
 }
@@ -94,7 +96,7 @@ const LockKeysIndicator = new Lang.Class({
 		layoutManager.add_child(this.numIcon);
 		layoutManager.add_child(this.capsIcon);
 		this.add_child_compat(layoutManager);
-		
+
 		this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
 		this.menu.addMenuItem(this.numMenuItem);
 
@@ -105,7 +107,7 @@ const LockKeysIndicator = new Lang.Class({
 		this.settingsMenuItem = new PopupMenu.PopupMenuItem(_("Settings"));
 		this.settingsMenuItem.connect('activate', Lang.bind(this, this._handleSettingsMenuItem));
 		this.menu.addMenuItem(this.settingsMenuItem);
-		
+
 		this.config = new Configuration();
 		this.indicatorStyle = new HighlightIndicator(this);
 	},
@@ -126,7 +128,7 @@ const LockKeysIndicator = new Lang.Class({
 			Keymap.disconnect(this._keyboardStateChangedId);
 			this.config.settings.disconnect(this._settingsChangeId);
 		}
-	}, 
+	},
 
 	_handleSettingsMenuItem: function(actor, event) {
 		if (POST_3_36)
@@ -134,13 +136,13 @@ const LockKeysIndicator = new Lang.Class({
 		else
 			imports.misc.util.spawn(['gnome-shell-extension-prefs', 'lockkeys@vaina.lt']);
 	},
-	
+
 	_handleSettingsChange: function(actor, event) {
 		if (this.config.isVisibilityStyle())
 			this.indicatorStyle = new VisibilityIndicator(this);
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
-		this._updateState(actor);
+		this._updateState();
 	},
 
 	_handleStateChange: function(actor, event) {
@@ -191,15 +193,15 @@ const LockKeysIndicator = new Lang.Class({
 	_prepareSource: function(icon_name) {
 		if (this._source == null) {
 			this._source = new MessageTray.Source("LockKeysIndicator", icon_name);
-			
+
 			let parent = this;
 			this._source.createIcon = function(size) {
-				return new St.Icon({ 
+				return new St.Icon({
 					gicon: parent._getCustIcon(parent._source.iconName),
-                     			icon_size: size 
-                 		});
+                    icon_size: size
+                });
 			}
-			
+
 			this._source.connect('destroy', Lang.bind(this, function() {
 				this._source = null;
 			}));
@@ -229,14 +231,14 @@ HighlightIndicator.prototype = {
 	_init: function(panelButton) {
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
-		this.numIcon = panelButton.numIcon; 
+		this.numIcon = panelButton.numIcon;
 		this.capsIcon = panelButton.capsIcon;
-		
+
 		if (this.config.isHighlightNumLock())
 			this.numIcon.show();
 		else
 			this.numIcon.hide();
-		
+
 		if (this.config.isHighlightCapsLock())
 			this.capsIcon.show();
 		else
@@ -244,13 +246,13 @@ HighlightIndicator.prototype = {
 
 		this.panelButton.visible = this.config.isHighlightNumLock() || this.config.isHighlightCapsLock();
 	},
-	
+
 	displayState: function(numlock_state, capslock_state) {
 		if (numlock_state)
 			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
 		else
 			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-disabled-symbolic'));
-		
+
 		if (capslock_state)
 			this.capsIcon.set_gicon(this.panelButton._getCustIcon('capslock-enabled-symbolic'));
 		else
@@ -266,10 +268,10 @@ VisibilityIndicator.prototype = {
 	_init: function(panelButton) {
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
-		this.numIcon = panelButton.numIcon; 
+		this.numIcon = panelButton.numIcon;
 		this.capsIcon = panelButton.capsIcon;
 	},
-	
+
 	displayState: function(numlock_state, capslock_state) {
 		if (numlock_state) {
 			this.numIcon.set_gicon(this.panelButton._getCustIcon('numlock-enabled-symbolic'));
@@ -282,7 +284,7 @@ VisibilityIndicator.prototype = {
 			this.capsIcon.show();
 		} else
 			this.capsIcon.hide();
-			
+
 		this.panelButton.visible = numlock_state || capslock_state;
 	}
 }
@@ -296,22 +298,22 @@ Configuration.prototype = {
 	_init: function() {
 		this.settings = Utils.getSettings(Meta);
 	},
-	
+
 	isShowNotifications: function() {
 		let notification_prefs = this.settings.get_string(NOTIFICATIONS);
 		return notification_prefs == NOTIFICATIONS_ON || notification_prefs == NOTIFICATIONS_OSD;
 	},
-	
+
 	isShowOsd: function() {
 		let notification_prefs = this.settings.get_string(NOTIFICATIONS);
 		return notification_prefs == NOTIFICATIONS_OSD;
 	},
-	
+
 	isNotifyNumLock: function() {
 		let widget_style = this.settings.get_string(STYLE);
 		return this.isShowNotifications() && widget_style != STYLE_CAPSLOCK_ONLY;
 	},
-	
+
 	isNotifyCapsLock: function() {
 		let widget_style = this.settings.get_string(STYLE);
 		return this.isShowNotifications() && widget_style != STYLE_NUMLOCK_ONLY;
@@ -326,7 +328,7 @@ Configuration.prototype = {
         let widget_style = this.settings.get_string(STYLE);
         return widget_style == STYLE_BOTH || widget_style == STYLE_CAPSLOCK_ONLY;
     },
-	
+
 	isVisibilityStyle: function() {
 		let widget_style = this.settings.get_string(STYLE);
 		return widget_style == STYLE_SHOWHIDE;

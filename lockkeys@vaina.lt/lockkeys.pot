@@ -31,7 +31,7 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-#: extension.js:213 prefs.js:41
+#: extension.js:212 prefs.js:43
 msgid "Off"
 msgstr ""
 
