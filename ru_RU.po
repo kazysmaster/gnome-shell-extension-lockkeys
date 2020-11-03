@@ -1,0 +1,98 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Расширение Lock Keys\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sergey Kozharinov <hensuto@gmail.com>\n"
+"Language-Team: Sergey Kozharinov <hensuto@gmail.com>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: extension.js:97 extension.js:147
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: extension.js:100 extension.js:154
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: extension.js:104
+msgid "Settings"
+msgstr "Параметры"
+
+#: extension.js:213
+msgid "On"
+msgstr "включен"
+
+#: extension.js:212 prefs.js:43
+msgid "Off"
+msgstr "выключен"
+
+#: prefs.js:33
+msgid "Indicator Style"
+msgstr "Стиль индикатора"
+
+#: prefs.js:33
+msgid "Change indicator display options"
+msgstr "Изменить параметры отображения индикатора"
+
+#: prefs.js:34
+msgid "Num-Lock Only"
+msgstr "Только Num Lock"
+
+#: prefs.js:35
+msgid "Caps-Lock Only"
+msgstr "Только Caps Lock"
+
+#: prefs.js:36
+msgid "Both"
+msgstr "Оба"
+
+#: prefs.js:37
+msgid "Show/Hide"
+msgstr "Показать/Скрыть"
+
+#: prefs.js:40
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: prefs.js:40
+msgid "Show notifications when state changes"
+msgstr "Показывать уведомления при изменении режима"
+
+#: prefs.js:42
+msgid "Compact"
+msgstr "Компактные"
+
+#: prefs.js:43
+msgid "Osd"
+msgstr "OSD"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr "Показывать уведомления при изменении режима"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr ""
+"Выберите Выключены, чтобы отключить отображение уведомлений при смене режима"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr "Стиль индикатора"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+"Выберите Только Num Lock или Только Caps Lock, чтобы показывать только "
+"соответствующий индикатор. Выберите Оба, чтобы показывать оба индикатора. "
+"Выберите Показать/Скрыть, чтобы показывать соответствующий индикатор только "
+"тогда, когда соответствующий режим активен."
