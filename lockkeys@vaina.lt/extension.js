@@ -186,8 +186,15 @@ const LockKeysIndicator = new Lang.Class({
 				notification.update(notification_text, null, { clear: true });
 			}
 
-			this._source.notify(notification);
+			this._showSimpleNotification(notification);
 		}
+	},
+
+	_showSimpleNotification: function(notification) {
+		if (POST_3_36)
+			this._source.showNotification(notification);
+		else
+			this._source.notify(notification);
 	},
 
 	_prepareSource: function(icon_name) {
