@@ -14,6 +14,7 @@ const MessageTray = imports.ui.messageTray;
 const Config = imports.misc.config;
 
 const X11 = imports.gi.GLib.getenv('XDG_SESSION_TYPE') == 'x11';
+const POST_40 = parseFloat(Config.PACKAGE_VERSION) >= 40;
 const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
 const POST_3_34 = parseFloat(Config.PACKAGE_VERSION) >= 3.34;
 const Keymap = X11       ? imports.gi.Gdk.Keymap.get_default():
@@ -83,11 +84,15 @@ const LockKeysIndicator = new Lang.Class({
 		this.parent(0.0, "LockKeysIndicator");
 
 		this.numIcon = new St.Icon({
-			style_class: 'system-status-icon'
+			style_class: 'system-status-icon lockkeys-status-icon'
 		});
 		this.capsIcon = new St.Icon({
-			style_class: 'system-status-icon'
+			style_class: 'system-status-icon lockkeys-status-icon'
 		});
+		if (POST_40) {
+		    this.numIcon.set_style('padding-right: 0px; padding-left: 0px;');
+		    this.capsIcon.set_style('padding-right: 0px; padding-left: 0px;');
+		}
 
 		let layoutManager = new St.BoxLayout({
 			vertical: false,
