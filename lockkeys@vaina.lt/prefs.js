@@ -49,6 +49,7 @@ function buildPrefsWidget() {
 function createComboBox(key, text, tooltip, values) {
 	let label = new Gtk.Label({ label: text, xalign: 0, tooltip_text:tooltip });
 	let widget = new Gtk.ComboBoxText();
+	widget.halign = Gtk.Align.END;
 	for (let id in values) {
 		widget.append(id, values[id]);
 	}
@@ -83,7 +84,7 @@ function createVerticalBoxCompat(...widgets) {
 }
 
 function createHorizontalBoxCompat(label, widget) {
-    let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 10});
+    let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 10, homogeneous: true});
     if (POST_40) {
         box.append(label);
         box.append(widget);
