@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-08 16:42+0800\n"
-"PO-Revision-Date: 2020-07-08 18:12+0800\n"
+"PO-Revision-Date: 2021-04-08 18:12+0800\n"
 "Last-Translator: soiamsoNG\n"
 "Language-Team: Chinese <warmsun0220@gmail.com>\n"
 "Language: zh_CN\n"
@@ -33,6 +33,10 @@ msgstr "开启"
 msgid "Off"
 msgstr "关闭"
 
+#: prefs.js:34
+msgid "Notifications Only"
+msgstr "仅使用通知"
+
 #: prefs.js:33
 msgid "Indicator Style"
 msgstr "指示器风格"
@@ -59,7 +63,7 @@ msgstr "显示/隐藏"
 
 #: prefs.js:40
 msgid "Notifications"
-msgstr "通知"
+msgstr "通知方式"
 
 #: prefs.js:40
 msgid "Show notifications when state changes"
@@ -67,11 +71,11 @@ msgstr "状态变化时显示通知"
 
 #: prefs.js:42
 msgid "Compact"
-msgstr "紧凑通知"
+msgstr "通知中心显示"
 
 #: prefs.js:43
 msgid "Osd"
-msgstr "屏显"
+msgstr "OSD屏显"
 
 #: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
 msgid "Show notifications when key state changes"
