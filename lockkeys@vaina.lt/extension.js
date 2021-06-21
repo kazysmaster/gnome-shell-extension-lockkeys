@@ -16,10 +16,10 @@ const Config = imports.misc.config;
 const X11 = imports.gi.GLib.getenv('XDG_SESSION_TYPE') == 'x11';
 const POST_40 = parseFloat(Config.PACKAGE_VERSION) >= 40;
 const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
-const POST_3_34 = parseFloat(Config.PACKAGE_VERSION) >= 3.34;
+const POST_3_32 = parseFloat(Config.PACKAGE_VERSION) >= 3.32;
 const Keymap = X11       ? imports.gi.Gdk.Keymap.get_default():
                POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
-			   POST_3_34 ? Clutter.get_default_backend().get_keymap():
+			   POST_3_32 ? Clutter.get_default_backend().get_keymap():
 			               imports.gi.Gdk.Keymap.get_default();
 
 
@@ -118,7 +118,7 @@ const LockKeysIndicator = new Lang.Class({
 	},
 
 	add_child_compat: function(child) {
-		if (POST_3_34)
+		if (POST_3_32)
 			this.add_child(child);
 		else
 			this.actor.add_child(child);
