@@ -2,65 +2,96 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-23 00:01+0200\n"
-"PO-Revision-Date: 2019-04-12 16:46+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2021-07-11 14:37+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Language: nl\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 
-#: prefs.js:28
+#: extension.js:97 extension.js:147
+msgid "Num Lock"
+msgstr "NumLock vergrendelen"
+
+#: extension.js:100 extension.js:154
+msgid "Caps Lock"
+msgstr "CapsLock vergrendelen"
+
+#: extension.js:104
+msgid "Settings"
+msgstr "Voorkeuren"
+
+#: extension.js:213
+msgid "On"
+msgstr "Aan"
+
+#: extension.js:212 prefs.js:43
+msgid "Off"
+msgstr "Uit"
+
+#: prefs.js:33
 msgid "Indicator Style"
 msgstr "Indicatorstijl"
 
-#: prefs.js:28
+#: prefs.js:33
 msgid "Change indicator display options"
-msgstr "Verander weergaveopties van de indicator"
+msgstr "Pas de weergave-opties van de indicator aan"
 
-#: prefs.js:29
+#: prefs.js:34
 msgid "Num-Lock Only"
-msgstr "Alleen nummervergrendeling"
+msgstr "Alleen NumLock"
 
-#: prefs.js:29
+#: prefs.js:35
 msgid "Caps-Lock Only"
-msgstr "Alleen hoofdlettervergrendeling"
+msgstr "Alleen CapsLock"
 
-#: prefs.js:29
+#: prefs.js:36
 msgid "Both"
-msgstr "Allebei"
+msgstr "Beide"
 
-#: prefs.js:29
+#: prefs.js:37
 msgid "Show/Hide"
-msgstr "Weergeven/verbergen"
+msgstr "Tonen/Verbergen"
 
-#: prefs.js:30
+#: prefs.js:40
 msgid "Notifications"
 msgstr "Meldingen"
 
-#: prefs.js:30
+#: prefs.js:40
 msgid "Show notifications when state changes"
-msgstr "Laat meldingen zien bij statuswijzigingen"
+msgstr "Toon meldingen zien bij aan-/uitzetten van NumLock/CapsLock"
 
-#: extension.js:78 extension.js:152
-msgid "Num Lock"
-msgstr "Nummervergrendeling"
+#: prefs.js:42
+msgid "Compact"
+msgstr "Compact"
 
-#: extension.js:82 extension.js:158
-msgid "Caps Lock"
-msgstr "Hoofdlettervergrendeling"
+#: prefs.js:43
+msgid "Osd"
+msgstr "Meldingen"
 
-#: extension.js:87
-msgid "Settings"
-msgstr "Instellingen"
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr "Toon meldingen zien bij aan-/uitzetten van NumLock/CapsLock"
 
-#: extension.js:217
-msgid "On"
-msgstr "aan"
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr "Stel in op ‘false’ om meldingen te onderdrukken"
 
-#: extension.js:217
-msgid "Off"
-msgstr "uit"
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr "Indicatorstijl"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+"Stel de waarde ‘numlock’ in om alleen de NumLock-indicator te tonen, "
+"‘capslock’ in om alleen de CapsLock-indicator te tonen of ‘both’ om beide "
+"te tonen. Stel in ‘show-hide’ om alleen te tonen indien één van de knoppen "
+"wordt ingedrukt."
