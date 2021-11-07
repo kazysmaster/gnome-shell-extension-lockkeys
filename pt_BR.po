@@ -46,6 +46,14 @@ msgstr "Notificações"
 msgid "Show notifications when state changes"
 msgstr "Mostrar notificações quando houver mudança de estado"
 
+#: prefs.js:34
+msgid "Notifications Only"
+msgstr "Notificações somente"
+
+#: prefs.js:42
+msgid "Compact"
+msgstr "Compacto"
+
 #: extension.js:78 extension.js:152
 msgid "Num Lock"
 msgstr "Num Lock"
