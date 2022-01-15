@@ -34,6 +34,7 @@ const STYLE_NUMLOCK_ONLY = 'numlock';
 const STYLE_CAPSLOCK_ONLY = 'capslock';
 const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
+const STYLE_SHOWHIDE_CAPSLOCK = 'show-hide-capslock';
 const NOTIFICATIONS = 'notification-preferences';
 const NOTIFICATIONS_OFF = 'off';
 const NOTIFICATIONS_ON = 'on';
@@ -144,6 +145,8 @@ class LockKeysIndicator extends PanelMenu.Button {
 	handleSettingsChange(actor, event) {
 		if (this.config.isVisibilityStyle())
 			this.indicatorStyle = new VisibilityIndicator(this);
+		else if (this.config.isVisibilityStyleCapslock())
+			this.indicatorStyle = new VisibilityIndicatorCapslock(this);
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
 		this.updateState();
@@ -294,6 +297,25 @@ class VisibilityIndicator extends GObject.Object{
 	}
 });
 
+const VisibilityIndicatorCapslock = GObject.registerClass(
+class VisibilityIndicatorCapslock extends GObject.Object{
+	_init(panelButton) {
+		this.panelButton = panelButton;
+		this.config = panelButton.config;
+		this.capsIcon = panelButton.capsIcon;
+	}
+
+	displayState(numlock_state, capslock_state) {
+		if (capslock_state) {
+			this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
+			this.capsIcon.show();
+		} else
+			this.capsIcon.hide();
+
+		this.panelButton.visible = capslock_state;
+	}
+});
+
 const Configuration = GObject.registerClass(
 class Configuration extends GObject.Object{
 	_init() {
@@ -333,5 +355,10 @@ class Configuration extends GObject.Object{
 	isVisibilityStyle() {
 		let widget_style = this.settings.get_string(STYLE);
 		return widget_style == STYLE_SHOWHIDE;
+	}
+
+	isVisibilityStyleCapslock() {
+		let widget_style = this.settings.get_string(STYLE);
+		return widget_style == STYLE_SHOWHIDE_CAPSLOCK;
 	}
 });
