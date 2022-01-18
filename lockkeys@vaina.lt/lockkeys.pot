@@ -59,6 +59,10 @@ msgstr ""
 msgid "Show/Hide"
 msgstr ""
 
+#: prefs.js:39
+msgid "Show/Hide Caps-Lock Only"
+msgstr ""
+
 #: prefs.js:40
 msgid "Notifications"
 msgstr ""

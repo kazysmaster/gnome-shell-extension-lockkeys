@@ -15,6 +15,7 @@ const STYLE_NUMLOCK_ONLY = 'numlock';
 const STYLE_CAPSLOCK_ONLY = 'capslock';
 const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
+const STYLE_SHOWHIDE_CAPSLOCK = 'show-hide-capslock';
 const NOTIFICATIONS = 'notification-preferences';
 const NOTIFICATIONS_OFF = 'off';
 const NOTIFICATIONS_ON = 'on';
@@ -34,7 +35,8 @@ function buildPrefsWidget() {
 		[STYLE_NUMLOCK_ONLY]: _("Num-Lock Only"),
 		[STYLE_CAPSLOCK_ONLY]: _("Caps-Lock Only"),
 		[STYLE_BOTH]: _("Both"),
-		[STYLE_SHOWHIDE]: _("Show/Hide")
+		[STYLE_SHOWHIDE]: _("Show/Hide"),
+        [STYLE_SHOWHIDE_CAPSLOCK]: _("Show/Hide Caps-Lock Only")
 	});
 
 	let notifications_style = createComboBox(NOTIFICATIONS, _("Notifications"), _("Show notifications when state changes"), {
