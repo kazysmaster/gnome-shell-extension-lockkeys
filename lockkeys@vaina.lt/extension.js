@@ -278,17 +278,18 @@ class VisibilityIndicator extends GObject.Object{
 		this.config = panelButton.config;
 		this.numIcon = panelButton.numIcon;
 		this.capsIcon = panelButton.capsIcon;
+
+		this.numIcon.set_gicon(this.panelButton.getCustIcon('numlock-enabled-symbolic'));
+		this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
 	}
 
 	displayState(numlock_state, capslock_state) {
 		if (numlock_state) {
-			this.numIcon.set_gicon(this.panelButton.getCustIcon('numlock-enabled-symbolic'));
 			this.numIcon.show();
 		} else
 			this.numIcon.hide();
 
 		if (capslock_state) {
-			this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
 			this.capsIcon.show();
 		} else
 			this.capsIcon.hide();
@@ -303,11 +304,12 @@ class VisibilityIndicatorCapslock extends GObject.Object{
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
 		this.capsIcon = panelButton.capsIcon;
+		
+		this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
 	}
 
 	displayState(numlock_state, capslock_state) {
 		if (capslock_state) {
-			this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
 			this.capsIcon.show();
 		} else
 			this.capsIcon.hide();
