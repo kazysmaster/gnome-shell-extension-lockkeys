@@ -42,6 +42,9 @@ msgstr "Obydwa"
 msgid "Show/Hide"
 msgstr "Pokaż/Ukryj"
 
+msgid "Show/Hide Caps-Lock Only"
+msgstr "Pokaż/Ukryj tylko Caps-Lock"
+
 #: prefs.js:30
 msgid "Notifications"
 msgstr "Powiadomienia"

@@ -45,6 +45,9 @@ msgstr "Abu"
 msgid "Show/Hide"
 msgstr "Rodyti/Slėpti"
 
+msgid "Show/Hide Caps-Lock Only"
+msgstr "Rodyti/Slėpti tik Caps-Lock"
+
 #: prefs.js:30
 msgid "Notifications"
 msgstr "Pranešimai"
