@@ -68,10 +68,11 @@ msgstr "Caps Lock"
 msgid "Settings"
 msgstr "Nustatymai"
 
-#: extension.js:217
 msgid "On"
 msgstr "Įjungta"
 
-#: extension.js:217
 msgid "Off"
 msgstr "Išjungta"
+
+msgid "Compact"
+msgstr "Viršuje"
