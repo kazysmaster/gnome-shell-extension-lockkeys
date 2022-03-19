@@ -39,11 +39,6 @@ const NOTIFICATIONS_OSD = 'osd';
 
 let indicator;
 
-function main() {
-	init();
-	enable();
-}
-
 function init() {
 	Utils.initTranslations("lockkeys");
 }
