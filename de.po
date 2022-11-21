@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-10-09 20:55+0200\n"
+"PO-Revision-Date: 2022-11-18 19:58+0100\n"
 "Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
 "Language-Team: German <jonatan_zeidler@gmx.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: extension.js:97 extension.js:147
@@ -29,7 +29,7 @@ msgstr "Einstellungen"
 msgid "On"
 msgstr "An"
 
-#: extension.js:213 prefs.js:41
+#: extension.js:212 prefs.js:43
 msgid "Off"
 msgstr "Aus"
 
@@ -55,7 +55,11 @@ msgstr "Beide"
 
 #: prefs.js:37
 msgid "Show/Hide"
-msgstr "Anzeigen/Verstecken"
+msgstr "Anzeigen/Ausblenden"
+
+#: prefs.js:39
+msgid "Show/Hide Caps-Lock Only"
+msgstr "Nur Feststelltaste anzeigen/ausblenden"
 
 #: prefs.js:40
 msgid "Notifications"
@@ -80,8 +84,8 @@ msgstr "Benachrichtigung anzeigen, wenn sich der Tastatur-Status ändert"
 #: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
 msgid "Set false to suppress num-lock or caps-lock state change notifications"
 msgstr ""
-"Wählen Sie 'Aus', um keine Benachrichtigungen über Statusänderungen der "
-"Num- oder Feststelltaste zu erhalten"
+"Wählen Sie 'Aus', um keine Benachrichtigungen über Statusänderungen der Num- "
+"oder Feststelltaste zu erhalten"
 
 #: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
 msgid "Indicator style"
@@ -93,8 +97,8 @@ msgid ""
 "display only caps-lock indicator, or both for both. Set show-hide, to "
 "display corresponding indicator icons only when on."
 msgstr ""
-"Wählen Sie 'Nur Num-Taste', wenn nur das Symbol für die Nummern-Taste in "
-"der Leiste angezeigt werden soll oder 'Nur Feststelltaste', damit nur das "
-"Symbol für die Feststelltaste angezeigt wird. Soll beides angezeigt werden, "
-"wählen Sie 'Beide'. Bei 'Anzeigen/Verstecken' wird das entsprechende Symbol "
-"nur angezeigt, wenn die jeweilige Taste aktiv ist."
+"Wählen Sie 'Nur Num-Taste', wenn nur das Symbol für die Nummern-Taste in der "
+"Leiste angezeigt werden soll oder 'Nur Feststelltaste', damit nur das Symbol "
+"für die Feststelltaste angezeigt wird. Soll beides angezeigt werden, wählen "
+"Sie 'Beide'. Bei 'Anzeigen/Ausblenden' wird das entsprechende Symbol nur "
+"angezeigt, wenn die jeweilige Taste aktiv ist."
