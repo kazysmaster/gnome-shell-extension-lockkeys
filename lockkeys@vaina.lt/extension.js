@@ -1,5 +1,6 @@
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const GObject = imports.gi.GObject;
@@ -13,11 +14,9 @@ const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
 const Config = imports.misc.config;
 
-const X11 = imports.gi.GLib.getenv('XDG_SESSION_TYPE') == 'x11';
 const POST_40 = parseFloat(Config.PACKAGE_VERSION) >= 40;
 const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
-const Keymap = X11       ? imports.gi.Gdk.Keymap.get_default():
-               POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
+const Keymap = POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
 			               Clutter.get_default_backend().get_keymap();
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -94,18 +93,24 @@ class LockKeysIndicator extends PanelMenu.Button {
 
 	getCustIcon(icon_name) {
 		//workaround for themed icon
-		//new Gio.ThemedIcon({ name: icon_name });
-		//return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
+		if (this.getIconTheme().has_icon(icon_name)) {
+            return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
+        }
 		let icon_path = Me.dir.get_child('icons').get_child(icon_name + ".svg").get_path();
-		let theme = Gtk.IconTheme.get_default();
-		if (theme) {
-			let theme_icon = theme.lookup_icon(icon_name, -1, 2);
-			if (theme_icon) {
-				icon_path = theme_icon.get_filename();
-			}
-		}
 		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
 	}
+
+	getIconTheme() {
+        if (Gdk.Screen && Gdk.Screen.get_default()) {
+            let iconTheme = Gtk.IconTheme.get_default();
+            if (iconTheme)
+                return iconTheme;
+        }
+
+        let iconTheme = new Gtk.IconTheme();
+        iconTheme.set_theme_name(St.Settings.get().gtk_icon_theme);
+        return iconTheme;
+    }
 
 	addChildCompat(child) {
 		this.add_child(child);

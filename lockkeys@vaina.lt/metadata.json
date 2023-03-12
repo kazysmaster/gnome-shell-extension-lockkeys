@@ -1,5 +1,5 @@
 {
-   "shell-version": ["3.32", "3.34", "3.36", "3.38", "40", "41", "42", "43"],
+   "shell-version": ["3.34", "3.36", "3.38", "40", "41", "42", "43", "44"],
    "uuid": "lockkeys@vaina.lt", 
    "name": "Lock Keys", 
    "description": "Numlock & Capslock status on the panel. Gnome version 3.30 and earlier users please install 44 version of the extension https://extensions.gnome.org/download-extension/lockkeys%40vaina.lt.shell-extension.zip?version_tag=26229 ",
