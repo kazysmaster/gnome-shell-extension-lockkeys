@@ -92,6 +92,7 @@ class LockKeysIndicator extends PanelMenu.Button {
     }
 
 	getCustIcon(icon_name) {
+		//TODO implement proper icon theme support
 		//workaround for themed icon
 		if (this.getIconTheme().has_icon(icon_name)) {
             return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
@@ -112,6 +113,9 @@ class LockKeysIndicator extends PanelMenu.Button {
 		//available only from Gnome 44?
 		if (typeof iconTheme.set_theme_name !== "undefined") {
             iconTheme.set_theme_name(St.Settings.get().gtk_icon_theme);
+        } else if (typeof iconTheme.set_custom_theme !== "undefined") {
+            //available only till Gnome 44?
+            iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
         }
         return iconTheme;
     }
