@@ -101,14 +101,18 @@ class LockKeysIndicator extends PanelMenu.Button {
 	}
 
 	getIconTheme() {
-		let iconTheme = Gtk.IconTheme.get_default();
+		let iconTheme = null;
+		// available only till Gnome 44?
+		if (typeof Gtk.IconTheme.get_default !== "undefined") {
+		    iconTheme = Gtk.IconTheme.get_default();
+		}
 		if (iconTheme == null) {
 			iconTheme = new Gtk.IconTheme();
-			if (typeof iconTheme.set_theme_name !== "undefined") {
-				//available only in Gnome 44?
-				iconTheme.set_theme_name(St.Settings.get().gtk_icon_theme);
-			}
 		}
+		//available only from Gnome 44?
+		if (typeof iconTheme.set_theme_name !== "undefined") {
+            iconTheme.set_theme_name(St.Settings.get().gtk_icon_theme);
+        }
         return iconTheme;
     }
 
