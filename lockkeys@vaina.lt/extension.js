@@ -57,6 +57,8 @@ const LockKeysIndicator = GObject.registerClass(
 class LockKeysIndicator extends PanelMenu.Button {
     _init() {
         super._init(0.0, " LockKeysIndicator");
+
+        this.iconTheme = this.createIconThemeCompat();
         this.numIcon = new St.Icon({
             style_class: 'system-status-icon lockkeys-status-icon'
         });
@@ -91,34 +93,21 @@ class LockKeysIndicator extends PanelMenu.Button {
         this.indicatorStyle = new HighlightIndicator(this);
     }
 
+    createIconThemeCompat() {
+        if (St.IconTheme) {
+            return new St.IconTheme();
+        }
+
+        return new Gtk.IconTheme();
+    }
+
 	getCustIcon(icon_name) {
-		//TODO implement proper icon theme support
-		//workaround for themed icon
-		if (this.getIconTheme().has_icon(icon_name)) {
+		if (this.iconTheme.has_icon(icon_name)) {
             return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
         }
 		let icon_path = Me.dir.get_child('icons').get_child(icon_name + ".svg").get_path();
 		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
 	}
-
-	getIconTheme() {
-		let iconTheme = null;
-		// available only till Gnome 44?
-		if (typeof Gtk.IconTheme.get_default !== "undefined") {
-		    iconTheme = Gtk.IconTheme.get_default();
-		}
-		if (iconTheme == null) {
-			iconTheme = new Gtk.IconTheme();
-		}
-		//available only from Gnome 44?
-		if (typeof iconTheme.set_theme_name !== "undefined") {
-            iconTheme.set_theme_name(St.Settings.get().gtk_icon_theme);
-        } else if (typeof iconTheme.set_custom_theme !== "undefined") {
-            //available only till Gnome 44?
-            iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
-        }
-        return iconTheme;
-    }
 
 	addChildCompat(child) {
 		this.add_child(child);
@@ -127,13 +116,24 @@ class LockKeysIndicator extends PanelMenu.Button {
 	setActive(enabled) {
 		if (enabled) {
 			this._keyboardStateChangedId = Keymap.connect('state-changed', this.handleStateChange.bind(this));
-			this._settingsChangeId = this.config.settings.connect('changed::' + STYLE, this.handleSettingsChange.bind(this));
+			this._settingsChangedId = this.config.settings.connect('changed::' + STYLE, this.handleSettingsChange.bind(this));
+			if (St.IconTheme) {
+			   this._iconThemeChangedId = this.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
+			} else {
+			   this._iconThemeChangedId = St.Settings.get().connect('notify::gtk-icon-theme', this.handleSettingsChange.bind(this));
+			}
 			this.handleSettingsChange();
 		} else {
 			Keymap.disconnect(this._keyboardStateChangedId);
 			this._keyboardStateChangedId = 0;
-			this.config.settings.disconnect(this._settingsChangeId);
-			this._settingsChangeId = 0;
+			this.config.settings.disconnect(this._settingsChangedId);
+			this._settingsChangedId = 0;
+			if (St.IconTheme) {
+			   this.iconTheme.disconnect(this._iconThemeChangedId);
+			} else {
+			   St.Settings.get().disconnect(this._iconThemeChangedId);
+			}
+			this._iconThemeChangedId = 0;
 		}
 	}
 
@@ -145,6 +145,7 @@ class LockKeysIndicator extends PanelMenu.Button {
 	}
 
 	handleSettingsChange(actor, event) {
+		this.handleIconThemeChangeCompat();
 		if (this.config.isVisibilityStyle())
 			this.indicatorStyle = new VisibilityIndicator(this);
 		else if (this.config.isVisibilityStyleCapslock())
@@ -152,6 +153,13 @@ class LockKeysIndicator extends PanelMenu.Button {
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
 		this.updateState();
+	}
+
+	handleIconThemeChangeCompat() {
+		if (St.IconTheme) {
+			 return;
+		}
+		this.iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
 	}
 
 	handleStateChange(actor, event) {
