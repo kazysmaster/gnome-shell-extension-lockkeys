@@ -1,28 +1,18 @@
-const St = imports.gi.St;
-const Gio = imports.gi.Gio;
-const Gdk = imports.gi.Gdk;
-const Gtk = imports.gi.Gtk;
-const Clutter = imports.gi.Clutter;
-const GObject = imports.gi.GObject;
-const Gettext = imports.gettext.domain('lockkeys');
-const _ = Gettext.gettext;
+import St from 'gi://St';
+import Gio from 'gi://Gio';
+import Gdk from 'gi://Gdk';
+import Gtk from 'gi://Gtk';
+import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
 
-const Panel = imports.ui.panel;
-const Main = imports.ui.main;
-const PanelMenu = imports.ui.panelMenu;
-const PopupMenu = imports.ui.popupMenu;
-const MessageTray = imports.ui.messageTray;
-const Config = imports.misc.config;
+import * as Panel from 'resource:///org/gnome/shell/ui/panel.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
+import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 
-const POST_40 = parseFloat(Config.PACKAGE_VERSION) >= 40;
-const POST_3_36 = parseFloat(Config.PACKAGE_VERSION) >= 3.36;
-const Keymap = POST_3_36 ? Clutter.get_default_backend().get_default_seat().get_keymap():
-			               Clutter.get_default_backend().get_keymap();
-
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Utils = Me.imports.utils;
-
+import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 const STYLE = 'style';
 const STYLE_NONE = 'none';
@@ -36,39 +26,39 @@ const NOTIFICATIONS_OFF = 'off';
 const NOTIFICATIONS_ON = 'on';
 const NOTIFICATIONS_OSD = 'osd';
 
-let indicator;
+export default class LockKeysExtension extends Extension {
+    enable() {
+        const config = new Configuration(this.getSettings());
+        this._indicator = new LockKeysIndicator(config, this.dir);
+        Main.panel.addToStatusArea('lockkeys', this._indicator, 2);
+        this._indicator.setActive(true);
+    }
 
-function init() {
-	Utils.initTranslations("lockkeys");
+    disable() {
+        this._indicator.setActive(false);
+        this._indicator.destroy();
+        this._indicator = null;
+    }
 }
 
-function enable() {
-	indicator = new LockKeysIndicator();
-	Main.panel.addToStatusArea('lockkeys', indicator, 2);
-	indicator.setActive(true);
-}
-
-function disable() {
-	indicator.setActive(false);
-	indicator.destroy();
-}
-
-const LockKeysIndicator = GObject.registerClass(
-class LockKeysIndicator extends PanelMenu.Button {
-    _init() {
+const LockKeysIndicator = GObject.registerClass({
+}, class LockKeysIndicator extends PanelMenu.Button {
+    _init(config, extensionDir) {
         super._init(0.0, " LockKeysIndicator");
+        this.config = config;
+        this.extensionDir = extensionDir;
+        this.iconTheme = new St.IconTheme();
 
-        this.iconTheme = this.createIconThemeCompat();
+        this.keyMap = Clutter.get_default_backend().get_default_seat().get_keymap();
         this.numIcon = new St.Icon({
             style_class: 'system-status-icon lockkeys-status-icon'
         });
         this.capsIcon = new St.Icon({
             style_class: 'system-status-icon lockkeys-status-icon'
         });
-        if (POST_40) {
-            this.numIcon.set_style('padding-right: 0px; padding-left: 0px;');
-            this.capsIcon.set_style('padding-right: 0px; padding-left: 0px;');
-        }
+
+        this.numIcon.set_style('padding-right: 0px; padding-left: 0px;');
+        this.capsIcon.set_style('padding-right: 0px; padding-left: 0px;');
 
         let layoutManager = new St.BoxLayout({
             vertical: false,
@@ -76,7 +66,7 @@ class LockKeysIndicator extends PanelMenu.Button {
         });
         layoutManager.add_child(this.numIcon);
         layoutManager.add_child(this.capsIcon);
-        this.addChildCompat(layoutManager);
+        this.add_child(layoutManager);
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
         this.menu.addMenuItem(this.numMenuItem);
@@ -89,63 +79,37 @@ class LockKeysIndicator extends PanelMenu.Button {
         this.settingsMenuItem.connect('activate', this.handleSettingsMenuItem.bind(this));
         this.menu.addMenuItem(this.settingsMenuItem);
 
-        this.config = new Configuration();
         this.indicatorStyle = new HighlightIndicator(this);
-    }
-
-    createIconThemeCompat() {
-        if (St.IconTheme) {
-            return new St.IconTheme();
-        }
-
-        return new Gtk.IconTheme();
     }
 
 	getCustIcon(icon_name) {
 		if (this.iconTheme.has_icon(icon_name)) {
             return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
         }
-		let icon_path = Me.dir.get_child('icons').get_child(icon_name + ".svg").get_path();
+		let icon_path = this.extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
 		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
-	}
-
-	addChildCompat(child) {
-		this.add_child(child);
 	}
 
 	setActive(enabled) {
 		if (enabled) {
-			this._keyboardStateChangedId = Keymap.connect('state-changed', this.handleStateChange.bind(this));
+			this._keyboardStateChangedId = this.keyMap.connect('state-changed', this.handleStateChange.bind(this));
 			this._settingsChangedId = this.config.settings.connect('changed::' + STYLE, this.handleSettingsChange.bind(this));
-			if (St.IconTheme) {
-			   this._iconThemeChangedId = this.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
-			} else {
-			   this._iconThemeChangedId = St.Settings.get().connect('notify::gtk-icon-theme', this.handleSettingsChange.bind(this));
-			}
+			this._iconThemeChangedId = this.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
 			this.handleSettingsChange();
 		} else {
-			Keymap.disconnect(this._keyboardStateChangedId);
+			this.keyMap.disconnect(this._keyboardStateChangedId);
 			this._keyboardStateChangedId = 0;
 			this.config.settings.disconnect(this._settingsChangedId);
-			this._settingsChangedId = 0;
-			if (St.IconTheme) {
-			   this.iconTheme.disconnect(this._iconThemeChangedId);
-			} else {
-			   St.Settings.get().disconnect(this._iconThemeChangedId);
-			}
+            this.iconTheme.disconnect(this._iconThemeChangedId);
 			this._iconThemeChangedId = 0;
 		}
 	}
 
 	handleSettingsMenuItem(actor, event) {
-		if (POST_3_36)
-			imports.misc.util.spawn(['gnome-extensions', 'prefs', 'lockkeys@vaina.lt']);
-		else
-			imports.misc.util.spawn(['gnome-shell-extension-prefs', 'lockkeys@vaina.lt']);
+	    Main.extensionManager.openExtensionPrefs('lockkeys@vaina.lt', '', {});
 	}
 
 	handleSettingsChange(actor, event) {
-		this.handleIconThemeChangeCompat();
 		if (this.config.isVisibilityStyle())
 			this.indicatorStyle = new VisibilityIndicator(this);
 		else if (this.config.isVisibilityStyleCapslock())
@@ -153,13 +117,6 @@ class LockKeysIndicator extends PanelMenu.Button {
 		else
 			this.indicatorStyle = new HighlightIndicator(this);
 		this.updateState();
-	}
-
-	handleIconThemeChangeCompat() {
-		if (St.IconTheme) {
-			 return;
-		}
-		this.iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
 	}
 
 	handleStateChange(actor, event) {
@@ -208,10 +165,7 @@ class LockKeysIndicator extends PanelMenu.Button {
             notification.update(notification_text, null, { clear: true });
         }
 
-		if (POST_3_36)
-			this._source.showNotification(notification);
-		else
-			this._source.notify(notification);
+		this._source.showNotification(notification);
 	}
 
 	prepareSource(icon_name) {
@@ -239,16 +193,32 @@ class LockKeysIndicator extends PanelMenu.Button {
 	}
 
 	getNumlockState() {
-		return Keymap.get_num_lock_state();
+        return this.keyMap.get_num_lock_state();
 	}
 
 	getCapslockState() {
-		return Keymap.get_caps_lock_state();
+        return this.keyMap.get_caps_lock_state();
 	}
 });
 
-const HighlightIndicator = GObject.registerClass(
-class HighlightIndicator extends GObject.Object{
+const CustomIconSupplier = GObject.registerClass({
+}, class CustomIconSupplier extends GObject.Object{
+	_init(extensionDir) {
+	    this.extensionDir = extensionDir;
+	     this.iconTheme = new St.IconTheme();
+	}
+
+	getCustIcon(icon_name) {
+        if (this.iconTheme.has_icon(icon_name)) {
+            return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
+        }
+        let icon_path = this.extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
+        return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
+    }
+});
+
+const HighlightIndicator = GObject.registerClass({
+}, class HighlightIndicator extends GObject.Object{
 	_init(panelButton) {
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
@@ -281,8 +251,8 @@ class HighlightIndicator extends GObject.Object{
 	}
 });
 
-const VisibilityIndicator = GObject.registerClass(
-class VisibilityIndicator extends GObject.Object{
+const VisibilityIndicator = GObject.registerClass({
+}, class VisibilityIndicator extends GObject.Object{
 	_init(panelButton) {
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
@@ -308,8 +278,8 @@ class VisibilityIndicator extends GObject.Object{
 	}
 });
 
-const VisibilityIndicatorCapslock = GObject.registerClass(
-class VisibilityIndicatorCapslock extends GObject.Object{
+const VisibilityIndicatorCapslock = GObject.registerClass({
+}, class VisibilityIndicatorCapslock extends GObject.Object{
 	_init(panelButton) {
 		this.panelButton = panelButton;
 		this.config = panelButton.config;
@@ -329,10 +299,10 @@ class VisibilityIndicatorCapslock extends GObject.Object{
 	}
 });
 
-const Configuration = GObject.registerClass(
-class Configuration extends GObject.Object{
-	_init() {
-		this.settings = Utils.getSettings(Me);
+const Configuration = GObject.registerClass({
+}, class Configuration extends GObject.Object{
+	_init(settings) {
+		this.settings = settings;
 	}
 
 	isShowNotifications() {

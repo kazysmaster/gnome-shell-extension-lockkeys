@@ -1,13 +1,8 @@
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
+import Adw from 'gi://Adw';
+import Gtk from 'gi://Gtk';
 
-const Gettext = imports.gettext.domain('lockkeys');
-const _ = Gettext.gettext;
-
-const ExtensionUtils = imports.misc.extensionUtils;
-const Meta = ExtensionUtils.getCurrentExtension();
-const Utils = Meta.imports.utils;
-const Config = imports.misc.config;
+import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
 
 const STYLE = 'style';
 const STYLE_NONE = 'none';
@@ -20,53 +15,67 @@ const NOTIFICATIONS = 'notification-preferences';
 const NOTIFICATIONS_OFF = 'off';
 const NOTIFICATIONS_ON = 'on';
 const NOTIFICATIONS_OSD = 'osd';
-const POST_40 = parseFloat(Config.PACKAGE_VERSION) >= 40;
 
-let settings;
+export default class LockKeysPreferences extends ExtensionPreferences {
+    fillPreferencesWindow(window) {
+        const group = new Adw.PreferencesGroup({
+            title: _('Settings'),
+            description: _('Change indicator display options')
+        });
+        group.add(this.buildPrefsWidget());
+        const page = new Adw.PreferencesPage();
+        page.add(group);
+        window.add(page);
+    }
 
-function init() {
-	settings = Utils.getSettings(Meta);
-	Utils.initTranslations("lockkeys");
-}
+    buildPrefsWidget() {
+    	const indicator_style = this.createComboBox(
+    	    STYLE,
+    	    _("Indicator Style"),
+    	    _("Change indicator display options"),
+    	    {
+                [STYLE_NONE]: _("Notifications Only"),
+                [STYLE_NUMLOCK_ONLY]: _("Num-Lock Only"),
+                [STYLE_CAPSLOCK_ONLY]: _("Caps-Lock Only"),
+                [STYLE_BOTH]: _("Both"),
+                [STYLE_SHOWHIDE]: _("Show/Hide"),
+                [STYLE_SHOWHIDE_CAPSLOCK]: _("Show/Hide Caps-Lock Only")
+    	    }
+    	);
 
-function buildPrefsWidget() {
-	let indicator_style = createComboBox(STYLE, _("Indicator Style"), _("Change indicator display options"), {
-		[STYLE_NONE]: _("Notifications Only"),
-		[STYLE_NUMLOCK_ONLY]: _("Num-Lock Only"),
-		[STYLE_CAPSLOCK_ONLY]: _("Caps-Lock Only"),
-		[STYLE_BOTH]: _("Both"),
-		[STYLE_SHOWHIDE]: _("Show/Hide"),
-        [STYLE_SHOWHIDE_CAPSLOCK]: _("Show/Hide Caps-Lock Only")
-	});
+    	const notifications_style = this.createComboBox(
+    	    NOTIFICATIONS,
+    	    _("Notifications"),
+    	    _("Show notifications when state changes"),
+    	    {
+                [NOTIFICATIONS_OFF]: _("Off"),
+                [NOTIFICATIONS_ON]: _("Compact"),
+                [NOTIFICATIONS_OSD]: _("Osd")
+    	    }
+    	);
 
-	let notifications_style = createComboBox(NOTIFICATIONS, _("Notifications"), _("Show notifications when state changes"), {
-		[NOTIFICATIONS_OFF]: _("Off"),
-		[NOTIFICATIONS_ON]: _("Compact"),
-		[NOTIFICATIONS_OSD]: _("Osd")
-	});
+        return this.createVerticalBoxCompat(indicator_style, notifications_style);
+    }
 
-    return createVerticalBoxCompat(indicator_style, notifications_style);
-}
+    createComboBox(key, text, tooltip, values) {
+    	let label = new Gtk.Label({ label: text, xalign: 0, tooltip_text:tooltip });
+    	let widget = new Gtk.ComboBoxText();
+    	widget.halign = Gtk.Align.END;
+    	for (let id in values) {
+    		widget.append(id, values[id]);
+    	}
 
-function createComboBox(key, text, tooltip, values) {
-	let label = new Gtk.Label({ label: text, xalign: 0, tooltip_text:tooltip });
-	let widget = new Gtk.ComboBoxText();
-	widget.halign = Gtk.Align.END;
-	for (let id in values) {
-		widget.append(id, values[id]);
-	}
+    	const _settings = this.getSettings();
+    	widget.set_active_id(_settings.get_string(key));
+    	widget.connect('changed', function(combo_widget) {
+    		_settings.set_string(key, combo_widget.get_active_id());
+    	});
 
-	widget.set_active_id(settings.get_string(key));
-	widget.connect('changed', function(combo_widget) {
-		settings.set_string(key, combo_widget.get_active_id());
-	});
+    	return this.createHorizontalBoxCompat(label, widget);
+    }
 
-	return createHorizontalBoxCompat(label, widget);
-}
-
-function createVerticalBoxCompat(...widgets) {
-    if (POST_40) {
-        let box = new Gtk.Box({
+    createVerticalBoxCompat(...widgets) {
+        const box = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             spacing: 10,
             margin_top: 20,
@@ -77,22 +86,12 @@ function createVerticalBoxCompat(...widgets) {
         widgets.forEach(widget => box.append(widget));
         box.show();
         return box;
-    } else {
-        let box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 10, margin: 20});
-        widgets.forEach(widget => box.add(widget));
-        box.show_all();
-        return box;
     }
-}
 
-function createHorizontalBoxCompat(label, widget) {
-    let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 10, homogeneous: true});
-    if (POST_40) {
+    createHorizontalBoxCompat(label, widget) {
+        const box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 10, homogeneous: true});
         box.append(label);
         box.append(widget);
-    } else {
-        box.pack_start(label, true, true, 0);
-        box.add(widget);
+        return box;
     }
-    return box;
 }
