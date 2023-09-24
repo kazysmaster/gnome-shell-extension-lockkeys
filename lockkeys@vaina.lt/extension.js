@@ -29,7 +29,8 @@ const NOTIFICATIONS_OSD = 'osd';
 export default class LockKeysExtension extends Extension {
     enable() {
         const config = new Configuration(this.getSettings());
-        this._indicator = new LockKeysIndicator(config, this.dir);
+        const icons = new ExtensionIcons(this.dir);
+        this._indicator = new LockKeysIndicator(config, icons);
         Main.panel.addToStatusArea('lockkeys', this._indicator, 2);
         this._indicator.setActive(true);
     }
@@ -43,13 +44,12 @@ export default class LockKeysExtension extends Extension {
 
 const LockKeysIndicator = GObject.registerClass({
 }, class LockKeysIndicator extends PanelMenu.Button {
-    _init(config, extensionDir) {
+    _init(config, icons) {
         super._init(0.0, " LockKeysIndicator");
         this.config = config;
-        this.extensionDir = extensionDir;
-        this.iconTheme = new St.IconTheme();
-
+        this.icons = icons;
         this.keyMap = Clutter.get_default_backend().get_default_seat().get_keymap();
+
         this.numIcon = new St.Icon({
             style_class: 'system-status-icon lockkeys-status-icon'
         });
@@ -76,46 +76,37 @@ const LockKeysIndicator = GObject.registerClass({
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this.settingsMenuItem = new PopupMenu.PopupMenuItem(_("Settings"));
-        this.settingsMenuItem.connect('activate', this.handleSettingsMenuItem.bind(this));
         this.menu.addMenuItem(this.settingsMenuItem);
+        this.settingsMenuItem.connect('activate', function(menu_item) {
+            Main.extensionManager.openExtensionPrefs('lockkeys@vaina.lt', '', {});
+        });
 
-        this.indicatorStyle = new HighlightIndicator(this);
+        this.indicatorStyle = new HighlightIndicatorStyle(this);
     }
-
-	getCustIcon(icon_name) {
-		if (this.iconTheme.has_icon(icon_name)) {
-            return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
-        }
-		let icon_path = this.extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
-		return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
-	}
 
 	setActive(enabled) {
 		if (enabled) {
 			this._keyboardStateChangedId = this.keyMap.connect('state-changed', this.handleStateChange.bind(this));
 			this._settingsChangedId = this.config.settings.connect('changed::' + STYLE, this.handleSettingsChange.bind(this));
-			this._iconThemeChangedId = this.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
+			this._iconThemeChangedId = this.icons.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
 			this.handleSettingsChange();
 		} else {
 			this.keyMap.disconnect(this._keyboardStateChangedId);
 			this._keyboardStateChangedId = 0;
 			this.config.settings.disconnect(this._settingsChangedId);
-            this.iconTheme.disconnect(this._iconThemeChangedId);
+			this._settingsChangedId = 0;
+            this.icons.iconTheme.disconnect(this._iconThemeChangedId);
 			this._iconThemeChangedId = 0;
 		}
 	}
 
-	handleSettingsMenuItem(actor, event) {
-	    Main.extensionManager.openExtensionPrefs('lockkeys@vaina.lt', '', {});
-	}
-
 	handleSettingsChange(actor, event) {
 		if (this.config.isVisibilityStyle())
-			this.indicatorStyle = new VisibilityIndicator(this);
+			this.indicatorStyle = new VisibilityIndicatorStyle(this);
 		else if (this.config.isVisibilityStyleCapslock())
-			this.indicatorStyle = new VisibilityIndicatorCapslock(this);
+			this.indicatorStyle = new VisibilityIndicatorCapslockStyle(this);
 		else
-			this.indicatorStyle = new HighlightIndicator(this);
+			this.indicatorStyle = new HighlightIndicatorStyle(this);
 		this.updateState();
 	}
 
@@ -146,7 +137,7 @@ const LockKeysIndicator = GObject.registerClass({
 
 	showNotification(notification_text, icon_name) {
 		if (this.config.isShowOsd()) {
-			Main.osdWindowManager.show(-1, this.getCustIcon(icon_name), notification_text);
+			Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
 		} else {
 			this.showSimpleNotification(notification_text, icon_name);
 		}
@@ -175,7 +166,7 @@ const LockKeysIndicator = GObject.registerClass({
 			let parent = this;
 			this._source.createIcon = function(size) {
 				return new St.Icon({
-					gicon: parent.getCustIcon(parent._source.iconName),
+					gicon: parent.icons.getCustomIcon(parent._source.iconName),
                     icon_size: size
                 });
 			}
@@ -201,101 +192,104 @@ const LockKeysIndicator = GObject.registerClass({
 	}
 });
 
-const CustomIconSupplier = GObject.registerClass({
-}, class CustomIconSupplier extends GObject.Object{
+const ExtensionIcons = GObject.registerClass({
+}, class ExtensionIcons extends GObject.Object{
 	_init(extensionDir) {
-	    this.extensionDir = extensionDir;
-	     this.iconTheme = new St.IconTheme();
+	    this._extensionDir = extensionDir;
+	    this.iconTheme = new St.IconTheme();
 	}
 
-	getCustIcon(icon_name) {
+	getCustomIcon(icon_name) {
         if (this.iconTheme.has_icon(icon_name)) {
             return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
         }
-        let icon_path = this.extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
+        let icon_path = this._extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
         return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
     }
 });
 
-const HighlightIndicator = GObject.registerClass({
-}, class HighlightIndicator extends GObject.Object{
-	_init(panelButton) {
-		this.panelButton = panelButton;
-		this.config = panelButton.config;
-		this.numIcon = panelButton.numIcon;
-		this.capsIcon = panelButton.capsIcon;
+const HighlightIndicatorStyle = GObject.registerClass({
+}, class HighlightIndicatorStyle extends GObject.Object{
+	_init(indicator) {
+		this._indicator = indicator;
+		this._config = indicator.config;
+		this._icons = indicator.icons;
+		this._numIcon = indicator.numIcon;
+		this._capsIcon = indicator.capsIcon;
 
-		if (this.config.isHighlightNumLock())
-			this.numIcon.show();
+		if (this._config.isHighlightNumLock())
+			this._numIcon.show();
 		else
-			this.numIcon.hide();
+			this._numIcon.hide();
 
-		if (this.config.isHighlightCapsLock())
-			this.capsIcon.show();
+		if (this._config.isHighlightCapsLock())
+			this._capsIcon.show();
 		else
-			this.capsIcon.hide();
+			this._capsIcon.hide();
 
-		this.panelButton.visible = this.config.isHighlightNumLock() || this.config.isHighlightCapsLock();
+		this._indicator.visible = this._config.isHighlightNumLock() || this._config.isHighlightCapsLock();
 	}
 
 	displayState(numlock_state, capslock_state) {
 		if (numlock_state)
-			this.numIcon.set_gicon(this.panelButton.getCustIcon('numlock-enabled-symbolic'));
+			this._numIcon.set_gicon(this._icons.getCustomIcon('numlock-enabled-symbolic'));
 		else
-			this.numIcon.set_gicon(this.panelButton.getCustIcon('numlock-disabled-symbolic'));
+			this._numIcon.set_gicon(this._icons.getCustomIcon('numlock-disabled-symbolic'));
 
 		if (capslock_state)
-			this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
+			this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-enabled-symbolic'));
 		else
-			this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-disabled-symbolic'));
+			this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-disabled-symbolic'));
 	}
 });
 
-const VisibilityIndicator = GObject.registerClass({
-}, class VisibilityIndicator extends GObject.Object{
-	_init(panelButton) {
-		this.panelButton = panelButton;
-		this.config = panelButton.config;
-		this.numIcon = panelButton.numIcon;
-		this.capsIcon = panelButton.capsIcon;
+const VisibilityIndicatorStyle = GObject.registerClass({
+}, class VisibilityIndicatorStyle extends GObject.Object{
+	_init(indicator) {
+        this._indicator = indicator;
+        this._config = indicator.config;
+        this._icons = indicator.icons;
+        this._numIcon = indicator.numIcon;
+        this._capsIcon = indicator.capsIcon;
 
-		this.numIcon.set_gicon(this.panelButton.getCustIcon('numlock-enabled-symbolic'));
-		this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
+		this._numIcon.set_gicon(this._icons.getCustomIcon('numlock-enabled-symbolic'));
+		this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-enabled-symbolic'));
 	}
 
 	displayState(numlock_state, capslock_state) {
 		if (numlock_state) {
-			this.numIcon.show();
+			this._numIcon.show();
 		} else
-			this.numIcon.hide();
+			this._numIcon.hide();
 
 		if (capslock_state) {
-			this.capsIcon.show();
+			this._capsIcon.show();
 		} else
-			this.capsIcon.hide();
+			this._capsIcon.hide();
 
-		this.panelButton.visible = numlock_state || capslock_state;
+		this._indicator.visible = numlock_state || capslock_state;
 	}
 });
 
-const VisibilityIndicatorCapslock = GObject.registerClass({
-}, class VisibilityIndicatorCapslock extends GObject.Object{
-	_init(panelButton) {
-		this.panelButton = panelButton;
-		this.config = panelButton.config;
-		this.capsIcon = panelButton.capsIcon;
+const VisibilityIndicatorCapslockStyle = GObject.registerClass({
+}, class VisibilityIndicatorCapslockStyle extends GObject.Object{
+	_init(indicator) {
+        this._indicator = indicator;
+        this._config = indicator.config;
+        this._icons = indicator.icons;
+        this._capsIcon = indicator.capsIcon;
 
-		panelButton.numIcon.hide();
-		this.capsIcon.set_gicon(this.panelButton.getCustIcon('capslock-enabled-symbolic'));
+		indicator.numIcon.hide();
+		this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-enabled-symbolic'));
 	}
 
 	displayState(numlock_state, capslock_state) {
 		if (capslock_state) {
-			this.capsIcon.show();
+			this._capsIcon.show();
 		} else
-			this.capsIcon.hide();
+			this._capsIcon.hide();
 
-		this.panelButton.visible = capslock_state;
+		this._indicator.visible = capslock_state;
 	}
 });
 
