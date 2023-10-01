@@ -1,7 +1,5 @@
 import St from 'gi://St';
 import Gio from 'gi://Gio';
-import Gdk from 'gi://Gdk';
-import Gtk from 'gi://Gtk';
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 
