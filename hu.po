@@ -1,65 +1,100 @@
-msgid ""
-msgstr ""
-"Project-Id-Version: gnome-shell-extension-transmission-daemon\n"
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-shell-extension-lockkeys package.
+# ViBE <vibe@protonmail.com>, 2020.
+#
+
+"Project-Id-Version: gnome-shell-extension-lockkeys\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 00:37-0300\n"
-"PO-Revision-Date: 2020-01-08 21:14+0200\n"
-"Last-Translator: ViBE\n"
-"Language-Team: Hungarian\n"
+"POT-Creation-Date: 2020-09-26 11:26+0200\n"
+"PO-Revision-Date: 2023-11-20 16:02+0100\n"
+"Last-Translator: ViBE <vibe@protonmail.com>\n"
+"Language-Team: Hungarian <vibe@protonmail.com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: prefs.js:28
-msgid "Indicator Style"
-msgstr "Megjelenő indikátorok"
-
-#: prefs.js:28
-msgid "Change indicator display options"
-msgstr "Értesítési területen megjelenő indikátorok"
-
-#: prefs.js:29
-msgid "Num-Lock Only"
-msgstr "Csak Num Lock"
-
-#: prefs.js:29
-msgid "Caps-Lock Only"
-msgstr "Csak Caps Lock"
-
-#: prefs.js:29
-msgid "Both"
-msgstr "Mindkettő"
-
-#: prefs.js:29
-msgid "Show/Hide"
-msgstr "Csak bekapcsolt"
-
-#: prefs.js:30
-msgid "Notifications"
-msgstr "Értesítések"
-
-#: prefs.js:30
-msgid "Show notifications when state changes"
-msgstr "Értesítési üzenetek megjelenítése ki-; és bekapcsolás esetén"
-
-#: extension.js:78 extension.js:152
+#: extension.js:97 extension.js:147
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: extension.js:82 extension.js:158
+#: extension.js:100 extension.js:154
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: extension.js:87
+#: extension.js:104
 msgid "Settings"
-msgstr "Beállítások"
+msgstr "Beálltások"
 
-#: extension.js:217
+#: extension.js:213
 msgid "On"
 msgstr "bekapcsolva"
 
-#: extension.js:217
+#: extension.js:212 prefs.js:43
 msgid "Off"
 msgstr "kikapcsolva"
+
+#: prefs.js:33
+msgid "Indicator Style"
+msgstr "Megjelenő indikátorok"
+
+#: prefs.js:33
+msgid "Change indicator display options"
+msgstr "Értesítési területen megjelenő indikátorok"
+
+#: prefs.js:34
+msgid "Num-Lock Only"
+msgstr "Csak Num Lock"
+
+#: prefs.js:35
+msgid "Caps-Lock Only"
+msgstr "Csak Caps Lock"
+
+#: prefs.js:36
+msgid "Both"
+msgstr "Mindkettő"
+
+#: prefs.js:37
+msgid "Show/Hide"
+msgstr "Csak bekapcsolt"
+
+#: prefs.js:39
+msgid "Show/Hide Caps-Lock Only"
+msgstr "Csak bekapcsolt Caps Lock"
+
+#: prefs.js:40
+msgid "Notifications"
+msgstr "Értesítés módja"
+
+#: prefs.js:40
+msgid "Show notifications when state changes"
+msgstr "Vizuális értesítések állapotváltozás esetén"
+
+#: prefs.js:42
+msgid "Compact"
+msgstr "Rendszerértesítés"
+
+#: prefs.js:43
+msgid "Osd"
+msgstr "OSD képátfedés"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr "Vizuális értesítések állapotváltozás esetén"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr "Beállíthatja milyen esetben jelenjenek meg értesítések"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr "Megjelenő indikátorok"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr "Beállíthatja milyen esetben jelenjenek meg indikátorok"
