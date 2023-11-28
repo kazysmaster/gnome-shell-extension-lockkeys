@@ -3,7 +3,8 @@
 # This file is distributed under the same license as the gnome-shell-extension-lockkeys package.
 # ViBE <vibe@protonmail.com>, 2020.
 #
-
+msgid ""
+msgstr ""
 "Project-Id-Version: gnome-shell-extension-lockkeys\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-26 11:26+0200\n"
