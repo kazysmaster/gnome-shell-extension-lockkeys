@@ -12,6 +12,8 @@ import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 
 import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
+const POST_46 = parseFloat(Config.PACKAGE_VERSION) >= 46;
+
 const STYLE = 'style';
 const STYLE_NONE = 'none';
 const STYLE_NUMLOCK_ONLY = 'numlock';
@@ -136,13 +138,49 @@ const LockKeysIndicator = GObject.registerClass({
 	showNotification(notification_text, icon_name) {
 		if (this.config.isShowOsd()) {
 			Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
+		} if (POST_46) {
+		    this.showSimpleNotification(notification_text, icon_name);
 		} else {
-			this.showSimpleNotification(notification_text, icon_name);
+			this.showSimpleNotification45(notification_text, icon_name);
 		}
 	}
 
 	showSimpleNotification(notification_text, icon_name) {
-	    this.prepareSource(icon_name);
+        this.prepareSource(icon_name);
+
+        let notification = null;
+        if (this._source.notifications.length == 0) {
+            notification = new MessageTray.Notification({
+                source: this._source,
+                title: notification_text
+            });
+            notification['is-transient'] = true;
+            notification['resident'] = false;
+        } else {
+            notification = this._source.notifications[0];
+            notification.title = notification_text
+        }
+
+        this._source.addNotification(notification);
+    }
+
+    prepareSource(icon_name) {
+        if (this._source == null) {
+            this._source = new MessageTray.Source({
+                title: "Lock Keys"
+            });
+
+            const parent = this;
+            this._source.connect('destroy', function() {
+                parent._source = null;
+            });
+            Main.messageTray.add(this._source);
+        }
+        this._source.icon = this.icons.getCustomIcon(icon_name);
+    }
+
+	showSimpleNotification45(notification_text, icon_name) {
+	    this.prepareSource45(icon_name);
 
         let notification = null;
         if (this._source.notifications.length == 0) {
@@ -157,9 +195,9 @@ const LockKeysIndicator = GObject.registerClass({
 		this._source.showNotification(notification);
 	}
 
-	prepareSource(icon_name) {
+	prepareSource45(icon_name) {
 		if (this._source == null) {
-			this._source = new MessageTray.Source("LockKeysIndicator", icon_name);
+			this._source = new MessageTray.Source("Lock Keys", icon_name);
 
 			let parent = this;
 			this._source.createIcon = function(size) {
