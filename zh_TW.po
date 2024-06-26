@@ -1,0 +1,97 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lock Keys Gnome-Shell extension\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-26 11:26+0200\n"
+"PO-Revision-Date: 2024-06-26 22:29+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: extension.js:97 extension.js:147
+msgid "Num Lock"
+msgstr "數字鎖定"
+
+#: extension.js:100 extension.js:154
+msgid "Caps Lock"
+msgstr "大寫鎖定"
+
+#: extension.js:104
+msgid "Settings"
+msgstr "設定"
+
+#: extension.js:213
+msgid "On"
+msgstr "開啟"
+
+#: extension.js:212 prefs.js:43
+msgid "Off"
+msgstr "關閉"
+
+#: prefs.js:33
+msgid "Indicator Style"
+msgstr "指示器樣式"
+
+#: prefs.js:33
+msgid "Change indicator display options"
+msgstr "更改指示器顯示選項"
+
+#: prefs.js:34
+msgid "Num-Lock Only"
+msgstr "僅顯示數字鎖定"
+
+#: prefs.js:35
+msgid "Caps-Lock Only"
+msgstr "僅顯示大寫鎖定"
+
+#: prefs.js:36
+msgid "Both"
+msgstr "兩者皆顯示"
+
+#: prefs.js:37
+msgid "Show/Hide"
+msgstr "顯示/隱藏"
+
+#: prefs.js:39
+msgid "Show/Hide Caps-Lock Only"
+msgstr "僅顯示/隱藏大寫鎖定"
+
+#: prefs.js:40
+msgid "Notifications"
+msgstr "通知"
+
+#: prefs.js:40
+msgid "Show notifications when state changes"
+msgstr "狀態變更時顯示通知"
+
+#: prefs.js:42
+msgid "Compact"
+msgstr "簡潔"
+
+#: prefs.js:43
+msgid "Osd"
+msgstr "螢幕顯示"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+msgid "Show notifications when key state changes"
+msgstr "按鍵狀態變更時顯示通知"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr "設為 false 以避免鎖定狀態變更通知"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+msgid "Indicator style"
+msgstr "指示器樣式"
+
+#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+"設定數字鎖定值僅顯示數字鎖定指示器，設定大寫鎖定值僅顯示大寫鎖定指示器，"
+"或設定為兩者皆顯示。設定顯示/隱藏以在開啟時顯示相應的指示器圖示。"
