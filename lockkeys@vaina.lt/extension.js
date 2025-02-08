@@ -322,9 +322,9 @@ const VisibilityIndicatorCapslockStyle = GObject.registerClass({
 	displayState(numlock_state, capslock_state) {
 		if (capslock_state) {
 			this._capsIcon.show();
-		} else
+		} else {
 			this._capsIcon.hide();
-
+        }
 		this._indicator.visible = capslock_state;
 	}
 });
@@ -346,9 +346,11 @@ const Configuration = GObject.registerClass({
 	}
 
 	isNotifyNumLock() {
-		let widget_style = this.settings.get_string(STYLE);
-		return this.isShowNotifications() && widget_style != STYLE_CAPSLOCK_ONLY;
-	}
+        let widget_style = this.settings.get_string(STYLE);
+        return this.isShowNotifications() &&
+            widget_style != STYLE_CAPSLOCK_ONLY &&
+            widget_style != STYLE_SHOWHIDE_CAPSLOCK;
+    }
 
 	isNotifyCapsLock() {
 		let widget_style = this.settings.get_string(STYLE);
