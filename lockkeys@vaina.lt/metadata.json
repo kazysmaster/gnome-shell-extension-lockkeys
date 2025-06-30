@@ -1,5 +1,5 @@
 {
-   "shell-version": ["45", "46", "47", "48"],
+   "shell-version": ["45", "46", "47", "48", "49"],
    "uuid": "lockkeys@vaina.lt",
    "name": "Lock Keys",
    "description": "Numlock & Capslock status on the panel.",
