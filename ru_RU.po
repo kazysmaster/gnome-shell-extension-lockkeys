@@ -3,7 +3,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: unnamed project\n"
+"Project-Id-Version: Расширение Lock Keys\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2025-06-30 20:00+0300\n"
 "Last-Translator: Fraxinus Acer <>\n"
