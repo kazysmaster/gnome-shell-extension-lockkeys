@@ -3,10 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-
+#, fuzzy
+msgid ""
+msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-26 11:26+0200\n"
+"POT-Creation-Date: 2025-02-08 18:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,83 +17,87 @@
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:97 extension.js:147
+#: lockkeys@vaina.lt/extension.js:71 lockkeys@vaina.lt/extension.js:115
 msgid "Num Lock"
 msgstr ""
 
-#: extension.js:100 extension.js:154
+#: lockkeys@vaina.lt/extension.js:74 lockkeys@vaina.lt/extension.js:121
 msgid "Caps Lock"
 msgstr ""
 
-#: extension.js:104
+#: lockkeys@vaina.lt/extension.js:78 lockkeys@vaina.lt/prefs.js:22
 msgid "Settings"
 msgstr ""
 
-#: extension.js:213
+#: lockkeys@vaina.lt/extension.js:219
 msgid "On"
 msgstr ""
 
-#: extension.js:212 prefs.js:43
+#: lockkeys@vaina.lt/extension.js:219 lockkeys@vaina.lt/prefs.js:51
 msgid "Off"
 msgstr ""
 
-#: prefs.js:33
-msgid "Indicator Style"
-msgstr ""
-
-#: prefs.js:33
+#: lockkeys@vaina.lt/prefs.js:23 lockkeys@vaina.lt/prefs.js:35
 msgid "Change indicator display options"
 msgstr ""
 
-#: prefs.js:34
+#: lockkeys@vaina.lt/prefs.js:34
+msgid "Indicator Style"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:37
+msgid "Notifications Only"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:38
 msgid "Num-Lock Only"
 msgstr ""
 
-#: prefs.js:35
+#: lockkeys@vaina.lt/prefs.js:39
 msgid "Caps-Lock Only"
 msgstr ""
 
-#: prefs.js:36
+#: lockkeys@vaina.lt/prefs.js:40
 msgid "Both"
 msgstr ""
 
-#: prefs.js:37
+#: lockkeys@vaina.lt/prefs.js:41
 msgid "Show/Hide"
 msgstr ""
 
-#: prefs.js:39
+#: lockkeys@vaina.lt/prefs.js:42
 msgid "Show/Hide Caps-Lock Only"
 msgstr ""
 
-#: prefs.js:40
+#: lockkeys@vaina.lt/prefs.js:48
 msgid "Notifications"
 msgstr ""
 
-#: prefs.js:40
+#: lockkeys@vaina.lt/prefs.js:49
 msgid "Show notifications when state changes"
 msgstr ""
 
-#: prefs.js:42
+#: lockkeys@vaina.lt/prefs.js:52
 msgid "Compact"
 msgstr ""
 
-#: prefs.js:43
+#: lockkeys@vaina.lt/prefs.js:53
 msgid "Osd"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
 msgid "Show notifications when key state changes"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
 msgid "Set false to suppress num-lock or caps-lock state change notifications"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
 msgid "Indicator style"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
 msgid ""
 "Set numlock value to display only num-lock indicator, set capslock value to "
 "display only caps-lock indicator, or both for both. Set show-hide, to "
