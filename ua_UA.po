@@ -3,13 +3,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Расширение Lock Keys\n"
+"Project-Id-Version: Розширення Lock Keys\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-08 18:09+0300\n"
 "PO-Revision-Date: 2025-08-01 22:13+0300\n"
 "Last-Translator: Fraxinus Acer <>\n"
-"Language-Team: Russian\n"
-"Language: ru\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,75 +32,75 @@ msgstr "Caps Lock"
 
 #: lockkeys@vaina.lt/extension.js:78 lockkeys@vaina.lt/prefs.js:22
 msgid "Settings"
-msgstr "Настройки"
+msgstr "Налаштування"
 
 #: lockkeys@vaina.lt/extension.js:219
 msgid "On"
-msgstr "Включены"
+msgstr "Увімкнено"
 
 #: lockkeys@vaina.lt/extension.js:219 lockkeys@vaina.lt/prefs.js:51
 msgid "Off"
-msgstr "Выключены"
+msgstr "Вимкнено"
 
 #: lockkeys@vaina.lt/prefs.js:23 lockkeys@vaina.lt/prefs.js:35
 msgid "Change indicator display options"
-msgstr "Изменить параметры отображения индикатора"
+msgstr "Змінити параметри відображення індикатора"
 
 #: lockkeys@vaina.lt/prefs.js:34
 msgid "Indicator Style"
-msgstr "Стиль индикатора"
+msgstr "Стиль індикатора"
 
 #: lockkeys@vaina.lt/prefs.js:37
 msgid "Notifications Only"
-msgstr "Только уведомления"
+msgstr "Лише сповіщення"
 
 #: lockkeys@vaina.lt/prefs.js:38
 msgid "Num-Lock Only"
-msgstr "Только Num-Lock"
+msgstr "Лише Num-Lock"
 
 #: lockkeys@vaina.lt/prefs.js:39
 msgid "Caps-Lock Only"
-msgstr "Только Caps-Lock"
+msgstr "Лише Caps-Lock"
 
 #: lockkeys@vaina.lt/prefs.js:40
 msgid "Both"
-msgstr "Оба"
+msgstr "Обидва"
 
 #: lockkeys@vaina.lt/prefs.js:41
 msgid "Show/Hide"
-msgstr "Показать/Скрыть"
+msgstr "Показати/Сховати"
 
 #: lockkeys@vaina.lt/prefs.js:42
 msgid "Show/Hide Caps-Lock Only"
-msgstr "Показать/Скрыть только Caps-Lock"
+msgstr "Показати/Сховати лише Caps-Lock"
 
 #: lockkeys@vaina.lt/prefs.js:48
 msgid "Notifications"
-msgstr "Уведомления"
+msgstr "Сповіщення"
 
 #: lockkeys@vaina.lt/prefs.js:49
 msgid "Show notifications when state changes"
-msgstr "Показывать уведомления при изменении состояния"
+msgstr "Показувати сповіщення при зміні стану"
 
 #: lockkeys@vaina.lt/prefs.js:52
 msgid "Compact"
-msgstr "Компактные"
+msgstr "Компактні"
 
 #: lockkeys@vaina.lt/prefs.js:53
 msgid "Osd"
-msgstr "Экранные"
+msgstr "Екранні"
 
 #: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
 msgid "Show notifications when key state changes"
-msgstr "Показывать уведомления при изменении состояния клавиши"
+msgstr "Показувати сповіщення при зміні стану клавіші"
 
 #: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
 msgid "Set false to suppress num-lock or caps-lock state change notifications"
-msgstr "Выберите выключены, чтобы отключить отображение уведомлений при смене режима"
+msgstr "Виберіть вимкнено, щоб відключити відображення сповіщень при зміні режиму"
 
 #: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
 msgid "Indicator style"
-msgstr "Стиль индикатора"
+msgstr "Стиль індикатора"
 
 #: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
 msgid ""
@@ -108,7 +108,7 @@ msgid ""
 "display only caps-lock indicator, or both for both. Set show-hide, to "
 "display corresponding indicator icons only when on."
 msgstr ""
-"Выберите Только Num Lock или Только Caps Lock, чтобы показывать только "
-"соответствующий индикатор. Выберите Оба, чтобы показывать оба индикатора. "
-"Выберите Показать/Скрыть, чтобы показывать соответствующий индикатор только "
-"тогда, когда соответствующий режим активен."
+"Виберіть Лише Num Lock або Лише Caps Lock, щоб показувати лише "
+"відповідний індикатор. Виберіть Обидва, щоб показувати обидва індикатори. "
+"Виберіть Показати/Сховати, щоб показувати відповідний індикатор лише "
+"тоді, коли відповідний режим активний."
