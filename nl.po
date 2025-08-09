@@ -2,96 +2,104 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-07-11 14:37+0200\n"
+"POT-Creation-Date: 2025-02-08 18:09+0300\n"
+"PO-Revision-Date: 2025-08-09 10:47+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: extension.js:97 extension.js:147
+#: lockkeys@vaina.lt/extension.js:71 lockkeys@vaina.lt/extension.js:115
 msgid "Num Lock"
 msgstr "NumLock vergrendelen"
 
-#: extension.js:100 extension.js:154
+#: lockkeys@vaina.lt/extension.js:74 lockkeys@vaina.lt/extension.js:121
 msgid "Caps Lock"
 msgstr "CapsLock vergrendelen"
 
-#: extension.js:104
+#: lockkeys@vaina.lt/extension.js:78 lockkeys@vaina.lt/prefs.js:22
 msgid "Settings"
 msgstr "Voorkeuren"
 
-#: extension.js:213
+#: lockkeys@vaina.lt/extension.js:219
 msgid "On"
 msgstr "Aan"
 
-#: extension.js:212 prefs.js:43
+#: lockkeys@vaina.lt/extension.js:219 lockkeys@vaina.lt/prefs.js:51
 msgid "Off"
 msgstr "Uit"
 
-#: prefs.js:33
+#: lockkeys@vaina.lt/prefs.js:23 lockkeys@vaina.lt/prefs.js:35
+msgid "Change indicator display options"
+msgstr "Pas de weergaveopties van de indicator aan"
+
+#: lockkeys@vaina.lt/prefs.js:34
 msgid "Indicator Style"
 msgstr "Indicatorstijl"
 
-#: prefs.js:33
-msgid "Change indicator display options"
-msgstr "Pas de weergave-opties van de indicator aan"
+#: lockkeys@vaina.lt/prefs.js:37
+msgid "Notifications Only"
+msgstr "Alleen meldingen"
 
-#: prefs.js:34
+#: lockkeys@vaina.lt/prefs.js:38
 msgid "Num-Lock Only"
 msgstr "Alleen NumLock"
 
-#: prefs.js:35
+#: lockkeys@vaina.lt/prefs.js:39
 msgid "Caps-Lock Only"
 msgstr "Alleen CapsLock"
 
-#: prefs.js:36
+#: lockkeys@vaina.lt/prefs.js:40
 msgid "Both"
 msgstr "Beide"
 
-#: prefs.js:37
+#: lockkeys@vaina.lt/prefs.js:41
 msgid "Show/Hide"
 msgstr "Tonen/Verbergen"
 
-#: prefs.js:40
+#: lockkeys@vaina.lt/prefs.js:42
+msgid "Show/Hide Caps-Lock Only"
+msgstr "Alleen CapsLock tonen/verbergen"
+
+#: lockkeys@vaina.lt/prefs.js:48
 msgid "Notifications"
 msgstr "Meldingen"
 
-#: prefs.js:40
+#: lockkeys@vaina.lt/prefs.js:49
 msgid "Show notifications when state changes"
-msgstr "Toon meldingen zien bij aan-/uitzetten van NumLock/CapsLock"
+msgstr "Toon meldingen bij aan-/uitzetten van NumLock/CapsLock"
 
-#: prefs.js:42
+#: lockkeys@vaina.lt/prefs.js:52
 msgid "Compact"
 msgstr "Compact"
 
-#: prefs.js:43
+#: lockkeys@vaina.lt/prefs.js:53
 msgid "Osd"
 msgstr "Meldingen"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
 msgid "Show notifications when key state changes"
-msgstr "Toon meldingen zien bij aan-/uitzetten van NumLock/CapsLock"
+msgstr "Toon meldingen bij aan-/uitzetten van NumLock/CapsLock"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
 msgid "Set false to suppress num-lock or caps-lock state change notifications"
 msgstr "Stel in op ‘false’ om meldingen te onderdrukken"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
 msgid "Indicator style"
 msgstr "Indicatorstijl"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
 msgid ""
 "Set numlock value to display only num-lock indicator, set capslock value to "
 "display only caps-lock indicator, or both for both. Set show-hide, to "
 "display corresponding indicator icons only when on."
 msgstr ""
 "Stel de waarde ‘numlock’ in om alleen de NumLock-indicator te tonen, "
-"‘capslock’ in om alleen de CapsLock-indicator te tonen of ‘both’ om beide "
-"te tonen. Stel in ‘show-hide’ om alleen te tonen indien één van de knoppen "
+"‘capslock’ in om alleen de CapsLock-indicator te tonen of ‘both’ om beide te "
+"tonen. Stel in op ‘show-hide’ om alleen te tonen indien een van de knoppen "
 "wordt ingedrukt."
