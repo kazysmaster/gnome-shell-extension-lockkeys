@@ -63,8 +63,8 @@ msgstr "Paramètres"
 
 #: extension.js:217
 msgid "On"
-msgstr "On"
+msgstr "activé"
 
 #: extension.js:217
 msgid "Off"
-msgstr "Off"
+msgstr "désactivé"
