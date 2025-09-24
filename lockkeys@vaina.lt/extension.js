@@ -139,7 +139,7 @@ const LockKeysIndicator = GObject.registerClass({
 	showNotification(notification_text, icon_name) {
 		if (this.config.isShowOsd()) {
 			if (POST_49) {
-				Main.osdWindowManager.showAll(this.icons.getCustomIcon(icon_name), notification_text, -1, -1);
+				Main.osdWindowManager.showAll(this.icons.getCustomIcon(icon_name), notification_text);
 			} else {
 				Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
 			}
