@@ -13,6 +13,7 @@ import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 const POST_46 = parseFloat(Config.PACKAGE_VERSION) >= 46;
+const POST_49 = parseFloat(Config.PACKAGE_VERSION) >= 49;
 
 const STYLE = 'style';
 const STYLE_NONE = 'none';
@@ -137,7 +138,11 @@ const LockKeysIndicator = GObject.registerClass({
 
 	showNotification(notification_text, icon_name) {
 		if (this.config.isShowOsd()) {
-			Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
+			if (POST_49) {
+				Main.osdWindowManager.showAll(this.icons.getCustomIcon(icon_name), notification_text, -1, -1);
+			} else {
+				Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
+			}
 		} else if (POST_46) {
 		    this.showSimpleNotification(notification_text, icon_name);
 		} else {
@@ -237,10 +242,14 @@ const ExtensionIcons = GObject.registerClass({
 
 	getCustomIcon(icon_name) {
         if (this.iconTheme.has_icon(icon_name)) {
-            return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
+            let theme_icon = Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
+            console.log("Theme icon: " + theme_icon);
+            return theme_icon;
         }
         let icon_path = this._extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
-        return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
+        let file_icon = Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
+        console.log("File icon: " + theme_icon);
+        return file_icon;
     }
 });
 
