@@ -242,14 +242,10 @@ const ExtensionIcons = GObject.registerClass({
 
 	getCustomIcon(icon_name) {
         if (this.iconTheme.has_icon(icon_name)) {
-            let theme_icon = Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
-            console.log("Theme icon: " + theme_icon);
-            return theme_icon;
+            return Gio.ThemedIcon.new_with_default_fallbacks(icon_name);
         }
         let icon_path = this._extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
-        let file_icon = Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
-        console.log("File icon: " + theme_icon);
-        return file_icon;
+        return Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
     }
 });
 
