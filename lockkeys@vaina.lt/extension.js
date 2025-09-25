@@ -248,7 +248,7 @@ const ExtensionIcons = GObject.registerClass({
         }
         let icon_path = this._extensionDir.get_child('icons').get_child(icon_name + ".svg").get_path();
         let file_icon = Gio.FileIcon.new(Gio.File.new_for_path(icon_path));
-        console.log("File icon: " + theme_icon);
+        console.log("File icon: " + file_icon);
         return file_icon;
     }
 });
