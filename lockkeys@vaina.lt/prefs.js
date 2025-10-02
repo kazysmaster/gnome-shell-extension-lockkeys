@@ -22,39 +22,133 @@ export default class LockKeysPreferences extends ExtensionPreferences {
             title: _('Settings'),
             description: _('Change indicator display options')
         });
-        group.add(this.buildPrefsWidget());
+
+        // Set up Caps Lock group
+        const capsGroup = new Adw.PreferencesGroup({
+            title: _('Caps Lock'),
+            description: _('Options for Caps Lock key'),
+            header_suffix: new Gtk.Switch({
+                active: this.getSettings().get_boolean('capslock-enabled'),
+                halign: Gtk.Align.END,
+                valign: Gtk.Align.CENTER,
+                tooltip_text: _('Enable/Disable Caps Lock key indicator')
+            })
+        });
+        capsGroup.header_suffix.connect('notify::active', (widget) => {
+            this.getSettings().set_boolean('capslock-enabled', widget.active);
+        });
+
+        capsGroup.add(this.buildCapsLockPrefsWidget());
+
+        // Set up Num Lock group
+        const numlockGroup = new Adw.PreferencesGroup({
+            title: _('Num Lock'),
+            description: _('Options for Num Lock key'),
+            header_suffix: new Gtk.Switch({
+                active: this.getSettings().get_boolean('numlock-enabled'),
+                halign: Gtk.Align.END,
+                valign: Gtk.Align.CENTER,
+                tooltip_text: _('Enable/Disable Num Lock key indicator')
+            })
+        });
+        numlockGroup.header_suffix.connect('notify::active', (widget) => {
+            this.getSettings().set_boolean('numlock-enabled', widget.active);
+        });
+
+        numlockGroup.add(this.buildNumLockPrefsWidget());
+
         const page = new Adw.PreferencesPage();
-        page.add(group);
+        page.add(capsGroup);
+        page.add(numlockGroup);
+
         window.add(page);
     }
 
-    buildPrefsWidget() {
-    	const indicator_style = this.createComboBox(
-    	    STYLE,
-    	    _("Indicator Style"),
-    	    _("Change indicator display options"),
-    	    {
-                [STYLE_NONE]: _("Notifications Only"),
-                [STYLE_NUMLOCK_ONLY]: _("Num-Lock Only"),
-                [STYLE_CAPSLOCK_ONLY]: _("Caps-Lock Only"),
-                [STYLE_BOTH]: _("Both"),
-                [STYLE_SHOWHIDE]: _("Show/Hide"),
-                [STYLE_SHOWHIDE_CAPSLOCK]: _("Show/Hide Caps-Lock Only")
-    	    }
-    	);
+    buildCapsLockPrefsWidget() {
+        const widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 10 });
 
-    	const notifications_style = this.createComboBox(
-    	    NOTIFICATIONS,
-    	    _("Notifications"),
-    	    _("Show notifications when state changes"),
-    	    {
-                [NOTIFICATIONS_OFF]: _("Off"),
-                [NOTIFICATIONS_ON]: _("Compact"),
-                [NOTIFICATIONS_OSD]: _("Osd")
-    	    }
-    	);
+        const capsNotification = this.createToggleGroup(
+            'capslock-notification',
+            _('Notifications'),
+            _('Show notifications when state changes'),
+            {
+                'off': _('Off'),
+                'compact': _('Compact'),
+                'osd': _('Osd')
+            }
+        );
+        widget.append(capsNotification);
 
-        return this.createVerticalBoxCompat(indicator_style, notifications_style);
+        const capsIndicator = this.createToggleGroup(
+            'capslock-indicator',
+            _('Top Bar Indicator'),
+            _('Show Caps Lock indicator in the top bar'),
+            {
+                'never': _('Never'),
+                'when-active': _('When Active'),
+                'always': _('Always')
+            }
+        );
+        widget.append(capsIndicator);
+
+        return this.createVerticalBoxCompat(widget);
+    }
+
+    buildNumLockPrefsWidget() {
+        const widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 10 });
+
+        const numlockNotification = this.createToggleGroup(
+            'numlock-notification',
+            _('Notifications'),
+            _('Show notifications when state changes'),
+            {
+                'off': _('Off'),
+                'compact': _('Compact'),
+                'osd': _('Osd')
+            }
+        );
+        widget.append(numlockNotification);
+
+        const numlockIndicator = this.createToggleGroup(
+            'numlock-indicator',
+            _('Top Bar Indicator'),
+            _('Show Num Lock indicator in the top bar'),
+            {
+                'never': _('Never'),
+                'when-active': _('When Active'),
+                'always': _('Always')
+            }
+        );
+        widget.append(numlockIndicator);
+
+        return this.createVerticalBoxCompat(widget);
+    }
+
+    createToggleGroup(key, text, tooltip, values) {
+        let label = new Gtk.Label({ label: text, xalign: 0, tooltip_text:tooltip });
+        label.set_hexpand(true);
+        let widget = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+        widget.halign = Gtk.Align.END;
+        widget.get_style_context().add_class('linked');
+
+        let firstButton = null;
+        const _settings = this.getSettings();
+        for (let id in values) {
+            let button = new Gtk.ToggleButton({ label: values[id], active: _settings.get_string(key) === id });
+            if (firstButton === null) {
+                firstButton = button;
+            } else {
+                button.set_group(firstButton);
+            }
+            button.connect('toggled', function(toggle_widget) {
+                if (toggle_widget.active) {
+                    _settings.set_string(key, id);
+                }
+            });
+            widget.append(button);
+        }
+
+        return this.createHorizontalBoxCompat(label, widget, false);
     }
 
     createComboBox(key, text, tooltip, values) {
@@ -88,8 +182,8 @@ export default class LockKeysPreferences extends ExtensionPreferences {
         return box;
     }
 
-    createHorizontalBoxCompat(label, widget) {
-        const box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 10, homogeneous: true});
+    createHorizontalBoxCompat(label, widget, homogenousity = true) {
+        const box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 10, homogeneous: homogenousity});
         box.append(label);
         box.append(widget);
         return box;
