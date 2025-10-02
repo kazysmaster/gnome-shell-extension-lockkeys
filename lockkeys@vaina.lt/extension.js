@@ -340,6 +340,7 @@ const Configuration = GObject.registerClass({
 		this.settings = settings;
 	}
 
+	// Old configuration functions
 	isShowNotifications() {
 		let notification_prefs = this.settings.get_string(NOTIFICATIONS);
 		return notification_prefs == NOTIFICATIONS_ON || notification_prefs == NOTIFICATIONS_OSD;
@@ -380,5 +381,30 @@ const Configuration = GObject.registerClass({
 	isVisibilityStyleCapslock() {
 		let widget_style = this.settings.get_string(STYLE);
 		return widget_style == STYLE_SHOWHIDE_CAPSLOCK;
+	}
+
+	// New configuration functions
+	isCapslockEnabled() {
+		return this.settings.get_boolean('capslock-enabled');
+	}
+
+	getCapslockNotification() {
+		return this.settings.get_string('capslock-notification');
+	}
+
+	getCapslockIndicator() {
+		return this.settings.get_string('capslock-indicator');
+	}
+
+	isNumlockEnabled() {
+		return this.settings.get_boolean('numlock-enabled');
+	}
+
+	getNumlockNotification() {
+		return this.settings.get_string('numlock-notification');
+	}
+
+	getNumlockIndicator() {
+		return this.settings.get_string('numlock-indicator');
 	}
 });
