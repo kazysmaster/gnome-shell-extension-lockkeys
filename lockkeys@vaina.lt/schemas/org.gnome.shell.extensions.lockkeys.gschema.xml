@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extension-lockkeys">
 	<schema path="/org/gnome/shell/extensions/lockkeys/" id="org.gnome.shell.extensions.lockkeys">
+		<!-- Existing Keys, keep around until new settings are properly implemented -->
 		<key name="notification-preferences" type="s">
 			<default>'osd'</default>
 			<summary>Show notifications when key state changes</summary>
@@ -13,6 +14,44 @@
 			<description>Set numlock value to display only num-lock indicator,
 				set capslock value to display only caps-lock indicator, or both for
 				both. Set show-hide, to display corresponding indicator icons only when on.</description>
+		</key>
+		<!-- New Keys -->
+		<!-- Caps Lock Keys -->
+		<key name="capslock-enabled" type="b">
+			<default>true</default>
+			<summary>Enable caps-lock indicator</summary>
+			<description>Set false to disable caps-lock indicator entirely</description>
+		</key>
+		<key name="capslock-notification" type="s">
+			<default>'osd'</default>
+			<summary>Caps-lock notification style</summary>
+			<description>Set to 'off' to disable caps-lock notifications, 'compact' for
+				compact notifications, or 'osd' for on-screen display notifications</description>
+		</key>
+		<key name="capslock-indicator" type="s">
+			<default>'always'</default>
+			<summary>Caps-lock indicator display mode</summary>
+			<description>Set to 'never' to never show the caps-lock indicator, 'when-active' to show it only when
+				caps-lock is active, or 'always' to always show the indicator</description>
+		</key>
+
+		<!-- Num Lock Keys -->
+		<key name="numlock-enabled" type="b">
+			<default>true</default>
+			<summary>Enable num-lock indicator</summary>
+			<description>Set false to disable num-lock indicator entirely</description>
+		</key>
+		<key name="numlock-notification" type="s">
+			<default>'osd'</default>
+			<summary>Num-lock notification style</summary>
+			<description>Set to 'off' to disable num-lock notifications, 'compact' for
+				compact notifications, or 'osd' for on-screen display notifications</description>
+		</key>
+		<key name="numlock-indicator" type="s">
+			<default>'always'</default>
+			<summary>Num-lock indicator display mode</summary>
+			<description>Set to 'never' to never show the num-lock indicator, 'when-active' to show it only when
+				num-lock is active, or 'always' to always show the indicator</description>
 		</key>
 	</schema>
 </schemalist>
