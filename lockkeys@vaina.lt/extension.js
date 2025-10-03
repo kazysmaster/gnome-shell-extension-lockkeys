@@ -119,7 +119,7 @@ const LockKeysIndicator = GObject.registerClass({
             this.indicatorStyle = new VisibilityIndicatorStyle(this);
         } else {
             this.indicatorStyle = new HighlightIndicatorStyle(this);
-        s}
+        }
         this.updateState();
 	}
 
