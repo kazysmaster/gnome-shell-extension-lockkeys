@@ -30,7 +30,7 @@ const NOTIFICATIONS_ON = 'on';
 const NOTIFICATION_OFF = "off";
 const NOTIFICATION_COMPACT = "compact";
 const NOTIFICATION_OSD = "osd";
-const VISIBILITY_OFF = "never";
+const VISIBILITY_NEVER = "never";
 const VISIBILITY_WHEN_ACTIVE = "when-active";
 const VISIBILITY_ALWAYS = "always";
 
@@ -292,7 +292,7 @@ const HighlightIndicatorStyle = GObject.registerClass({
     }
 
 	displayState(numlock_state, capslock_state) {
-        if (this._config.getNumlockIndicator() == VISIBILITY_OFF) {
+        if (this._config.getNumlockIndicator() == VISIBILITY_NEVER) {
             this._numIcon.hide();
         } else if (this._config.getNumlockIndicator() == VISIBILITY_WHEN_ACTIVE) {
             if (numlock_state) {
@@ -309,7 +309,7 @@ const HighlightIndicatorStyle = GObject.registerClass({
         }
 
         // Handle Capslock visibility
-        if (this._config.getCapslockIndicator() == VISIBILITY_OFF) {
+        if (this._config.getCapslockIndicator() == VISIBILITY_NEVER) {
             this._capsIcon.hide();
         } else if (this._config.getCapslockIndicator() == VISIBILITY_WHEN_ACTIVE) {
             if (capslock_state) {
