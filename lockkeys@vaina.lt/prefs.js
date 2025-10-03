@@ -23,20 +23,23 @@ export default class LockKeysPreferences extends ExtensionPreferences {
             description: _('Change indicator display options')
         });
 
+        // Header Suffixes are temporary commented out. The idea is to have them
+        // act as a master switch for each group, but for now, this isn't implemented.
+
         // Set up Caps Lock group
         const capsGroup = new Adw.PreferencesGroup({
             title: _('Caps Lock'),
             description: _('Options for Caps Lock key'),
-            header_suffix: new Gtk.Switch({
+            /*header_suffix: new Gtk.Switch({
                 active: this.getSettings().get_boolean('capslock-enabled'),
                 halign: Gtk.Align.END,
                 valign: Gtk.Align.CENTER,
                 tooltip_text: _('Enable/Disable Caps Lock key indicator')
-            })
+            })*/
         });
-        capsGroup.header_suffix.connect('notify::active', (widget) => {
+        /*capsGroup.header_suffix.connect('notify::active', (widget) => {
             this.getSettings().set_boolean('capslock-enabled', widget.active);
-        });
+        });*/
 
         capsGroup.add(this.buildCapsLockPrefsWidget());
 
@@ -44,16 +47,16 @@ export default class LockKeysPreferences extends ExtensionPreferences {
         const numlockGroup = new Adw.PreferencesGroup({
             title: _('Num Lock'),
             description: _('Options for Num Lock key'),
-            header_suffix: new Gtk.Switch({
+            /*header_suffix: new Gtk.Switch({
                 active: this.getSettings().get_boolean('numlock-enabled'),
                 halign: Gtk.Align.END,
                 valign: Gtk.Align.CENTER,
                 tooltip_text: _('Enable/Disable Num Lock key indicator')
-            })
+            })*/
         });
-        numlockGroup.header_suffix.connect('notify::active', (widget) => {
+        /*numlockGroup.header_suffix.connect('notify::active', (widget) => {
             this.getSettings().set_boolean('numlock-enabled', widget.active);
-        });
+        });*/
 
         numlockGroup.add(this.buildNumLockPrefsWidget());
 
