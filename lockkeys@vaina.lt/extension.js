@@ -23,9 +23,16 @@ const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
 const STYLE_SHOWHIDE_CAPSLOCK = 'show-hide-capslock';
 const NOTIFICATIONS = 'notification-preferences';
-const NOTIFICATIONS_OFF = 'off';
+//const NOTIFICATIONS_OFF = 'off';
 const NOTIFICATIONS_ON = 'on';
-const NOTIFICATIONS_OSD = 'osd';
+//const NOTIFICATIONS_OSD = 'osd';
+
+const NOTIFICATION_OFF = "off";
+const NOTIFICATION_COMPACT = "compact";
+const NOTIFICATION_OSD = "osd";
+const VISIBILITY_OFF = "never";
+const VISIBILITY_WHEN_ACTIVE = "when-active";
+const VISIBILITY_ALWAYS = "always";
 
 export default class LockKeysExtension extends Extension {
     enable() {
@@ -83,14 +90,15 @@ const LockKeysIndicator = GObject.registerClass({
         });
 
         this.indicatorStyle = new HighlightIndicatorStyle(this);
+		this.updateState();
     }
 
 	setActive(enabled) {
 		if (enabled) {
 			this._keyboardStateChangedId = this.keyMap.connect('state-changed', this.handleStateChange.bind(this));
-			this._settingsChangedId = this.config.settings.connect('changed::' + STYLE, this.handleSettingsChange.bind(this));
-			this._iconThemeChangedId = this.icons.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
-			this.handleSettingsChange();
+           	this._settingsChangedId = this.config.settings.connect('changed', this.handleSettingsChange.bind(this));
+           	this._iconThemeChangedId = this.icons.iconTheme.connect('changed', this.handleSettingsChange.bind(this));
+           	this.handleSettingsChange();
 		} else {
 			this.keyMap.disconnect(this._keyboardStateChangedId);
 			this._keyboardStateChangedId = 0;
@@ -102,26 +110,30 @@ const LockKeysIndicator = GObject.registerClass({
 	}
 
 	handleSettingsChange(actor, event) {
-		if (this.config.isVisibilityStyle())
-			this.indicatorStyle = new VisibilityIndicatorStyle(this);
-		else if (this.config.isVisibilityStyleCapslock())
-			this.indicatorStyle = new VisibilityIndicatorCapslockStyle(this);
-		else
-			this.indicatorStyle = new HighlightIndicatorStyle(this);
-		this.updateState();
+        const numSetting = this.config.getNumlockIndicator();
+        const capsSetting = this.config.getCapslockIndicator();
+
+        if (numSetting === VISIBILITY_NEVER && capsSetting === VISIBILITY_WHEN_ACTIVE) {
+            this.indicatorStyle = new VisibilityIndicatorCapslockStyle(this);
+        } else if (numSetting === VISIBILITY_WHEN_ACTIVE && capsSetting === VISIBILITY_WHEN_ACTIVE) {
+            this.indicatorStyle = new VisibilityIndicatorStyle(this);
+        } else {
+            this.indicatorStyle = new HighlightIndicatorStyle(this);
+        s}
+        this.updateState();
 	}
 
 	handleStateChange(actor, event) {
-		if (this.numlock_state != this.getNumlockState() && this.config.isNotifyNumLock()) {
+		if (this.numlock_state != this.getNumlockState() && this.config.getNumlockNotification() !== NOTIFICATION_OFF) {
 		    let notification_text = _("Num Lock") + ' ' + this.getStateText(this.getNumlockState());
             let icon_name = this.getNumlockState()? "numlock-enabled-symbolic" : "numlock-disabled-symbolic";
-            this.showNotification(notification_text, icon_name);
+            this.showNumlockNotification(notification_text, icon_name);
 		}
 
-		if (this.capslock_state != this.getCapslockState() && this.config.isNotifyCapsLock()) {
+		if (this.capslock_state != this.getCapslockState() && this.config.getCapslockNotification() !== NOTIFICATION_OFF) {
 			let notification_text = _("Caps Lock") + ' ' + this.getStateText(this.getCapslockState());
 			let icon_name = this.getCapslockState()? "capslock-enabled-symbolic" : "capslock-disabled-symbolic";
-            this.showNotification(notification_text, icon_name);
+            this.showCapslockNotification(notification_text, icon_name);
 		}
 
 		this.updateState();
@@ -136,17 +148,35 @@ const LockKeysIndicator = GObject.registerClass({
 		this.capsMenuItem.setToggleState(this.capslock_state);
 	}
 
-	showNotification(notification_text, icon_name) {
-		if (this.config.isShowOsd()) {
+	showNumlockNotification(notification_text, icon_name) {
+		if (this.config.getNumlockNotification() === NOTIFICATION_OSD) {
 			if (POST_49) {
 				Main.osdWindowManager.showAll(this.icons.getCustomIcon(icon_name), notification_text);
 			} else {
 				Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
 			}
-		} else if (POST_46) {
-		    this.showSimpleNotification(notification_text, icon_name);
-		} else {
-			this.showSimpleNotification45(notification_text, icon_name);
+		} else if (this.config.getNumlockNotification() === NOTIFICATION_COMPACT) {
+			if (POST_46) {
+				this.showSimpleNotification(notification_text, icon_name, '_numlockSource');
+			} else {
+				this.showSimpleNotification45(notification_text, icon_name, '_numlockSource');
+			}
+		}
+	}
+
+	showCapslockNotification(notification_text, icon_name) {
+		if (this.config.getCapslockNotification() === NOTIFICATION_OSD) {
+			if (POST_49) {
+				Main.osdWindowManager.showAll(this.icons.getCustomIcon(icon_name), notification_text);
+			} else {
+				Main.osdWindowManager.show(-1, this.icons.getCustomIcon(icon_name), notification_text);
+			}
+		} else if (this.config.getCapslockNotification() === NOTIFICATION_COMPACT) {
+			if (POST_46) {
+				this.showSimpleNotification(notification_text, icon_name, '_capslockSource');
+			} else {
+				this.showSimpleNotification45(notification_text, icon_name, '_capslockSource');
+			}
 		}
 	}
 
@@ -197,7 +227,7 @@ const LockKeysIndicator = GObject.registerClass({
             notification.update(notification_text, null, { clear: true });
         }
 
-		this._source.showNotification(notification);
+	    this._source.showNotification(notification);
 	}
 
 	prepareSource45(icon_name) {
@@ -258,29 +288,46 @@ const HighlightIndicatorStyle = GObject.registerClass({
 		this._numIcon = indicator.numIcon;
 		this._capsIcon = indicator.capsIcon;
 
-		if (this._config.isHighlightNumLock())
-			this._numIcon.show();
-		else
-			this._numIcon.hide();
-
-		if (this._config.isHighlightCapsLock())
-			this._capsIcon.show();
-		else
-			this._capsIcon.hide();
-
-		this._indicator.visible = this._config.isHighlightNumLock() || this._config.isHighlightCapsLock();
-	}
+        this.displayState(this._indicator.getNumlockState(), this._indicator.getCapslockState());
+    }
 
 	displayState(numlock_state, capslock_state) {
-		if (numlock_state)
-			this._numIcon.set_gicon(this._icons.getCustomIcon('numlock-enabled-symbolic'));
-		else
-			this._numIcon.set_gicon(this._icons.getCustomIcon('numlock-disabled-symbolic'));
+        if (this._config.getNumlockIndicator() == VISIBILITY_OFF) {
+            this._numIcon.hide();
+        } else if (this._config.getNumlockIndicator() == VISIBILITY_WHEN_ACTIVE) {
+            if (numlock_state) {
+                this._numIcon.show();
+                this._numIcon.set_gicon(this._icons.getCustomIcon('numlock-enabled-symbolic'));
+            } else {
+                this._numIcon.hide();
+            }
+        } else if (this._config.getNumlockIndicator() == VISIBILITY_ALWAYS) {
+            this._numIcon.show();
+            this._numIcon.set_gicon(this._icons.getCustomIcon(
+                numlock_state ? 'numlock-enabled-symbolic' : 'numlock-disabled-symbolic'
+            ));
+        }
 
-		if (capslock_state)
-			this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-enabled-symbolic'));
-		else
-			this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-disabled-symbolic'));
+        // Handle Capslock visibility
+        if (this._config.getCapslockIndicator() == VISIBILITY_OFF) {
+            this._capsIcon.hide();
+        } else if (this._config.getCapslockIndicator() == VISIBILITY_WHEN_ACTIVE) {
+            if (capslock_state) {
+                this._capsIcon.show();
+                this._capsIcon.set_gicon(this._icons.getCustomIcon('capslock-enabled-symbolic'));
+            } else {
+                this._capsIcon.hide();
+            }
+        } else if (this._config.getCapslockIndicator() == VISIBILITY_ALWAYS) {
+            this._capsIcon.show();
+            this._capsIcon.set_gicon(this._icons.getCustomIcon(
+                capslock_state ? 'capslock-enabled-symbolic' : 'capslock-disabled-symbolic'
+            ));
+        }
+
+        // Update overall indicator visibility
+        this._indicator.visible = 
+            (this._numIcon.visible || this._capsIcon.visible);
 	}
 });
 
