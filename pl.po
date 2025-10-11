@@ -18,57 +18,70 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: prefs.js:28
-msgid "Indicator Style"
-msgstr "Styl wskaźnika"
-
-#: prefs.js:28
-msgid "Change indicator display options"
-msgstr "Zmień opcje wyświetlania wskaźnika"
-
-#: prefs.js:29
-msgid "Num-Lock Only"
-msgstr "Tylko Num-Lock"
-
-#: prefs.js:29
-msgid "Caps-Lock Only"
-msgstr "Tylko Caps-Lock"
-
-#: prefs.js:29
-msgid "Both"
-msgstr "Obydwa"
-
-#: prefs.js:29
-msgid "Show/Hide"
-msgstr "Pokaż/Ukryj"
-
-msgid "Show/Hide Caps-Lock Only"
-msgstr "Pokaż/Ukryj tylko Caps-Lock"
-
-#: prefs.js:30
-msgid "Notifications"
-msgstr "Powiadomienia"
-
-#: prefs.js:30
-msgid "Show notifications when state changes"
-msgstr "Wyświetl powiadomienie gdy zmieni się stan"
-
-#: extension.js:78 extension.js:152
+#: extension.js:79 extension.js:128 prefs.js:48
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: extension.js:82 extension.js:158
+#: extension.js:82 extension.js:134 prefs.js:31
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: extension.js:87
+#: extension.js:86 prefs.js:22
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: extension.js:217
+#: extension.js:254
 msgid "On"
 msgstr "Włączony"
 
-#: extension.js:217
+#: extension.js:254 prefs.js:78 prefs.js:108
 msgid "Off"
 msgstr "Wyłączony"
+
+#: prefs.js:32
+msgid "Options for Caps Lock key"
+msgstr "Ustawienia klawisza Caps Lock"
+
+#: prefs.js:49
+msgid "Options for Num Lock key"
+msgstr "Ustawienia klawisza Num Lock"
+
+#: prefs.js:75 prefs.js:105
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+#: prefs.js:76 prefs.js:106
+msgid "Show notifications when state changes"
+msgstr "Wyświetl powiadomienie gdy zmieni się stan"
+
+#: prefs.js:79 prefs.js:109
+msgid "Compact"
+msgstr "Kompaktowe"
+
+#: prefs.js:80 prefs.js:110
+msgid "Osd"
+msgstr "Osd"
+
+#: prefs.js:87 prefs.js:117
+msgid "Top Bar Indicator"
+msgstr "Wskaźnik górnego paska"
+
+#: prefs.js:88
+msgid "Show Caps Lock indicator in the top bar"
+msgstr "Wyświetl Caps Lock wskaźnik na górnym pasku"
+
+#: prefs.js:90 prefs.js:120
+msgid "Never"
+msgstr "Nigdy"
+
+#: prefs.js:91 prefs.js:121
+msgid "When Active"
+msgstr "Tylko włączony"
+
+#: prefs.js:92 prefs.js:122
+msgid "Always"
+msgstr "Zawsze"
+
+#: prefs.js:118
+msgid "Show Num Lock indicator in the top bar"
+msgstr "Wyświetl Caps Lock wskaźnik na górnym pasku"
