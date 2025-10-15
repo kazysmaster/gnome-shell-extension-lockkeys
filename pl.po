@@ -1,5 +1,5 @@
 # Polish translations for PACKAGE package.
-# 
+#
 # This file is distributed under the same license as the PACKAGE package.
 # Kazimieras Vaina <kazimieras.vaina@gmail.com>, 2013.
 #
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 00:01+0200\n"
+"POT-Creation-Date: 2025-10-03 20:50+0300\n"
 "PO-Revision-Date: 2013-10-14 23:36+0300\n"
 "Last-Translator: Mariusz Lisowski <lisu.tei@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -15,73 +15,157 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: extension.js:79 extension.js:128 prefs.js:48
+#: lockkeys@vaina.lt/extension.js:79 lockkeys@vaina.lt/extension.js:128
+#: lockkeys@vaina.lt/prefs.js:48
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: extension.js:82 extension.js:134 prefs.js:31
+#: lockkeys@vaina.lt/extension.js:82 lockkeys@vaina.lt/extension.js:134
+#: lockkeys@vaina.lt/prefs.js:31
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: extension.js:86 prefs.js:22
+#: lockkeys@vaina.lt/extension.js:86 lockkeys@vaina.lt/prefs.js:22
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: extension.js:254
+#: lockkeys@vaina.lt/extension.js:254
 msgid "On"
 msgstr "Włączony"
 
-#: extension.js:254 prefs.js:78 prefs.js:108
+#: lockkeys@vaina.lt/extension.js:254 lockkeys@vaina.lt/prefs.js:78
+#: lockkeys@vaina.lt/prefs.js:108
 msgid "Off"
 msgstr "Wyłączony"
 
-#: prefs.js:32
+#: lockkeys@vaina.lt/prefs.js:23
+msgid "Change indicator display options"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:32
 msgid "Options for Caps Lock key"
 msgstr "Ustawienia klawisza Caps Lock"
 
-#: prefs.js:49
+#: lockkeys@vaina.lt/prefs.js:49
 msgid "Options for Num Lock key"
 msgstr "Ustawienia klawisza Num Lock"
 
-#: prefs.js:75 prefs.js:105
+#: lockkeys@vaina.lt/prefs.js:75 lockkeys@vaina.lt/prefs.js:105
 msgid "Notifications"
 msgstr "Powiadomienia"
 
-#: prefs.js:76 prefs.js:106
+#: lockkeys@vaina.lt/prefs.js:76 lockkeys@vaina.lt/prefs.js:106
 msgid "Show notifications when state changes"
 msgstr "Wyświetl powiadomienie gdy zmieni się stan"
 
-#: prefs.js:79 prefs.js:109
+#: lockkeys@vaina.lt/prefs.js:79 lockkeys@vaina.lt/prefs.js:109
 msgid "Compact"
 msgstr "Kompaktowe"
 
-#: prefs.js:80 prefs.js:110
+#: lockkeys@vaina.lt/prefs.js:80 lockkeys@vaina.lt/prefs.js:110
 msgid "Osd"
 msgstr "Osd"
 
-#: prefs.js:87 prefs.js:117
+#: lockkeys@vaina.lt/prefs.js:87 lockkeys@vaina.lt/prefs.js:117
 msgid "Top Bar Indicator"
 msgstr "Wskaźnik górnego paska"
 
-#: prefs.js:88
+#: lockkeys@vaina.lt/prefs.js:88
 msgid "Show Caps Lock indicator in the top bar"
 msgstr "Wyświetl Caps Lock wskaźnik na górnym pasku"
 
-#: prefs.js:90 prefs.js:120
+#: lockkeys@vaina.lt/prefs.js:90 lockkeys@vaina.lt/prefs.js:120
 msgid "Never"
 msgstr "Nigdy"
 
-#: prefs.js:91 prefs.js:121
+#: lockkeys@vaina.lt/prefs.js:91 lockkeys@vaina.lt/prefs.js:121
 msgid "When Active"
 msgstr "Tylko włączony"
 
-#: prefs.js:92 prefs.js:122
+#: lockkeys@vaina.lt/prefs.js:92 lockkeys@vaina.lt/prefs.js:122
 msgid "Always"
 msgstr "Zawsze"
 
-#: prefs.js:118
+#: lockkeys@vaina.lt/prefs.js:118
 msgid "Show Num Lock indicator in the top bar"
 msgstr "Wyświetl Caps Lock wskaźnik na górnym pasku"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+#, fuzzy
+msgid "Show notifications when key state changes"
+msgstr "Wyświetl powiadomienie gdy zmieni się stan"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:8
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid "Indicator style"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:14
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:22
+msgid "Enable caps-lock indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:23
+msgid "Set false to disable caps-lock indicator entirely"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:27
+msgid "Caps-lock notification style"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:28
+msgid ""
+"Set to 'off' to disable caps-lock notifications, 'compact' for compact "
+"notifications, or 'osd' for on-screen display notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:33
+msgid "Caps-lock indicator display mode"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:34
+msgid ""
+"Set to 'never' to never show the caps-lock indicator, 'when-active' to show "
+"it only when caps-lock is active, or 'always' to always show the indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:41
+msgid "Enable num-lock indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:42
+msgid "Set false to disable num-lock indicator entirely"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:46
+#, fuzzy
+msgid "Num-lock notification style"
+msgstr "Powiadomienia"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:47
+msgid ""
+"Set to 'off' to disable num-lock notifications, 'compact' for compact "
+"notifications, or 'osd' for on-screen display notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:52
+msgid "Num-lock indicator display mode"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:53
+msgid ""
+"Set to 'never' to never show the num-lock indicator, 'when-active' to show "
+"it only when num-lock is active, or 'always' to always show the indicator"
+msgstr ""

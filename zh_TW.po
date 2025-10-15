@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-26 11:26+0200\n"
+"POT-Creation-Date: 2025-10-03 20:50+0300\n"
 "PO-Revision-Date: 2024-06-26 22:29+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: Peter Dave Hello <hsu@peterdavehello.org>\n"
@@ -11,87 +11,175 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:97 extension.js:147
+#: lockkeys@vaina.lt/extension.js:79 lockkeys@vaina.lt/extension.js:128
+#: lockkeys@vaina.lt/prefs.js:48
 msgid "Num Lock"
 msgstr "數字鎖定"
 
-#: extension.js:100 extension.js:154
+#: lockkeys@vaina.lt/extension.js:82 lockkeys@vaina.lt/extension.js:134
+#: lockkeys@vaina.lt/prefs.js:31
 msgid "Caps Lock"
 msgstr "大寫鎖定"
 
-#: extension.js:104
+#: lockkeys@vaina.lt/extension.js:86 lockkeys@vaina.lt/prefs.js:22
 msgid "Settings"
 msgstr "設定"
 
-#: extension.js:213
+#: lockkeys@vaina.lt/extension.js:254
 msgid "On"
 msgstr "開啟"
 
-#: extension.js:212 prefs.js:43
+#: lockkeys@vaina.lt/extension.js:254 lockkeys@vaina.lt/prefs.js:78
+#: lockkeys@vaina.lt/prefs.js:108
 msgid "Off"
 msgstr "關閉"
 
-#: prefs.js:33
-msgid "Indicator Style"
-msgstr "指示器樣式"
-
-#: prefs.js:33
+#: lockkeys@vaina.lt/prefs.js:23
 msgid "Change indicator display options"
 msgstr "更改指示器顯示選項"
 
-#: prefs.js:34
-msgid "Num-Lock Only"
-msgstr "僅顯示數字鎖定"
+#: lockkeys@vaina.lt/prefs.js:32
+msgid "Options for Caps Lock key"
+msgstr ""
 
-#: prefs.js:35
-msgid "Caps-Lock Only"
-msgstr "僅顯示大寫鎖定"
+#: lockkeys@vaina.lt/prefs.js:49
+msgid "Options for Num Lock key"
+msgstr ""
 
-#: prefs.js:36
-msgid "Both"
-msgstr "兩者皆顯示"
-
-#: prefs.js:37
-msgid "Show/Hide"
-msgstr "顯示/隱藏"
-
-#: prefs.js:39
-msgid "Show/Hide Caps-Lock Only"
-msgstr "僅顯示/隱藏大寫鎖定"
-
-#: prefs.js:40
+#: lockkeys@vaina.lt/prefs.js:75 lockkeys@vaina.lt/prefs.js:105
 msgid "Notifications"
 msgstr "通知"
 
-#: prefs.js:40
+#: lockkeys@vaina.lt/prefs.js:76 lockkeys@vaina.lt/prefs.js:106
 msgid "Show notifications when state changes"
 msgstr "狀態變更時顯示通知"
 
-#: prefs.js:42
+#: lockkeys@vaina.lt/prefs.js:79 lockkeys@vaina.lt/prefs.js:109
 msgid "Compact"
 msgstr "簡潔"
 
-#: prefs.js:43
+#: lockkeys@vaina.lt/prefs.js:80 lockkeys@vaina.lt/prefs.js:110
 msgid "Osd"
 msgstr "螢幕顯示"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
+#: lockkeys@vaina.lt/prefs.js:87 lockkeys@vaina.lt/prefs.js:117
+msgid "Top Bar Indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:88
+msgid "Show Caps Lock indicator in the top bar"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:90 lockkeys@vaina.lt/prefs.js:120
+msgid "Never"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:91 lockkeys@vaina.lt/prefs.js:121
+msgid "When Active"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:92 lockkeys@vaina.lt/prefs.js:122
+msgid "Always"
+msgstr ""
+
+#: lockkeys@vaina.lt/prefs.js:118
+msgid "Show Num Lock indicator in the top bar"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
 msgid "Show notifications when key state changes"
 msgstr "按鍵狀態變更時顯示通知"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:8
 msgid "Set false to suppress num-lock or caps-lock state change notifications"
 msgstr "設為 false 以避免鎖定狀態變更通知"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
 msgid "Indicator style"
 msgstr "指示器樣式"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:14
 msgid ""
 "Set numlock value to display only num-lock indicator, set capslock value to "
 "display only caps-lock indicator, or both for both. Set show-hide, to "
 "display corresponding indicator icons only when on."
 msgstr ""
-"設定數字鎖定值僅顯示數字鎖定指示器，設定大寫鎖定值僅顯示大寫鎖定指示器，"
-"或設定為兩者皆顯示。設定顯示/隱藏以在開啟時顯示相應的指示器圖示。"
+"設定數字鎖定值僅顯示數字鎖定指示器，設定大寫鎖定值僅顯示大寫鎖定指示器，或設"
+"定為兩者皆顯示。設定顯示/隱藏以在開啟時顯示相應的指示器圖示。"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:22
+msgid "Enable caps-lock indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:23
+msgid "Set false to disable caps-lock indicator entirely"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:27
+msgid "Caps-lock notification style"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:28
+msgid ""
+"Set to 'off' to disable caps-lock notifications, 'compact' for compact "
+"notifications, or 'osd' for on-screen display notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:33
+#, fuzzy
+msgid "Caps-lock indicator display mode"
+msgstr "更改指示器顯示選項"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:34
+msgid ""
+"Set to 'never' to never show the caps-lock indicator, 'when-active' to show "
+"it only when caps-lock is active, or 'always' to always show the indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:41
+msgid "Enable num-lock indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:42
+msgid "Set false to disable num-lock indicator entirely"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:46
+#, fuzzy
+msgid "Num-lock notification style"
+msgstr "通知"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:47
+msgid ""
+"Set to 'off' to disable num-lock notifications, 'compact' for compact "
+"notifications, or 'osd' for on-screen display notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:52
+#, fuzzy
+msgid "Num-lock indicator display mode"
+msgstr "更改指示器顯示選項"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:53
+msgid ""
+"Set to 'never' to never show the num-lock indicator, 'when-active' to show "
+"it only when num-lock is active, or 'always' to always show the indicator"
+msgstr ""
+
+#~ msgid "Indicator Style"
+#~ msgstr "指示器樣式"
+
+#~ msgid "Num-Lock Only"
+#~ msgstr "僅顯示數字鎖定"
+
+#~ msgid "Caps-Lock Only"
+#~ msgstr "僅顯示大寫鎖定"
+
+#~ msgid "Both"
+#~ msgstr "兩者皆顯示"
+
+#~ msgid "Show/Hide"
+#~ msgstr "顯示/隱藏"
+
+#~ msgid "Show/Hide Caps-Lock Only"
+#~ msgstr "僅顯示/隱藏大寫鎖定"
