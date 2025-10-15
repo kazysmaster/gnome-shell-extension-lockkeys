@@ -19,77 +19,164 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#: extension.js:79 extension.js:128 prefs.js:48
+#: lockkeys@vaina.lt/extension.js:79 lockkeys@vaina.lt/extension.js:128
+#: lockkeys@vaina.lt/prefs.js:48
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: extension.js:82 extension.js:134 prefs.js:31
+#: lockkeys@vaina.lt/extension.js:82 lockkeys@vaina.lt/extension.js:134
+#: lockkeys@vaina.lt/prefs.js:31
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: extension.js:86 prefs.js:22
+#: lockkeys@vaina.lt/extension.js:86 lockkeys@vaina.lt/prefs.js:22
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: extension.js:254
+#: lockkeys@vaina.lt/extension.js:254
 msgid "On"
 msgstr "Açık"
 
-#: extension.js:254 prefs.js:78 prefs.js:108
+#: lockkeys@vaina.lt/extension.js:254 lockkeys@vaina.lt/prefs.js:78
+#: lockkeys@vaina.lt/prefs.js:108
 msgid "Off"
 msgstr "Kapalı"
 
-#: prefs.js:23
+#: lockkeys@vaina.lt/prefs.js:23
 msgid "Change indicator display options"
 msgstr "Gösterge görünüm seçeneklerini değiştir"
 
-#: prefs.js:32
+#: lockkeys@vaina.lt/prefs.js:32
 msgid "Options for Caps Lock key"
 msgstr "Caps Lock tuşu seçenekleri"
 
-#: prefs.js:49
+#: lockkeys@vaina.lt/prefs.js:49
 msgid "Options for Num Lock key"
 msgstr "Num Lock tuşu seçenekleri"
 
-#: prefs.js:75 prefs.js:105
+#: lockkeys@vaina.lt/prefs.js:75 lockkeys@vaina.lt/prefs.js:105
 msgid "Notifications"
 msgstr "Bildirimler"
 
-#: prefs.js:76 prefs.js:106
+#: lockkeys@vaina.lt/prefs.js:76 lockkeys@vaina.lt/prefs.js:106
 msgid "Show notifications when state changes"
 msgstr "Durum değişikliklerinde bildirim göster"
 
-#: prefs.js:79 prefs.js:109
+#: lockkeys@vaina.lt/prefs.js:79 lockkeys@vaina.lt/prefs.js:109
 msgid "Compact"
 msgstr "Kompakt"
 
-#: prefs.js:80 prefs.js:110
+#: lockkeys@vaina.lt/prefs.js:80 lockkeys@vaina.lt/prefs.js:110
 msgid "Osd"
 msgstr "OSD"
 
-#: prefs.js:87 prefs.js:117
+#: lockkeys@vaina.lt/prefs.js:87 lockkeys@vaina.lt/prefs.js:117
 msgid "Top Bar Indicator"
 msgstr "Üst Çubuk Göstergesi"
 
-#: prefs.js:88
+#: lockkeys@vaina.lt/prefs.js:88
 msgid "Show Caps Lock indicator in the top bar"
 msgstr "Caps Lock göstergesini üst çubukta göster"
 
-#: prefs.js:90 prefs.js:120
+#: lockkeys@vaina.lt/prefs.js:90 lockkeys@vaina.lt/prefs.js:120
 msgid "Never"
 msgstr "Asla"
 
-#: prefs.js:91 prefs.js:121
+#: lockkeys@vaina.lt/prefs.js:91 lockkeys@vaina.lt/prefs.js:121
 msgid "When Active"
 msgstr "Etkinken"
 
-#: prefs.js:92 prefs.js:122
+#: lockkeys@vaina.lt/prefs.js:92 lockkeys@vaina.lt/prefs.js:122
 msgid "Always"
 msgstr "Daima"
 
-#: prefs.js:118
+#: lockkeys@vaina.lt/prefs.js:118
 msgid "Show Num Lock indicator in the top bar"
 msgstr "Num Lock göstergesini üst çubukta göster"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
+msgid "Show notifications when key state changes"
+msgstr "Tuş durumu değişikliklerinde bildirim göster"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:8
+msgid "Set false to suppress num-lock or caps-lock state change notifications"
+msgstr ""
+"Num Lock ve Caps Lock durum değişikliği bildirimlerini susturmak için kapalı "
+"olarak ayarlayın"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
+msgid "Indicator style"
+msgstr "Gösterge stili"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:14
+msgid ""
+"Set numlock value to display only num-lock indicator, set capslock value to "
+"display only caps-lock indicator, or both for both. Set show-hide, to "
+"display corresponding indicator icons only when on."
+msgstr ""
+"Yalnızca Num Lock belirtecini göstermek için Num Lock'u, yalnızca Caps Lock "
+"belirtecini göstermek için Caps Lock'u veya her ikisi için İkisi Birden'i "
+"seçin. İlgili belirteç simgelerini yalnızca açıkken göstermek için Göster/"
+"Gizle'yi seçin."
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:22
+msgid "Enable caps-lock indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:23
+msgid "Set false to disable caps-lock indicator entirely"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:27
+msgid "Caps-lock notification style"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:28
+msgid ""
+"Set to 'off' to disable caps-lock notifications, 'compact' for compact "
+"notifications, or 'osd' for on-screen display notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:33
+#, fuzzy
+msgid "Caps-lock indicator display mode"
+msgstr "Gösterge görünüm seçeneklerini değiştir"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:34
+msgid ""
+"Set to 'never' to never show the caps-lock indicator, 'when-active' to show "
+"it only when caps-lock is active, or 'always' to always show the indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:41
+msgid "Enable num-lock indicator"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:42
+msgid "Set false to disable num-lock indicator entirely"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:46
+#, fuzzy
+msgid "Num-lock notification style"
+msgstr "Bildirimler"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:47
+msgid ""
+"Set to 'off' to disable num-lock notifications, 'compact' for compact "
+"notifications, or 'osd' for on-screen display notifications"
+msgstr ""
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:52
+#, fuzzy
+msgid "Num-lock indicator display mode"
+msgstr "Gösterge görünüm seçeneklerini değiştir"
+
+#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:53
+msgid ""
+"Set to 'never' to never show the num-lock indicator, 'when-active' to show "
+"it only when num-lock is active, or 'always' to always show the indicator"
+msgstr ""
 
 #~ msgid "Indicator Style"
 #~ msgstr "Gösterge Stili"
@@ -111,15 +198,3 @@ msgstr "Num Lock göstergesini üst çubukta göster"
 
 #~ msgid "Show/Hide Caps-Lock Only"
 #~ msgstr "Göster/Gizle (Yalnızca Caps Lock)"
-
-#~ msgid "Show notifications when key state changes"
-#~ msgstr "Tuş durumu değişikliklerinde bildirim göster"
-
-#~ msgid "Set false to suppress num-lock or caps-lock state change notifications"
-#~ msgstr "Num Lock ve Caps Lock durum değişikliği bildirimlerini susturmak için kapalı olarak ayarlayın"
-
-#~ msgid "Indicator style"
-#~ msgstr "Gösterge stili"
-
-#~ msgid "Set numlock value to display only num-lock indicator, set capslock value to display only caps-lock indicator, or both for both. Set show-hide, to display corresponding indicator icons only when on."
-#~ msgstr "Yalnızca Num Lock belirtecini göstermek için Num Lock'u, yalnızca Caps Lock belirtecini göstermek için Caps Lock'u veya her ikisi için İkisi Birden'i seçin. İlgili belirteç simgelerini yalnızca açıkken göstermek için Göster/Gizle'yi seçin."
