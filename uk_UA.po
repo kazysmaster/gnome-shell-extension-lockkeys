@@ -1,114 +1,90 @@
-#
-# Fraxinus Acer <>, 2025.
-#
-msgid ""
-msgstr ""
-"Project-Id-Version: Розширення Lock Keys\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-08 18:09+0300\n"
-"PO-Revision-Date: 2025-08-01 22:13+0300\n"
-"Last-Translator: Fraxinus Acer <>\n"
-"Language-Team: Ukrainian\n"
-"Language: uk\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 48.0\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: lockkeys@vaina.lt/extension.js:71 lockkeys@vaina.lt/extension.js:115
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-03 20:50+0300\n"
+"PO-Revision-Date: 2025-10-19 18:15+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: extension.js:79 extension.js:128 prefs.js:48
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: lockkeys@vaina.lt/extension.js:74 lockkeys@vaina.lt/extension.js:121
+#: extension.js:82 extension.js:134 prefs.js:31
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: lockkeys@vaina.lt/extension.js:78 lockkeys@vaina.lt/prefs.js:22
+#: extension.js:86 prefs.js:22
 msgid "Settings"
 msgstr "Налаштування"
 
-#: lockkeys@vaina.lt/extension.js:219
+#: extension.js:254
 msgid "On"
-msgstr "Увімкнено"
+msgstr "Увімк."
 
-#: lockkeys@vaina.lt/extension.js:219 lockkeys@vaina.lt/prefs.js:51
+#: extension.js:254 prefs.js:78 prefs.js:108
 msgid "Off"
-msgstr "Вимкнено"
+msgstr "Вимк."
 
-#: lockkeys@vaina.lt/prefs.js:23 lockkeys@vaina.lt/prefs.js:35
+#: prefs.js:23
 msgid "Change indicator display options"
 msgstr "Змінити параметри відображення індикатора"
 
-#: lockkeys@vaina.lt/prefs.js:34
-msgid "Indicator Style"
-msgstr "Стиль індикатора"
+#: prefs.js:32
+msgid "Options for Caps Lock key"
+msgstr "Параметри клавіші Caps Lock"
 
-#: lockkeys@vaina.lt/prefs.js:37
-msgid "Notifications Only"
-msgstr "Лише сповіщення"
+#: prefs.js:49
+msgid "Options for Num Lock key"
+msgstr "Параметри клавіші Num Lock"
 
-#: lockkeys@vaina.lt/prefs.js:38
-msgid "Num-Lock Only"
-msgstr "Лише Num-Lock"
-
-#: lockkeys@vaina.lt/prefs.js:39
-msgid "Caps-Lock Only"
-msgstr "Лише Caps-Lock"
-
-#: lockkeys@vaina.lt/prefs.js:40
-msgid "Both"
-msgstr "Обидва"
-
-#: lockkeys@vaina.lt/prefs.js:41
-msgid "Show/Hide"
-msgstr "Показати/Сховати"
-
-#: lockkeys@vaina.lt/prefs.js:42
-msgid "Show/Hide Caps-Lock Only"
-msgstr "Показати/Сховати лише Caps-Lock"
-
-#: lockkeys@vaina.lt/prefs.js:48
+#: prefs.js:75 prefs.js:105
 msgid "Notifications"
 msgstr "Сповіщення"
 
-#: lockkeys@vaina.lt/prefs.js:49
+#: prefs.js:76 prefs.js:106
 msgid "Show notifications when state changes"
 msgstr "Показувати сповіщення при зміні стану"
 
-#: lockkeys@vaina.lt/prefs.js:52
+#: prefs.js:79 prefs.js:109
 msgid "Compact"
-msgstr "Компактні"
+msgstr "Компактний"
 
-#: lockkeys@vaina.lt/prefs.js:53
+#: prefs.js:80 prefs.js:110
 msgid "Osd"
-msgstr "Екранні"
+msgstr "OSD"
 
-#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
-msgid "Show notifications when key state changes"
-msgstr "Показувати сповіщення при зміні стану клавіші"
+#: prefs.js:87 prefs.js:117
+msgid "Top Bar Indicator"
+msgstr "Індикатор на верхній панелі"
 
-#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
-msgid "Set false to suppress num-lock or caps-lock state change notifications"
-msgstr "Виберіть вимкнено, щоб відключити відображення сповіщень при зміні режиму"
+#: prefs.js:88
+msgid "Show Caps Lock indicator in the top bar"
+msgstr "Показувати індикатор Caps Lock на верхній панелі"
 
-#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
-msgid "Indicator style"
-msgstr "Стиль індикатора"
+#: prefs.js:90 prefs.js:120
+msgid "Never"
+msgstr "Ніколи"
 
-#: lockkeys@vaina.lt/schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
-msgid ""
-"Set numlock value to display only num-lock indicator, set capslock value to "
-"display only caps-lock indicator, or both for both. Set show-hide, to "
-"display corresponding indicator icons only when on."
-msgstr ""
-"Виберіть Лише Num Lock або Лише Caps Lock, щоб показувати лише "
-"відповідний індикатор. Виберіть Обидва, щоб показувати обидва індикатори. "
-"Виберіть Показати/Сховати, щоб показувати відповідний індикатор лише "
-"тоді, коли відповідний режим активний."
+#: prefs.js:91 prefs.js:121
+msgid "When Active"
+msgstr "Коли активний"
+
+#: prefs.js:92 prefs.js:122
+msgid "Always"
+msgstr "Завжди"
+
+#: prefs.js:118
+msgid "Show Num Lock indicator in the top bar"
+msgstr "Показувати індикатор Num Lock на верхній панелі"
