@@ -77,12 +77,19 @@ const LockKeysIndicator = GObject.registerClass({
         this.add_child(layoutManager);
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
-        this.numMenuItem._switch.set_opacity(122);
         this.menu.addMenuItem(this.numMenuItem);
 
         this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: false });
-        this.capsMenuItem._switch.set_opacity(122);
         this.menu.addMenuItem(this.capsMenuItem);
+
+        const a11ySettings = new Gio.Settings({
+            schema: 'org.gnome.desktop.a11y.interface'
+        });
+        const isHighContrast = a11ySettings.get_boolean('high-contrast');
+        const disabledOpacity = isHighContrast ? 0.4 : 0.5;
+
+        this.numMenuItem._switch.set_opacity(disabledOpacity * 255);
+        this.capsMenuItem._switch.set_opacity(disabledOpacity * 255);
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this.settingsMenuItem = new PopupMenu.PopupMenuItem(_("Settings"));
