@@ -77,9 +77,11 @@ const LockKeysIndicator = GObject.registerClass({
         this.add_child(layoutManager);
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
+        this.numMenuItem._switch.set_opacity(122);
         this.menu.addMenuItem(this.numMenuItem);
 
         this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: false });
+        this.capsMenuItem._switch.set_opacity(122);
         this.menu.addMenuItem(this.capsMenuItem);
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
