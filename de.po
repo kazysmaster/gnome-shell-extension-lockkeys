@@ -3,102 +3,82 @@ msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-11-18 19:58+0100\n"
-"Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
+"PO-Revision-Date: 2026-01-03 17:22+0100\n"
+"Last-Translator: Philip Geissler <toggleee@gmail.com>\n"
 "Language-Team: German <jonatan_zeidler@gmx.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1.1\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
-#: extension.js:97 extension.js:147
+#: extension.js:79 extension.js:128 prefs.js:48
 msgid "Num Lock"
 msgstr "Num-Taste"
 
-#: extension.js:100 extension.js:154
+#: extension.js:82 extension.js:134 prefs.js:31
 msgid "Caps Lock"
 msgstr "Feststelltaste"
 
-#: extension.js:104
+#: extension.js:86 prefs.js:22
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: extension.js:213
+#: extension.js:254
 msgid "On"
 msgstr "An"
 
-#: extension.js:212 prefs.js:43
+#: extension.js:254 prefs.js:78 prefs.js:108
 msgid "Off"
 msgstr "Aus"
 
-#: prefs.js:33
-msgid "Indicator Style"
-msgstr "Indikatorstil"
-
-#: prefs.js:33
+#: prefs.js:23
 msgid "Change indicator display options"
-msgstr "Anzeigeoption des Indikators wählen"
+msgstr "Anzeigeoption des Statusindikators ändern"
 
-#: prefs.js:34
-msgid "Num-Lock Only"
-msgstr "Nur Num-Taste"
+#: prefs.js:32
+msgid "Options for Caps Lock key"
+msgstr "Feststelltasten-Optionen"
 
-#: prefs.js:35
-msgid "Caps-Lock Only"
-msgstr "Nur Feststelltaste"
+#: prefs.js:49
+msgid "Options for Num Lock key"
+msgstr "Num-Tasten-Optionen"
 
-#: prefs.js:36
-msgid "Both"
-msgstr "Beide"
-
-#: prefs.js:37
-msgid "Show/Hide"
-msgstr "Anzeigen/Ausblenden"
-
-#: prefs.js:39
-msgid "Show/Hide Caps-Lock Only"
-msgstr "Nur Feststelltaste anzeigen/ausblenden"
-
-#: prefs.js:40
+#: prefs.js:75 prefs.js:105
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: prefs.js:40
+#: prefs.js:76 prefs.js:106
 msgid "Show notifications when state changes"
-msgstr "Benachrichtigung anzeigen, wenn sich der Status ändert"
+msgstr "Benachrichtigung bei Statusänderung anzeigen"
 
-#: prefs.js:42
+#: prefs.js:79 prefs.js:109
 msgid "Compact"
-msgstr "Kompakt"
+msgstr "Systembenachrichtigung"
 
-#: prefs.js:43
+#: prefs.js:80 prefs.js:110
 msgid "Osd"
-msgstr "OSD"
+msgstr "Bildschirmanzeige"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
-msgid "Show notifications when key state changes"
-msgstr "Benachrichtigung anzeigen, wenn sich der Tastatur-Status ändert"
+#: prefs.js:87 prefs.js:117
+msgid "Top Bar Indicator"
+msgstr "Taskleisten-Statusindikator"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:7
-msgid "Set false to suppress num-lock or caps-lock state change notifications"
-msgstr ""
-"Wählen Sie 'Aus', um keine Benachrichtigungen über Statusänderungen der Num- "
-"oder Feststelltaste zu erhalten"
+#: prefs.js:88
+msgid "Show Caps Lock indicator in the top bar"
+msgstr "Zeige den Feststelltasten-Statusindikator in der Taskleiste"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
-msgid "Indicator style"
-msgstr "Indikatorstil"
+#: prefs.js:90 prefs.js:120
+msgid "Never"
+msgstr "Nie"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:13
-msgid ""
-"Set numlock value to display only num-lock indicator, set capslock value to "
-"display only caps-lock indicator, or both for both. Set show-hide, to "
-"display corresponding indicator icons only when on."
-msgstr ""
-"Wählen Sie 'Nur Num-Taste', wenn nur das Symbol für die Nummern-Taste in der "
-"Leiste angezeigt werden soll oder 'Nur Feststelltaste', damit nur das Symbol "
-"für die Feststelltaste angezeigt wird. Soll beides angezeigt werden, wählen "
-"Sie 'Beide'. Bei 'Anzeigen/Ausblenden' wird das entsprechende Symbol nur "
-"angezeigt, wenn die jeweilige Taste aktiv ist."
+#: prefs.js:91 prefs.js:121
+msgid "When Active"
+msgstr "Falls Angeschaltet"
+
+#: prefs.js:92 prefs.js:122
+msgid "Always"
+msgstr "Immer"
+
+#: prefs.js:118
+msgid "Show Num Lock indicator in the top bar"
+msgstr "Zeige den Num-Tasten-Statusindikator in der Taskleiste"
