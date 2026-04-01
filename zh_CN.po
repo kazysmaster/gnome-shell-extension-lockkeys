@@ -2,85 +2,109 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lock Keys Gnome-Shell extension\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 16:42+0800\n"
-"PO-Revision-Date: 2021-04-08 18:12+0800\n"
+"POT-Creation-Date: 2025-10-03 20:50+0300\n"
+"PO-Revision-Date: 2026-04-01 20:49+0800\n"
 "Last-Translator: soiamsoNG\n"
 "Language-Team: Chinese <warmsun0220@gmail.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: extension.js:97 extension.js:147
+#: extension.js:79 extension.js:128 prefs.js:48
 msgid "Num Lock"
-msgstr "数字锁定"
+msgstr "Num Lock"
 
-#: extension.js:100 extension.js:154
+#: extension.js:82 extension.js:134 prefs.js:31
 msgid "Caps Lock"
-msgstr "大写锁定"
+msgstr "Caps Lock"
 
-#: extension.js:104
+#: extension.js:86 prefs.js:22
 msgid "Settings"
 msgstr "设置"
 
-#: extension.js:213
+#: extension.js:254
 msgid "On"
 msgstr "开启"
 
-#: extension.js:213 prefs.js:41
+#: extension.js:254 prefs.js:78 prefs.js:108
 msgid "Off"
 msgstr "关闭"
 
-#: prefs.js:34
-msgid "Notifications Only"
-msgstr "仅使用通知"
-
-#: prefs.js:33
-msgid "Indicator Style"
-msgstr "指示器风格"
-
-#: prefs.js:33
+#: prefs.js:23
 msgid "Change indicator display options"
 msgstr "改变指示器显示选项"
 
-#: prefs.js:34
-msgid "Num-Lock Only"
-msgstr "仅数字锁定"
+#: prefs.js:32
+msgid "Options for Caps Lock key"
+msgstr "Caps Lock显示选项"
 
-#: prefs.js:35
-msgid "Caps-Lock Only"
-msgstr "仅大写锁定"
+#: prefs.js:49
+msgid "Options for Num Lock key"
+msgstr "Num Lock显示选项"
 
-#: prefs.js:36
-msgid "Both"
-msgstr "两者都显示"
-
-#: prefs.js:37
-msgid "Show/Hide"
-msgstr "显示/隐藏"
-
-#: prefs.js:40
+#: prefs.js:75 prefs.js:105
 msgid "Notifications"
 msgstr "通知方式"
 
-#: prefs.js:40
+#: prefs.js:76 prefs.js:106
 msgid "Show notifications when state changes"
 msgstr "状态变化时显示通知"
 
-#: prefs.js:42
+#: prefs.js:79 prefs.js:109
 msgid "Compact"
 msgstr "通知中心显示"
 
-#: prefs.js:43
+#: prefs.js:80 prefs.js:110
 msgid "Osd"
 msgstr "OSD屏显"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:6
-msgid "Show notifications when key state changes"
-msgstr "状态变化时显示通知"
+#: prefs.js:87 prefs.js:117
+msgid "Top Bar Indicator"
+msgstr "顶栏指示器显示时机"
 
-#: schemas/org.gnome.shell.extensions.lockkeys.gschema.xml:12
-msgid "Indicator style"
-msgstr "指示器风格"
+#: prefs.js:88
+msgid "Show Caps Lock indicator in the top bar"
+msgstr "在顶栏显示Caps Lock图标"
+
+#: prefs.js:90 prefs.js:120
+msgid "Never"
+msgstr "从不"
+
+#: prefs.js:91 prefs.js:121
+msgid "When Active"
+msgstr "激活时"
+
+#: prefs.js:92 prefs.js:122
+msgid "Always"
+msgstr "总是"
+
+#: prefs.js:118
+msgid "Show Num Lock indicator in the top bar"
+msgstr "在顶栏显示Num Lock图标"
+
+#~ msgid "Notifications Only"
+#~ msgstr "仅使用通知"
+
+#~ msgid "Indicator Style"
+#~ msgstr "指示器风格"
+
+#~ msgid "Num-Lock Only"
+#~ msgstr "仅数字锁定"
+
+#~ msgid "Caps-Lock Only"
+#~ msgstr "仅大写锁定"
+
+#~ msgid "Both"
+#~ msgstr "两者都显示"
+
+#~ msgid "Show/Hide"
+#~ msgstr "显示/隐藏"
+
+#~ msgid "Show notifications when key state changes"
+#~ msgstr "状态变化时显示通知"
+
+#~ msgid "Indicator style"
+#~ msgstr "指示器风格"
