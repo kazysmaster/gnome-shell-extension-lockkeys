@@ -77,12 +77,19 @@ const LockKeysIndicator = GObject.registerClass({
         this.add_child(layoutManager);
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
-        this.numMenuItem._switch.set_opacity(122);
         this.menu.addMenuItem(this.numMenuItem);
 
         this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: false });
-        this.capsMenuItem._switch.set_opacity(122);
         this.menu.addMenuItem(this.capsMenuItem);
+
+        this.a11ySettings = new Gio.Settings({
+            schema: 'org.gnome.desktop.a11y.interface'
+        });
+
+        this.updateSwitchOpacity();
+        this._highContrastChangedId = this.a11ySettings.connect('changed::high-contrast', () => {
+            this.updateSwitchOpacity();
+        });
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         this.settingsMenuItem = new PopupMenu.PopupMenuItem(_("Settings"));
@@ -93,6 +100,14 @@ const LockKeysIndicator = GObject.registerClass({
 
         this.indicatorStyle = new HighlightIndicatorStyle(this);
 		this.updateState();
+    }
+
+    updateSwitchOpacity() {
+        const isHighContrast = this.a11ySettings.get_boolean('high-contrast');
+        const disabledOpacity = isHighContrast ? 0.4 : 0.5;
+        
+        this.numMenuItem._switch.set_opacity(disabledOpacity * 255);
+        this.capsMenuItem._switch.set_opacity(disabledOpacity * 255);
     }
 
 	setActive(enabled) {
@@ -108,6 +123,10 @@ const LockKeysIndicator = GObject.registerClass({
 			this._settingsChangedId = 0;
             this.icons.iconTheme.disconnect(this._iconThemeChangedId);
 			this._iconThemeChangedId = 0;
+            if (this._highContrastChangedId) {
+                this.a11ySettings.disconnect(this._highContrastChangedId);
+                this._highContrastChangedId = 0;
+            }
 		}
 	}
 
