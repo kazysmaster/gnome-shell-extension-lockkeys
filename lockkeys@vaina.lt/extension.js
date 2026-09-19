@@ -14,6 +14,7 @@ import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/ex
 
 const POST_46 = parseFloat(Config.PACKAGE_VERSION) >= 46;
 const POST_49 = parseFloat(Config.PACKAGE_VERSION) >= 49;
+const POST_51 = parseFloat(Config.PACKAGE_VERSION) >= 51;
 
 const STYLE = 'style';
 const STYLE_NONE = 'none';
@@ -23,9 +24,7 @@ const STYLE_BOTH = 'both';
 const STYLE_SHOWHIDE = 'show-hide';
 const STYLE_SHOWHIDE_CAPSLOCK = 'show-hide-capslock';
 const NOTIFICATIONS = 'notification-preferences';
-//const NOTIFICATIONS_OFF = 'off';
 const NOTIFICATIONS_ON = 'on';
-//const NOTIFICATIONS_OSD = 'osd';
 
 const NOTIFICATION_OFF = "off";
 const NOTIFICATION_COMPACT = "compact";
@@ -56,7 +55,13 @@ const LockKeysIndicator = GObject.registerClass({
         super._init(0.0, " LockKeysIndicator");
         this.config = config;
         this.icons = icons;
-        this.keyMap = Clutter.get_default_backend().get_default_seat().get_keymap();
+        if (POST_51) {
+            // Clutter.get_default_backend() was removed in 51; the backend is now
+            // reached through the actor's Clutter.Context instead.
+            this.keyMap = this.get_context().get_backend().get_default_seat().get_keymap();
+        } else {
+            this.keyMap = Clutter.get_default_backend().get_default_seat().get_keymap();
+        }
 
         this.numIcon = new St.Icon({
             style_class: 'system-status-icon lockkeys-status-icon'
@@ -68,13 +73,23 @@ const LockKeysIndicator = GObject.registerClass({
         this.numIcon.set_style('padding-right: 0px; padding-left: 0px;');
         this.capsIcon.set_style('padding-right: 0px; padding-left: 0px;');
 
-        let layoutManager = new St.BoxLayout({
-            vertical: false,
-            style_class: 'lockkeys-container'
-        });
-        layoutManager.add_child(this.numIcon);
-        layoutManager.add_child(this.capsIcon);
-        this.add_child(layoutManager);
+        if (POST_51) {
+            let layoutManager = new St.BoxLayout({
+                orientation: Clutter.Orientation.HORIZONTAL,
+                style_class: 'lockkeys-container'
+            });
+            layoutManager.add_child(this.numIcon);
+            layoutManager.add_child(this.capsIcon);
+            this.add_child(layoutManager);
+        } else {
+            let layoutManager = new St.BoxLayout({
+                vertical: false,
+                style_class: 'lockkeys-container'
+            });
+            layoutManager.add_child(this.numIcon);
+            layoutManager.add_child(this.capsIcon);
+            this.add_child(layoutManager);
+        }
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: false });
         this.menu.addMenuItem(this.numMenuItem);
@@ -105,7 +120,7 @@ const LockKeysIndicator = GObject.registerClass({
     updateSwitchOpacity() {
         const isHighContrast = this.a11ySettings.get_boolean('high-contrast');
         const disabledOpacity = isHighContrast ? 0.4 : 0.5;
-        
+
         this.numMenuItem._switch.set_opacity(disabledOpacity * 255);
         this.capsMenuItem._switch.set_opacity(disabledOpacity * 255);
     }
